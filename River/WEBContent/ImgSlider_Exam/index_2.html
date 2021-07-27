@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <!-- jQuery, js파일 연결 -->  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script>
+    $(window).load(function() {
+  $('.flexslider').flexslider({
+    animation: "slide",
+    animationLoop: false,
+    itemWidth: 210,
+    itemMargin: 3
+  });
+});
+
+  </script>
+
+  <!-- 도넛사진 imgSlider -->
+    <!-- Demo CSS -->
+	<link rel="stylesheet" href="../FlexSlider_01/flexslider.css" type="text/css" media="screen" />
+	<!-- Modernizr -->
+  <script src="../FlexSlider_01/demo/js/modernizr.js"></script>
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.min.js">\x3C/script>')</script>
+  <!-- FlexSlider -->
+  <script defer src="../FlexSlider_01/jquery.flexslider.js"></script>
+  <!-- 여기 위에 적힌 flexslider.js 파일에서 사진 넘어가는 속도 조절 가능합니다. 저는 2초(2000)로 바꿔뒀으니,
+  변경하고 싶으시면 ctrl+F 로 숫자 '2000' 검색하셔서 원하시는 속도로 변경하시면 됩니다. -->
+</head>
+
+<!-- css로 width, height 사이즈 조절해서 쓰시면 됩니다. -->
+<style>
+  .flexslider{
+    width: 500px;
+    height: 100px;
+  }
+</style>
+
+<body>
+  <!-- 원하시는 곳에 이 div 통째로 넣으시면 됩니다 -->
+  <!-- Place somewhere in the <body> of your page -->
+<div class="flexslider">
+  <ul class="slides">
+    <li>
+      <img src="imgs/kitchen_adventurer_caramel.jpg" />
+    </li>
+    <li>
+      <img src="imgs/kitchen_adventurer_cheesecake_brownie.jpg" />
+    </li>
+    <li>
+      <img src="imgs/kitchen_adventurer_donut.jpg" />
+    </li>
+    <li>
+      <img src="imgs/kitchen_adventurer_lemon.jpg" />
+    </li>
+    <!-- items mirrored twice, total of 12 -->
+  </ul>
+</div>
+</body>
+</html>

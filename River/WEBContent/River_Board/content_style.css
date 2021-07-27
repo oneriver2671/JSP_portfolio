@@ -1,0 +1,294 @@
+@charset "UTF-8";
+* {
+  font-family: "Nanum Gothic";
+}
+
+li {
+  list-style: none;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+#wrap {
+  background-color: #41414c;
+}
+a {
+  text-decoration: none;
+}
+a:visited {
+  text-decoration: none;
+}
+
+
+/*------ section 시작 ------*/
+#main_section {
+  position: relative;
+  width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background-color: whitesmoke;
+}
+#top_btns{
+	width: 840px;
+	height: 30px;
+	display: flex;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 10px;
+	justify-content: space-between;
+}
+#top_btns button{
+	padding: 10px;
+	border-radius: 5px;
+	border: none;
+	background-color: #dddddd;
+	font-weight: bold;
+	
+	cursor: pointer;
+}
+#top_btns a{
+	border-radius: 5px;
+	border: none;
+	background-color: #dddddd;
+	color: black;
+	text-decoration: none;
+	font-weight: bold;
+	cursor: pointer;
+	font-size: 10pt;
+	padding: 10px;
+	
+}
+#top_btns a:visited{
+	padding: 5px;
+	border-radius: 5px;
+	border: none;
+	background-color: #dddddd;
+	color: black;
+	text-decoration: none;
+	font-weight: bold;
+	margin-right: 5px;
+	cursor: pointer;
+	font-size: 10pt;
+	padding: 10px;
+}
+.top_btns_left{
+	display: flex;
+	width: 120px;
+	height: 35px;
+}
+.top_btns_left a{
+	margin-right: 5px;
+}
+.top_btns_right{
+	display: flex;
+	justify-content: flex-end;
+	width: 210px;
+	height: 35px;
+}
+.top_btns_right a{
+	margin-left: 5px;
+}
+
+.post{
+	width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 20px;
+	border: solid 1px gray;
+}
+.post_categori{
+	font-weight: bold;
+	color:  rgb(10, 175, 10);
+	margin-bottom: 10px;
+}
+
+.post_title{
+	width: 800px;
+	height: 40px;
+	border-radius: 5px;
+	margin: 0;
+}
+.post_etc{
+	width: 800px;
+	height: 40px;
+	display: flex;
+	justify-content: space-between;
+  border-bottom: solid 1px gray;
+  padding-bottom: 10px;
+}
+.post_etc_left{
+	width: 300px;
+	height: 40px;
+	position: relative;
+
+}
+.post_etc_left_id{
+	margin-bottom: 5px;
+}
+.post_etc_left_date{
+	float: left;
+	margin-right: 10px;
+	font-size: 10pt;
+}
+.post_etc_left_num{
+	font-size: 10pt;
+}
+.post_etc_right{
+	font-size: 10pt;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: flex-end;
+	
+}
+.post_etc_right div{
+	background-color: #dddddd;
+	padding: 5px;
+	width: 55px;
+	text-align: center;
+	
+}
+.post_etc_right a {
+  color: black;
+}
+.post_etc_right a:visited {
+  color: black;
+}
+
+.post_content{
+	width: 800px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding: 15px 0;
+}
+.post_btn{
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	width: 800px;
+	height: 50px;
+	margin: 0 auto;
+	border-top: solid 1px gray;
+	border-bottom: solid 1px gray;
+}
+.post_btn span{
+	background-color: none;
+	padding: 0 10px;
+	font-size: 11pt;
+}
+.post_btn div{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 263px;
+	height: 40px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.post_btn div:hover{
+	background-color: #dddddd;
+}
+
+#comment_write{
+	width: 778px;
+	height: 100px;
+	padding: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border: solid 2px lightgray;
+	border-radius: 5px;
+	
+}
+#comment_write input{
+	width: 760px;
+	height: 30px;
+	margin: 8px 0 8px 5px;
+}
+.comment_write_attach{
+	float: left;
+	margin-left: 5px;
+}
+#comment_write button{
+	float: right;
+	margin-right: 5px;
+	padding: 7px 10px;
+	border-radius: 5px;
+	border: none;
+	background-color: #E0F8EB;
+	color: rgb(10, 175, 10);
+	font-weight: bold;
+	cursor: pointer;
+}
+
+#comment_intro{
+	border-bottom: solid 1px gray;
+	margin: 15px 0 0 0;
+	padding: 10px 0;
+}
+.comment{
+	width: 800px;
+	border-bottom: solid 1px lightgray;
+}
+.comment_writer{
+	font-weight: bold;
+	padding: 10px 5px 5px 5px;
+}
+.comment_content{
+	padding: 5px;
+}
+
+.comment_time{
+	font-size: 8pt;
+	padding: 5px 5px 10px 5px;
+}
+
+/*------ section 끝 -------*/
+
+/*--- footer 시작 ---*/
+footer {
+  /* margin-top: 100px; */
+  margin-left: auto;
+  margin-right: auto;
+  height: 100px;
+  background-color: #1d2335;
+  color: whitesmoke;
+  position: relative;
+}
+#footer_bar {
+  width: 1200px;
+  height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  /* border: solid 2px gray; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer_linkBox {
+  padding: 0;
+  width: 400px;
+  height: 40px;
+  /* float: left; */
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  /* border: solid 2px green; */
+}
+
+.footer_snsBox {
+  padding: 0;
+  width: 200px;
+  height: 40px;
+  /* float: right; */
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  /* border: solid 2px green; */
+}
+
+
+

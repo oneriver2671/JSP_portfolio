@@ -1,0 +1,424 @@
+@charset "UTF-8";
+* {
+  font-family: "Nanum Gothic";
+}
+
+li {
+  list-style: none;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+#wrap {
+  background-color: #41414c;
+}
+
+#searchbar {
+  width: 300px;
+  height: 100%;
+  top: 0px;
+  right: 0;
+  position: fixed;
+  background-color: #1d2335;
+  z-index: 5;
+  color: whitesmoke;
+  /* display: flex;
+  justify-content: center; */
+}
+#searchbar h3 {
+  /* width: 180px; */
+  height: 40px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+}
+.searchbar_text {
+  width: 200px;
+  height: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+  padding: 0;
+  /* display: block; */
+}
+.searchbar_input {
+  width: 250px;
+  height: 40px;
+  border-bottom: solid 2px whitesmoke;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+  margin-bottom: 100px;
+  padding: 0;
+  display: flex;
+  position: relative;
+}
+.searchbar_input input {
+  margin-left: 5px;
+  background-color: #1d2335;
+  border: none;
+  color: rgba(245, 245, 245, 0.801);
+  font-size: 13pt;
+}
+.searchbar_input input:focus {
+  outline: none;
+}
+.searchbar_input i {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+}
+.searchbar_rankBox {
+  width: 250px;
+  height: 400px;
+  border: solid 2px gray;
+  margin-top: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.searchbar_rankBox > div {
+  margin-left: 10px;
+}
+
+/* 최상단 (header 부분) */
+#header a {
+  text-decoration: none;
+}
+#header a:visited {
+  text-decoration: none;
+}
+#header {
+  /* width: 1200px; */
+  height: 110px;
+  position: relative;
+  background-color: #41414c;
+  margin-left: auto;
+  margin-right: auto;
+  color: whitesmoke;
+  font-family: "Nanum Gothic";
+}
+.headerbar {
+  position: relative;
+  width: 1200px;
+  height: 100px;
+  /* border: solid 3px firebrick; */
+  margin-left: auto;
+  margin-right: auto;
+}
+.headerbar_logo {
+  width: 230px;
+  height: 80px;
+  /* border: solid 3px gray; */
+  float: left;
+  margin-top: 15px;
+}
+
+#headerbar_info {
+  float: right;
+  /* width: 450px; */
+  height: 30px;
+  /* margin-left: 786px; */
+  padding-top: 20px;
+  margin-right: 20px;
+  /* border: solid 2px gray; */
+}
+#headerbar_info a{
+	color: whitesmoke;
+}
+#headerbar_info a:visited{
+	color: whitesmoke;
+}
+.headerbar_info_search:hover {
+  cursor: pointer;
+}
+#headerbar_info div {
+  float: left;
+  margin-right: 20px;
+}
+#headerbar_info ul {
+  margin-top: 0;
+  padding-top: 0;
+  padding-left: 0;
+  margin-bottom: 0;
+  /* margin-right: 35px; */
+  float: right;
+}
+#headerbar_info li {
+  list-style: none;
+  display: inline;
+  margin-left: 3px;
+  margin-right: 3px;
+  font-size: 11pt;
+  cursor: pointer;
+}
+.headerbar_info_login {
+  background-color: rgb(10, 175, 10);
+  font-weight: bold;
+  border-radius: 15px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+.headerbar_info_join {
+  background-color: #646277;
+  font-weight: bold;
+  border-radius: 15px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 25px;
+  padding-right: 25px;
+  cursor: pointer;
+}
+
+.headerbar_info_search {
+  border: solid 2px gray;
+  border-radius: 15px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 15px;
+  padding-right: 35px;
+  position: relative;
+}
+.headerbar_info_search:hover {
+  cursor: pointer;
+}
+.headerbar_info_search i {
+  position: absolute;
+  top: 9px;
+  left: 50px;
+}
+
+#navbar {
+  float: right;
+  width: 900px;
+  height: 50px;
+  /* border: solid 1px white; */
+  font-size: 14pt;
+  font-weight: bold;
+}
+#navbar > ul {
+  float: right;
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  /* margin-right: 40px; */
+  margin-top: 20px;
+  text-align: center;
+  padding: 0;
+  z-index: 3;
+}
+/* #navbar > ul > li {
+  border: solid 2px green;
+} */
+.header_level1_1 {
+  list-style: none;
+  width: 160px;
+}
+.header_level1_1 > ul {
+  padding-left: 30px;
+}
+.header_level1_2 {
+  list-style: none;
+  width: 140px;
+}
+.header_level1_2 > ul {
+  padding-left: 25px;
+}
+.header_level1 {
+  list-style: none;
+  width: 130px;
+}
+.header_level1 > ul {
+  padding-left: 30px;
+}
+
+.header_level2 {
+  /* padding-left: 20px; */
+  padding-top: 40px;
+  font-size: 12pt;
+  font-weight: normal;
+  /* border: solid 1px green; */
+}
+.header_level2 li {
+  position: relative;
+  text-align: left;
+  display: block;
+  padding-left: 0px;
+  padding-bottom: 15px;
+  z-index: 4;
+  color: rgba(245, 245, 245, 0.726);
+}
+.header_level2 a{
+  color: rgba(245, 245, 245, 0.726);	
+}
+.header_level1_3 {
+  list-style: none;
+  width: 150px;
+}
+.header_level1_3 > ul {
+  padding-left: 30px;
+}
+#header_box {
+  margin: 0;
+  padding: 0;
+  width: 3000px;
+  height: 200px;
+  position: absolute;
+  /* right: 0; */
+  top: 110px;
+  background-color: #373741;
+  border-top: solid 1px gray;
+  z-index: 2;
+}
+
+.header_info {
+  width: 1200px;
+  height: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  /* border: solid 2px green; */
+  background-color: #0d0e10;
+}
+.header_info_text {
+  width: 330px;
+  height: 120px;
+  /* border: solid 2px whitesmoke; */
+  float: left;
+  margin-top: 70px;
+  padding-left: 50px;
+}
+
+.header_info_image {
+  position: relative;
+  float: right;
+  width: 800px;
+  height: 200px;
+  /* border: solid 3px whitesmoke; */
+  /* margin-left: 330px; */
+  z-index: 1;
+}
+/*------ header 끝 ------*/
+
+/*------ section 시작 ------*/
+#main_section {
+  position: relative;
+  width: 1200px;
+  height: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: whitesmoke;
+}
+.post{
+	width: 800px;
+	height: 780px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 50px;
+}
+.post_categori select{
+	width: 600px;
+	height: 40px;
+	margin-bottom: 10px;
+}
+
+.post_title{
+	width: 800px;
+	height: 40px;
+	border-radius: 5px;
+	border: solid 1px gray;
+}
+.post_content{
+	width: 800px;
+	height: 500px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border-radius: 5px;
+	border: solid 1px gray;
+}
+.post_btn{
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	width: 350px;
+	height: 60px;
+	margin: 0 auto;
+}
+.post_btn input{
+	width: 150px;
+	height: 50px;
+	font-size: 14pt;
+	border-radius: 5px;
+	cursor: pointer;
+}
+.post_btn input:first-child{
+	background-color: #e0e0e0;
+	border: solid 1px gray;
+	
+}
+.post_btn input:last-child{
+	background-color: #ef5350;
+	border: none;
+	color: whitesmoke;
+}
+
+/*------ section 끝 -------*/
+
+/*------ footer 시작 ------*/
+footer {
+  /* margin-top: 100px; */
+  margin-left: auto;
+  margin-right: auto;
+  height: 100px;
+  background-color: #1d2335;
+  color: whitesmoke;
+  position: relative;
+}
+#footer_bar {
+  width: 1200px;
+  height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  /* border: solid 2px gray; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer_linkBox {
+  padding: 0;
+  width: 400px;
+  height: 40px;
+  /* float: left; */
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  /* border: solid 2px green; */
+}
+
+.footer_snsBox {
+  padding: 0;
+  width: 200px;
+  height: 40px;
+  /* float: right; */
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  /* border: solid 2px green; */
+}
+
+
+
+
+
+
+
+
+

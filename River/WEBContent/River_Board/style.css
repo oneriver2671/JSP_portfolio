@@ -1,0 +1,200 @@
+@charset "UTF-8";
+* {
+  font-family: "Nanum Gothic";
+}
+a{
+	text-decoration: none;
+}
+a:visited{
+	text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+#wrap {
+  background-color: #41414c;
+}
+
+
+/*------ section 시작 ------*/
+#main_section {
+  position: relative;
+  width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: whitesmoke;
+}
+#main_section h2{
+	padding-top: 50px;
+	padding-left: 200px;
+	margin: 0;
+}
+.main_table{
+	width: 800px;
+	padding-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	font-size: 10pt;
+	border-spacing: 0;
+}
+.main_table a{
+	text-decoration: none;
+	color: black;
+}
+.main_table a:visited{
+	text-decoration: none;
+	color: black;
+}
+.main_table tr{
+	margin: 0;
+}
+.main_table th{
+	margin: 0;
+	border-bottom: solid 1px gray;
+	height: 30px;
+}
+.main_table td{
+	border-bottom: solid 1px lightgray;
+	height: 30px;
+
+}
+.main_table th:first-child{
+	width: 60px;
+}
+.mainT_writer{
+	width: 110px;
+}
+.mainT_date{
+	width: 100px;
+}
+.mainT_num{
+	width: 50px;
+}
+
+.write_blank{
+	position: relative;
+	width: 800px;
+	height: 60px;
+	margin-left: auto;
+	margin-right: auto;
+}
+#write_btn{
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 2px 0;
+	top: 5px;
+	right: 5px;
+	width: 100px;
+	height: 30px;
+	border: solid 1px lightgray;
+	border-radius: 5px;
+	background-color: #E0F8EB;
+	color: rgb(10, 175, 10);
+	font-weight: bold;
+	cursor: pointer;
+	font-size: 10pt;
+}
+#write_btn a{
+	color: black;
+}
+#write_btn a:visited{
+	color: black;
+}
+
+#bot_section{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 1200px;
+	height: 110px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #dddddd;
+}
+#bot_section > div:first-child{
+	/* border-bottom: solid 1px gray; */
+}
+#bot_section > div{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 1200px;
+	height: 40px;
+}
+.page_num{
+	padding: 3px 8px;
+	margin: 0 8px;
+	border: solid 1px gray;
+}
+
+.board_search select{
+	width: 100px;
+	height: 30px;
+}
+.searchBar{
+	width: 200px;
+	height: 25px;
+}
+.search_btn{
+	width: 50px;
+	height: 30px;
+}
+
+/*------ section 끝 -------*/
+
+/*--- footer 시작 ---*/
+footer {
+  /* margin-top: 100px; */
+  margin-left: auto;
+  margin-right: auto;
+  height: 100px;
+  background-color: #1d2335;
+  color: whitesmoke;
+  position: relative;
+}
+#footer_bar {
+  width: 1200px;
+  height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  /* border: solid 2px gray; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer_linkBox {
+  padding: 0;
+  width: 400px;
+  height: 40px;
+  /* float: left; */
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  /* border: solid 2px green; */
+}
+
+.footer_snsBox {
+  padding: 0;
+  width: 200px;
+  height: 40px;
+  /* float: right; */
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  /* border: solid 2px green; */
+}
+
+
+
+
+
+
+
