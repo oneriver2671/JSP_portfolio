@@ -250,11 +250,7 @@ section {
   font-family: "Nanum Gothic";
 }
 
-/* .input_text {
-  background-color: rgba(224, 233, 238, 0.986);
-  line-height: 30px;
-  border: none;
-} */
+
 input[type="text"] {
   background-color: rgba(224, 233, 238, 0.986);
   line-height: 30px;
@@ -291,6 +287,15 @@ select {
   background-color: rgba(224, 233, 238, 0.986);
   height: 30px;
   border: none;
+}
+
+#id_ok{
+	color: red;
+	font-weight: bold;
+	font-size: 10pt;
+}
+#checkId_btn:disabled{
+	background-color: rgba(203, 206, 209, 0.781);
 }
 
 .tel_sort {

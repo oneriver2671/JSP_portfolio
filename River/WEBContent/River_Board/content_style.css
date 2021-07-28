@@ -201,7 +201,6 @@ a:visited {
 	margin-bottom: 10px;
 	border: solid 2px lightgray;
 	border-radius: 5px;
-	
 }
 #comment_write input{
 	width: 760px;
@@ -223,27 +222,73 @@ a:visited {
 	font-weight: bold;
 	cursor: pointer;
 }
+/* 대댓글. 댓글과 살짝 달라 따로 만듦 */
+#comment_write_new input[type='text']{
+	width: 650px;
+	height: 30px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.comment_new_cancel{
+	margin-right: 5px;
+	padding: 7px 10px;
+	border-radius: 5px;
+	border: none;
+	background-color:#e7e7e7;
+	color: #727272;
+	font-weight: bold;
+	cursor: pointer;
+}
+.comment_new_action{
+	margin-right: 5px;
+	padding: 7px 10px;
+	border-radius: 5px;
+	border: none;
+	background-color: #E0F8EB;
+	color: rgb(10, 175, 10);
+	font-weight: bold;
+	cursor: pointer;
+}
 
 #comment_intro{
-	border-bottom: solid 1px gray;
+	border-bottom: solid 1px lightgray;
 	margin: 15px 0 0 0;
 	padding: 10px 0;
 }
 .comment{
 	width: 800px;
 	border-bottom: solid 1px lightgray;
+	padding-bottom: 10px;
 }
 .comment_writer{
 	font-weight: bold;
-	padding: 10px 5px 5px 5px;
+	padding: 10px 5px 5px 10px;
 }
 .comment_content{
-	padding: 5px;
+	padding: 5px 5px 5px 10px;
 }
 
 .comment_time{
-	font-size: 8pt;
-	padding: 5px 5px 10px 5px;
+	font-size: 10pt;
+	padding: 5px 5px 5px 10px;
+	color: gray;
+
+}
+.comment_reply{
+	font-size: 10pt;
+	margin-left: 5px;
+	padding-bottom: 5px;
+}
+.comment_reply span{
+	margin-right: 5px;
+	color: gray;
+	cursor: pointer;
+}
+.comment_reply a{
+	color: gray;
+}
+.comment_reply a:visited{
+	color: gray;
 }
 
 /*------ section 끝 -------*/

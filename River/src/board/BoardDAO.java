@@ -468,15 +468,16 @@ public class BoardDAO {
 		
 	
 		try {
-			pstmt = con.prepareStatement("select writer_id, content, writed_date from board_comment where board_num=? order by comment_num desc;");
+			pstmt = con.prepareStatement("select * from board_comment where board_num=? order by comment_num desc;");
 			pstmt.setInt(1, board_num);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
 				commentDTO = new CommentDTO();
-				commentDTO.setWriter_id(rs.getString(1));
-				commentDTO.setContent(rs.getString(2));
-				commentDTO.setWrited_date(rs.getString(3));
+				commentDTO.setComment_num(rs.getInt(1));
+				commentDTO.setWriter_id(rs.getString(2));
+				commentDTO.setContent(rs.getString(3));
+				commentDTO.setWrited_date(rs.getString(4));
 				
 				commentList.add(commentDTO);
 			}
@@ -490,6 +491,99 @@ public class BoardDAO {
 		return commentList;
 	}
 	
+	
+	/* 댓글 삭제 */
+	public int deleteComment(int comment_num) {
+		connect();
+		int result = 0;
+		
+		try {
+			pstmt = con.prepareStatement("delete from board_comment where comment_num=?;");
+			pstmt.setInt(1, comment_num);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return result;
+	}
+	
+	/* 좋아요 증가 */
+	public int addLikeNum(int board_num) {
+		connect();
+		int result = 0;
+		
+		try {
+			pstmt = con.prepareStatement("update board set like_num = like_num+1 where orders=?");
+			pstmt.setInt(1, board_num);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return result;
+	}
+	
+	/* 좋아요 감소 */
+	public int decreaseLikeNum(int board_num) {
+		connect();
+		int result = 0;
+		
+		try {
+			pstmt = con.prepareStatement("update board set like_num = like_num-1 where orders=?");
+			pstmt.setInt(1, board_num);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return result;
+	}
+	
+	/* 좋아요 테이블 튜플 추가 */
+	public int insertLikeNum(String member_id, int board_num) {
+		connect();
+		int result = 0;
+		
+		try {
+			pstmt = con.prepareStatement("insert into member_like_info values(?, ?)");
+			pstmt.setString(1, member_id);		// 회원 id
+			pstmt.setInt(2, board_num);			// 게시물 번호
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return result;
+	}
+	
+	/* 좋아요 테이블 튜플 제거 */
+	public int deleteLikeNum(String member_id, int board_num) {
+		connect();
+		int result = 0;
+		
+		try {
+			pstmt = con.prepareStatement("delete from member_like_info where member_id=? and board_num=?");
+			pstmt.setString(1, member_id);		// 회원 id
+			pstmt.setInt(2, board_num);			// 게시물 번호
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return result;
+	}
+
 
 	
 	

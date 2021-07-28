@@ -115,7 +115,24 @@ public class BoardController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		
+		/* 댓글 삭제 */
+		else if(command.equals("/River_Index/boardCommentDelete.bo") || command.equals("/River_Board/boardCommentDelete.bo")){	
+			action = new CommentDeleteAction();
+			try{
+				forward = action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		/* 좋아요 클릭 시 */
+		else if(command.equals("/River_Index/boardLikeNum.bo") || command.equals("/River_Board/boardLikeNum.bo")){	
+			action = new LikeNumAction();
+			try{
+				forward = action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
 		
 		if(forward != null){	
 			if(forward.isRedirect()){

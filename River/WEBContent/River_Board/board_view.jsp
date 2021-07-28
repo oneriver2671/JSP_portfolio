@@ -32,6 +32,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="freeBoard.js"></script>		<!-- script는 파일 하나로 써도 무방할 듯. 다른 것만 몇개 이 파일에 추가. -->
 </head>
+
 <script>
 /*----  ajax 사용해야할 듯. ----*/
 function delete01(){
@@ -47,18 +48,84 @@ function delete01(){
 	
 }
 
-// 좋아요 클릭 시, 따봉버튼 바뀜.
 $(document).ready(function(){
-	$('.post_btn_like').click(function(){		// #.로그인한 사람만 클릭할 수 있게 하자. 
+	// 좋아요 클릭 시, 좋아요버튼 색깔 바뀜
+	$('.post_btn_like').click(function(){		  
 		var test = $('.post_btn_like i').attr('class');
-		if($('.post_btn_like i').attr('class')=='far fa-thumbs-up'){		// 안눌린 상태에서 클릭.
+		var _orders = $('#board_num').val();			// hidden으로 가져옴.
+		var _member_id = $('#member_id').val();		// hidden으로 가져옴. 다른 방법이 있을까??
+		
+		// 안눌린 상태 -> 눌린 상태
+		if($('.post_btn_like i').attr('class')=='far fa-thumbs-up'){		
 				$('.post_btn_like i').attr('class', 'fas fa-thumbs-up');
 				
-		} else{		// 좋아요 눌린 상태에서 다시 클릭.
+				$.ajax({
+					type: "post",
+					async: true,
+					url: "boardLikeNum.bo?temp=0",	// temp==0 : like 증가
+					data: {orders: _orders, member_id: _member_id},
+					dataType: "text",
+					error : function(request, error){
+						alert("ajax 연결 실패"); 
+						alert("code:"+ request.status + "\n" + "message:"+request.responseText+"\n"+"error:"+error);
+					}
+				})
+				
+		} 
+		// 눌린 상태 -> 좋아요 해제
+		else{		
 			$('.post_btn_like i').attr('class', 'far fa-thumbs-up');
+			
+			$.ajax({
+				type: "post",
+				async: true,
+				url: "boardLikeNum.bo?temp=1",	// temp==1 : like 감소
+				data: {orders: _orders},
+				dataType: "text",
+				error : function(request, error){
+					alert("ajax 연결 실패"); 
+					alert("code:"+ request.status + "\n" + "message:"+request.responseText+"\n"+"error:"+error);
+				}
+			})
 		}
+	});
 	
-});
+	
+	
+	// 댓글 '답글달기' 클릭 시.
+	$('.comment_reply_btn').one("click",function(){		  // one()을 통해 1번만 실행되게 설정.
+		var input = "<input type='text' class='comment_new_input' name='content' placeholder='댓글을 남겨보세요'>";
+		var btn1 = "<input type='button' class='comment_new_cancel' value='취소' onclick='comment_cancel()'>";
+		var btn2 = "<input type='button' class='comment_new_action' value='등록'>";
+	
+		var styleObj = {
+				'display' : 'flex',
+				'width' : '780px',
+				'height' : '30px',
+				'padding' : '10px',
+		};
+			$('#comment_write_new').css(styleObj);
+			$('#comment_write_new').append(input);
+			$('#comment_write_new').append(btn1);
+			$('#comment_write_new').append(btn2);
+	});
+	
+
+});  // ------ jquery 끝 ------
+
+// 대댓글 취소 버튼 클릭 시.
+function comment_cancel(){
+	var remove1 = document.querySelector(".comment_new_input");
+	var remove2 = document.querySelector(".comment_new_cancel");
+	var remove3 = document.querySelector(".comment_new_action");
+	var cssRemove = document.querySelector("#comment_write_new");
+	
+	remove1.parentNode.removeChild(remove1);
+	remove2.parentNode.removeChild(remove2);
+	remove3.parentNode.removeChild(remove3);
+	$('#comment_write_new').removeAttr("style");			// 일반 js function안에서도 jquery문법 쓸 수 있네??
+}
+	
 </script>
 
 <body>
@@ -108,6 +175,8 @@ $(document).ready(function(){
   			</div>
  				<div class="post_content"><%= dto.getContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>") %></div>
  				<form name="content_btns" action="boardCommentWrite.bo?id=<%=id %>&orders=<%=dto.getOrders() %>&sort=<%=dto.getSort() %>" method="POST">
+	 				<input type="hidden" id="board_num" value=<%=dto.getOrders() %>>		<!-- 좋아요 ajax data송신을 위함 -->
+	 				<input type="hidden" id="member_id" value=<%=id %>>
 	 				<div class="post_btn">
 	 					<span class="rec_count"></span>		<!-- 좋아요 숫자 들어갈 곳. -->
 	 					<div class="post_btn_like"><i class="far fa-thumbs-up"></i><span>좋아요</span></div>
@@ -124,7 +193,18 @@ $(document).ready(function(){
 	 					<div class="comment">
 	 						<div class="comment_writer"><%=commentDTO.getWriter_id() %></div>
 	 						<div class="comment_content"><%=commentDTO.getContent() %></div>
-	 						<div class="comment_time"><%=commentDTO.getWrited_date().substring(0, 16) %></div>
+	 						<span class="comment_time"><%=commentDTO.getWrited_date().substring(0, 16) %></span>
+	 						<span class="comment_reply">
+	 						<%if(id != null){ %>
+	 							<span class="comment_reply_btn">답글달기</span>
+	 						<%} %>
+ 							<%if(id!=null && id.equals(commentDTO.getWriter_id())){ %>
+ 								<!-- 수정 클릭 : 일단 view단에서의 변화필요 ->   -->
+	 							<span>수정</span>
+	 							<a href="boardCommentDelete.bo?orders=<%=dto.getOrders() %>&comment_num=<%= commentDTO.getComment_num() %>">삭제</a>
+ 							<%} %>
+ 							</span>
+ 								<div id="comment_write_new"></div>
 	 					</div>
 	 				<%} %>
 	 				</div>
@@ -134,7 +214,7 @@ $(document).ready(function(){
 		 					<input type="text" name="content" placeholder="댓글을 남겨보세요" autocomplete='off'>
 		 					<div class="comment_write_bot">
 		 						<div class="comment_write_attach">(여기가 허전해)</div>
-		 						<button>등록</button>   <!-- 근데 이거 submit 아니어도 action으로 넘어가네?? -->
+		 						<button>등록</button>   <!-- 근데 이거 submit 아니어도 action으로 넘어가네? 참고로, input type='button'하면 안넘어감 -->
 		 					</div>
 	 					</div>
 	 				<% }%>

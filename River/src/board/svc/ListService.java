@@ -16,7 +16,6 @@ public class ListService {
 		listCount = boardDAO.selectListCount(sort);	
 		
 		return listCount;
-		
 	}
 
 	/* 게시글 select 메소드 */
@@ -27,4 +26,6 @@ public class ListService {
 	
 		return articleList;
 	}
+		
+	
 }

@@ -13,149 +13,148 @@ $(document).ready(function(){
 });
 
 
-
-
-/* -------- 회원가입 버튼 클릭 -------- */
-function join_btn(){
-  var joinForm = document.getElementsByName("joinForm");
-  joinForm.action("join_result.jsp");
-  
-}
-
-
 /* -----------회원가입 버튼 클릭 ----------- */
-function join_sub(form){
-	// alert("확인용");
-  // 이 함수 return 만나서 강제로 끝내게 만들어보자. 
-  var temp = 0;  // 값이 제대로 입력될 때마다 ++
+function join(){
+		// var id_ok = document.joinForm.idCheck;
+	  var temp = 0;  // 값이 제대로 입력될 때마다 ++
 
-  /* 변수 설정 */
-  var input_text = document.querySelectorAll("input[type='text']");
-  
-  // 이름, 아이디
-  var nameValue = input_text[0].value;
-  var idValue = input_text[1].value;
-  var nameLength = input_text[0].value.length;
-  var idLength = input_text[1].value.length;
-  
-  // 비밀번호
-  var input_pwd = document.querySelectorAll("input[type='password']");
-  var pwdValue = input_pwd[0].value;
-  var pwdLength = input_pwd[0].value.length;
-  var pwdValue_check = input_pwd[1].value;
+	  /* 변수 설정 */
+	  var joinForm = document.joinForm;			// form 태그 불러오기.
+	  var input_text = document.querySelectorAll("input[type='text']");
+	  
+	  // 이름, 아이디
+	  var nameValue = input_text[1].value;				// 이부분이 계속 [0]으로 안잡히는 이유 : include로 검색창 추가해, input_text 순번이 밀렸기 때문!
+	  var idValue = input_text[2].value;
+	  var nameLength = input_text[1].value.length;
+	  var idLength = input_text[2].value.length;
+	  
+	  // 비밀번호
+	  var input_pwd = document.querySelectorAll("input[type='password']");
+	  var pwdValue = input_pwd[0].value;
+	  var pwdLength = input_pwd[0].value.length;
+	  var pwdValue_check = input_pwd[1].value;
 
-  // 생년월일
-  var birth_year = document.getElementsByName("birth_1")[0].value;
-  var birth_month = document.getElementsByName("birth_2_1")[0].value;
-  var birth_day = document.getElementsByName("birth_2_2")[0].value;
-  
-  // 성별
-  var gender_radio = document.getElementsByName("gender");
-  var gender;
-  if(gender_radio[0].checked){
-    gender = gender_radio[0].value;
-  } else{
-    gender = gender_radio[1].value;
-  }
+	  // 생년월일
+	  var birth_year = document.getElementsByName("birth_1")[0].value;
+	  var birth_month = document.getElementsByName("birth_2_1")[0].value;
+	  var birth_day = document.getElementsByName("birth_2_2")[0].value;
+	  
+	  // 성별
+	  var gender_radio = document.getElementsByName("gender");
+	  var gender;
+	  if(gender_radio[0].checked){
+	    gender = gender_radio[0].value;
+	  } else{
+	    gender = gender_radio[1].value;
+	  }
 
-  // 연락처
-  var tel_sort = document.getElementsByName("tel_sort")[0].value;
-  var tel_front = document.getElementsByClassName("tel_first")[0].value;
-  var tel_middle = input_text[2].value;
-  var tel_back = input_text[3].value;
+	  // 연락처
+	  var tel_sort = document.getElementsByName("tel_sort")[0].value;
+	  var tel_front = document.getElementsByClassName("tel_first")[0].value;
+	  var tel_middle = input_text[3].value;
+	  var tel_back = input_text[4].value;
 
-  // 이메일
-  var mail_front = input_text[4].value;
-  var mail_back = input_text[5].value;
+	  // 이메일
+	  var mail_front = input_text[5].value;
+	  var mail_back = input_text[6].value;
 
-  // 주소
-  var addNum = input_text[6].value;
-  var add = input_text[7].value;
-  var add_value;
-  if(add == ''){
-    add_value="미입력";
-  } else{
-    add_value= add +" ("+addNum+")";
-  }
-  
-  // 이메일, SMS 수신여부
-  var mail_ok;
-  var sms_ok;
-  var mailOK_radio = document.getElementsByName("mailOK");
-  for(var i=0; i<mailOK_radio.length; i++){
-    if(mailOK_radio[i].checked){
-      mail_ok = mailOK_radio[i].value;
-    }
-  }
-  var smsOK_radio = document.getElementsByName("sms_ok");
-  for(var i=0; i<smsOK_radio.length; i++){
-    if(smsOK_radio[i].checked){
-      sms_ok = smsOK_radio[i].value;
-    }
-  }
+	  // 주소
+	  var addNum = input_text[7].value;
+	  var add = input_text[8].value;
+	  var add_value;
+	  if(add == ''){
+	    add_value="미입력";
+	  } else{
+	    add_value= add +" ("+addNum+")";
+	  }
+	  
+	  // 이메일, SMS 수신여부
+	  var mail_ok;
+	  var sms_ok;
+	  var mailOK_radio = document.getElementsByName("mailOK");
+	  for(var i=0; i<mailOK_radio.length; i++){
+	    if(mailOK_radio[i].checked){
+	      mail_ok = mailOK_radio[i].value;
+	    }
+	  }
+	  var smsOK_radio = document.getElementsByName("sms_ok");
+	  for(var i=0; i<smsOK_radio.length; i++){
+	    if(smsOK_radio[i].checked){
+	      sms_ok = smsOK_radio[i].value;
+	    }
+	  }
+	  
 
-  /*---- 입력값 확인 ----*/
-   if(nameLength == 0){
-     alert("이름을 입력하세요.");
-     input_text[0].focus();
-   } else if(nameLength>=6){
-     alert("이름은 5자 이하로 입력하세요.");
-     input_text[0].focus();
-   } else{
-     temp++;     // temp 0->1
-     // 아이디
-     if(idLength == 0){
-       alert("id를 입력하세요.");
-       input_text[1].focus();
-     } else if(idLength<6){
-       alert("id를 6자 이상 입력하세요.");
-       input_text[1].focus();
-     }
-     else if(idLength>15){
-       alert("id는 15자 이하로 입력하세요.");
-       input_text[1].focus();
-     } else{
-       temp++;     // temp 1->2
+	  /*---- 입력값 확인 ----*/	  
+	   if(nameLength == 0){
+	     alert("이름을 입력하세요.");
+	     input_text[1].focus();
+	   } else if(nameLength>=21){
+	     alert("이름은 20자 이하로 입력하세요.");
+	     input_text[1].focus();
+	   } else{
+	     temp++;     // temp 0->1
+	     // 아이디
+	     if(idLength == 0){
+	       alert("id를 입력하세요.");
+	       input_text[2].focus();
+	     } else if(idLength<6){
+	       alert("id를 6자 이상 입력하세요.");
+	       input_text[2].focus();
+	     }
+	     else if(idLength>15){
+	       alert("id는 15자 이하로 입력하세요.");
+	       input_text[2].focus();
+	     } else{
+	       temp++;     // temp 1->2
 
-       // 비밀번호
-       if(pwdLength == 0){
-         alert("패스워드를 입력하세요.");
-         input_pwd[0].focus();
-       } else if(pwdLength<9){
-         alert("패스워드를 9자 이상 입력하세요.");
-         input_pwd[0].focus();
-       } else{
-         if(pwdValue !== pwdValue_check){
-           alert("비밀번호 확인 값이 일치하지 않습니다.");
-           input_pwd[1].focus();
-        
-         } else{
-           temp++;      // temp 2->3
+	       // 비밀번호
+	       if(pwdLength == 0){
+	         alert("패스워드를 입력하세요.");
+	         input_pwd[0].focus();
+	       } else if(pwdLength<9){
+	         alert("패스워드를 9자 이상 입력하세요.");
+	         input_pwd[0].focus();
+	       } else{
+	         if(pwdValue !== pwdValue_check){
+	           alert("비밀번호 확인 값이 일치하지 않습니다.");
+	           input_pwd[1].focus();
+	        
+	         } else{
+	           temp++;      // temp 2->3
 
-           // 연락처
-           if(tel_middle.length==0 || tel_back.length==0){
-             alert("연락처를 입력해주세요.");
-           }else{
-             temp++;      // temp 3->4
-             // 이메일 주소
-             if(mail_front.length==0 || mail_back.length==0){
-               alert("이메일 주소를 입력해주세요.");
-             }else{
-               temp++;       // temp 4->5
-             }
-           }  
-         }
-       }
-     }
-   }
-
-  //  temp가 5가 되어야만 모든게 잘 입력된 상황임.
-   form.action("join_dbInput.jsp");
-
-  // if(temp == 5){
- //	form.action("join_dbInput.jsp");			// 매개변수로 넘어온 form.
-  // }
-}
+	           // 연락처
+	           if(tel_middle.length==0 || tel_back.length==0){
+	             alert("연락처를 입력해주세요.");
+	           }else{
+	             temp++;      // temp 3->4
+	             // 이메일 주소
+	             if(mail_front.length==0 || mail_back.length==0){
+	               alert("이메일 주소를 입력해주세요.");
+	             }else{
+	               temp++;       // temp 4->5
+	             }
+	           }  
+	         }
+	       }
+	     }
+	   }
+	  
+	  
+	  // 만약 btn이 없이 중복확인 체크한 경우에는, 어떻게 조건을 써줘야할까?? 
+	   if(document.getElementById("checkId_btn").disabled == true){
+		  temp++;
+	  } else{
+		  alert("중복확인을 진행해주세요.");
+	  } 
+	  
+	 
+	  //  temp가 5가 되어야만 모든게 잘 입력된 상황임.    + ★★★ 중복확인이 모두 완료되어야 실행되게 !! ★★★ (모두 disabled 상태여야 함)
+	  	
+	  if(temp == 6){
+		  joinForm.submit();				// join_dbInput.jsp로 이동. 
+	  }
+	}
 
 
 /* 어떤게 더 좋을지. */
@@ -231,3 +230,36 @@ function sample6_execDaumPostcode() {
       }
   }).open();
 }
+
+
+
+/*----- 아이디 중복확인 ajax -----*/
+	function checkId_ajax(){
+		var _id = $('#id_input').val();				// id input의 value 가져오기
+		if(_id ==''){
+			alert("id를 입력하세요.");
+			return;			    // 아예 function을 끝내버림.
+		}
+		
+		$.ajax({
+			type: "post",
+			async: true,        
+			url : "http://localhost:8080/River/UserServlet",				// 아마 Servlet에서 mapping해줘서 이렇게 될걸?
+			dataType : "text",        // html대신 text 써줌. (별로 차이 없을듯??)
+			data: {id: _id},           // ID를 서블릿으로 전송. (이렇게 보내면 받을 때 'id'로 받으면 되나?)
+			error : function(request, error){
+				alert("ajax 연결 실패"); 
+				alert("code:"+ request.status + "\n" + "message:"+request.responseText+"\n"+"error:"+error);
+			},
+			success : function(data, textStatus){				// 서블릿에서 보내는 데이터를 data로 받기.
+				if(data == 'usable'){
+					$('#id_ok').text("사용할 수 있는 아이디입니다.");
+					$('#id_ok').css("color", "blue");
+					$('#checkId_btn').prop("disabled", true);			// 중복확인 버튼 비활성화. (비활성화 시, css로 변화주기.)
+					$('#checkId_btn').css("backgrond-color", "whitesmoke");
+				} else{
+					$('#id_ok').text("이미 존재하는 아이디입니다.");
+				}
+			}
+		})
+	}

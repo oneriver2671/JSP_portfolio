@@ -20,17 +20,18 @@ public class DetailAction implements Action {
 		String sort = request.getParameter("sort");
 		String page = request.getParameter("page");		// 이거 굳이 필요함? 어떻게 쓰이는지 추적해보자.
 		
+		// 게시글 출력용 model 객체 생성
 		DetailService detailService = new DetailService();
 		BoardDTO article = detailService.getArticle(board_num);
+		
+		// 댓글 출력용 model 객체 생성
+		CommentService commentService = new CommentService();
+		ArrayList<CommentDTO> commentList = commentService.getComment(board_num);
 		
 		 // 이전글, 다음글 표시를 위한. (이거 너무 돌아왔나..?)
 		int[] articleNum = detailService.checkArticleNum(sort);  
 		int maxNum = articleNum[0];
 		int minNum = articleNum[1];
-		
-		// 댓글 출력용 model 객체 생성
-		CommentService commentService = new CommentService();
-		ArrayList<CommentDTO> commentList = commentService.getComment(board_num);
 		
 		
 		ActionForward forward = new ActionForward();
