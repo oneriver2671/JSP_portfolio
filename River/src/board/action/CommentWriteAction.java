@@ -21,12 +21,13 @@ public class CommentWriteAction implements Action {
 		
 		// board_view.jsp에서 넘어온 값들
 		int board_num = Integer.parseInt(request.getParameter("orders"));
-		String board_sort = request.getParameter("sort");
+		String board_sort = request.getParameter("sort");   // 이거 detailAction에 안넘겨주면, 이전글/다음글 기능 문제생김.
+		String member_id = request.getParameter("id");		// 현재 로그인한 회원
 		
 		commentDTO = new CommentDTO();
-		commentDTO.setWriter_id( request.getParameter("id"));		// 작성자
+		commentDTO.setWriter_id(member_id);		  	// 작성자
 		commentDTO.setContent(request.getParameter("content"));		// 작성 내용
-		commentDTO.setBoard_num(board_num);	// 게시판 번호
+		commentDTO.setBoard_num(board_num);			// 게시판 번호
 		commentDTO.setBoard_sort(board_sort);		// 게시판 종류
 		
 		// model 객체 호출
@@ -38,7 +39,7 @@ public class CommentWriteAction implements Action {
 		forward.setRedirect(true);
 		// 보낼 것 : sort, 게시판 번호
 		String encoded_sort = URLEncoder.encode(board_sort, "utf-8");
-		forward.setPath("boardDetail.bo?orders="+board_num+"&sort="+encoded_sort);	 // Controller -> DetailAction으로 이동
+		forward.setPath("boardDetail.bo?orders="+board_num+"&sort="+encoded_sort+"&id="+member_id);	 // Controller -> DetailAction으로 이동
 		return forward;
 	}
 

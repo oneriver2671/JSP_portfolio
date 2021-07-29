@@ -19,8 +19,7 @@ public class LikeNumAction implements Action {
 		int board_num = Integer.parseInt(request.getParameter("orders"));
 		int temp = Integer.parseInt(request.getParameter("temp"));  	// 0 : 좋아요 증가, 1 : 좋아요 감소
 		member_id = request.getParameter("member_id");		// 로그인된 회원 id 넘어옴
-	
-		System.out.println(member_id);
+			
 		
 		LikeNumService likeNumService = new LikeNumService();	// Model 객체 생성
 		if(temp==0) {			

@@ -13,7 +13,12 @@
   int maxNum = (Integer)request.getAttribute("maxNum");	  // 게시글 번호 최대값
 	int minNum = (Integer)request.getAttribute("minNum");	  // 게시글 번호 최솟값
 	ArrayList<CommentDTO> commentList = (ArrayList<CommentDTO>)request.getAttribute("comment");
+	boolean isLike = (Boolean)request.getAttribute("isLike");		// 게시글 좋아요 누른 회원인지 확인용
 	
+	String attachedName = dto.getAttached();
+	if(attachedName == null){		// 널값 오류 방지용
+		attachedName = "null";
+	}	
 %>
 
 <!DOCTYPE html>
@@ -49,20 +54,54 @@ function delete01(){
 }
 
 $(document).ready(function(){
+	
+	// 댓글 달기 클릭 시.
+	$('.post_btn_comment').click(function(){
+		var _member_id = $('#member_id').val();  	// hidden으로 가져옴.
+		
+		if(_member_id == 'null'){
+			alert('로그인 후 작성 가능합니다.');
+		} else{
+			$('#comment_write input').focus();
+		}
+	});
+	
 	// 좋아요 클릭 시, 좋아요버튼 색깔 바뀜
 	$('.post_btn_like').click(function(){		  
 		var test = $('.post_btn_like i').attr('class');
 		var _orders = $('#board_num').val();			// hidden으로 가져옴.
 		var _member_id = $('#member_id').val();		// hidden으로 가져옴. 다른 방법이 있을까??
 		
-		// 안눌린 상태 -> 눌린 상태
-		if($('.post_btn_like i').attr('class')=='far fa-thumbs-up'){		
-				$('.post_btn_like i').attr('class', 'fas fa-thumbs-up');
+		// 로그인한 회원만 누를 수 있게.	
+		if(_member_id == 'null'){
+			alert('로그인 후 누르실 수 있습니다.');
+		} 
+		else{
+			// 안눌린 상태 -> 눌린 상태
+			if($('.post_btn_like i').attr('class')=='far fa-thumbs-up'){		
+					$('.post_btn_like i').attr('class', 'fas fa-thumbs-up');
+					
+					$.ajax({
+						type: "post",
+						async: true,
+						url: "boardLikeNum.bo?temp=0",	// temp==0 : like 증가
+						data: {orders: _orders, member_id: _member_id},
+						dataType: "text",
+						error : function(request, error){
+							alert("ajax 연결 실패"); 
+							alert("code:"+ request.status + "\n" + "message:"+request.responseText+"\n"+"error:"+error);
+						}
+					})
+					
+			} 
+			// 눌린 상태 -> 좋아요 해제
+			else{		
+				$('.post_btn_like i').attr('class', 'far fa-thumbs-up');
 				
 				$.ajax({
 					type: "post",
 					async: true,
-					url: "boardLikeNum.bo?temp=0",	// temp==0 : like 증가
+					url: "boardLikeNum.bo?temp=1",	// temp==1 : like 감소
 					data: {orders: _orders, member_id: _member_id},
 					dataType: "text",
 					error : function(request, error){
@@ -70,23 +109,7 @@ $(document).ready(function(){
 						alert("code:"+ request.status + "\n" + "message:"+request.responseText+"\n"+"error:"+error);
 					}
 				})
-				
-		} 
-		// 눌린 상태 -> 좋아요 해제
-		else{		
-			$('.post_btn_like i').attr('class', 'far fa-thumbs-up');
-			
-			$.ajax({
-				type: "post",
-				async: true,
-				url: "boardLikeNum.bo?temp=1",	// temp==1 : like 감소
-				data: {orders: _orders},
-				dataType: "text",
-				error : function(request, error){
-					alert("ajax 연결 실패"); 
-					alert("code:"+ request.status + "\n" + "message:"+request.responseText+"\n"+"error:"+error);
-				}
-			})
+			}
 		}
 	});
 	
@@ -139,7 +162,6 @@ function comment_cancel(){
   			<%
 					if(id!=null && id.equals(dto.getWriter_id())){
 			   %>
-			   	<!-- 이 수정, 삭제 페이지도 MVC2로 새로 만들어야겠지.. 후..! -->
 			   		<a href="boardModifyForm.bo?orders=<%=dto.getOrders() %>">수정</a>
   				  <a href="boardDelete.bo?orders=<%=dto.getOrders() %>&sort=<%=dto.getSort() %>">삭제</a>
 			  <% } %>
@@ -148,10 +170,10 @@ function comment_cancel(){
   				<!-- 이전글, 다음글도 onclick시 이동되어야 함. -->
   				<% int temp=0; %>
   				<% if(dto.getOrders()!=minNum){ %>
-  					<a href="boardDetailMove.bo?sort=<%= dto.getSort() %>&orders=<%= dto.getOrders() %>&temp=0" >이전글</a>
+  					<a href="boardDetailMove.bo?sort=<%= dto.getSort() %>&orders=<%= dto.getOrders() %>&id=<%=id %>&temp=0" >이전글</a>
   				<% }%>
   				<% if(dto.getOrders()!=maxNum){ %>
-  					<a href="boardDetailMove.bo?sort=<%= dto.getSort() %>&orders=<%= dto.getOrders() %>&temp=1" >다음글</a>
+  					<a href="boardDetailMove.bo?sort=<%= dto.getSort() %>&orders=<%= dto.getOrders() %>&id=<%=id %>&temp=1" >다음글</a>
   				<% }%>
   				<a href="boardList.bo?sort=<%= dto.getSort() %>">목록</a>
   			</div>
@@ -166,10 +188,10 @@ function comment_cancel(){
 	  				<div class="post_etc_left_num">조회수 <%= dto.getCheck_num() %></div>
   				</div>
   				<div class="post_etc_right">
-  					<%if( dto.getAttached()!=null ){ %>
+  					<%if(!attachedName.equals("null")){ %>
   						<div>첨부파일</div>
 							<!-- ---- 이거 컨트롤러 거쳐가게 만들고 싶음. ---- -->
-							<a href="../River_Board/file_down.jsp?downFile=<%= dto.getAttached() %>"> <%= dto.getAttached() %></a>
+							<a href="../River_Board/file_down.jsp?downFile=<%= attachedName %>"> <%= attachedName %></a>
 						<%} %>
   				</div>
   			</div>
@@ -179,8 +201,14 @@ function comment_cancel(){
 	 				<input type="hidden" id="member_id" value=<%=id %>>
 	 				<div class="post_btn">
 	 					<span class="rec_count"></span>		<!-- 좋아요 숫자 들어갈 곳. -->
-	 					<div class="post_btn_like"><i class="far fa-thumbs-up"></i><span>좋아요</span></div>
-	 					<div><i class="far fa-comment"></i><span>댓글 달기</span></div>
+	 					<div class="post_btn_like">
+	 					<%if(isLike == false){ %>
+	 						<i class="far fa-thumbs-up"></i>		<!-- 색깔 없는 좋아요 -->
+	 					<%} else{ %>
+	 						<i class="fas fa-thumbs-up"></i>		<!-- 색깔 있는 좋아요 -->
+	 					<%} %>
+	 					<span>좋아요</span></div>
+	 					<div class="post_btn_comment"><i class="far fa-comment"></i><span>댓글 달기</span></div>
 	 					<div><i class="far fa-share-square"></i><span>공유하기</span></div>
 	 				</div>
 	 			
@@ -201,7 +229,7 @@ function comment_cancel(){
  							<%if(id!=null && id.equals(commentDTO.getWriter_id())){ %>
  								<!-- 수정 클릭 : 일단 view단에서의 변화필요 ->   -->
 	 							<span>수정</span>
-	 							<a href="boardCommentDelete.bo?orders=<%=dto.getOrders() %>&comment_num=<%= commentDTO.getComment_num() %>">삭제</a>
+	 							<a href="boardCommentDelete.bo?orders=<%=dto.getOrders() %>&comment_num=<%=commentDTO.getComment_num() %>&sort=<%=dto.getSort() %>&id=<%=id %>">삭제</a>
  							<%} %>
  							</span>
  								<div id="comment_write_new"></div>
@@ -218,8 +246,6 @@ function comment_cancel(){
 		 					</div>
 	 					</div>
 	 				<% }%>
-	 				
-	 					
  				</form>
   		</div>
   	</div>

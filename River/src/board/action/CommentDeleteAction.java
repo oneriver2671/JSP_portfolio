@@ -18,6 +18,8 @@ public class CommentDeleteAction implements Action {
 		ActionForward forward = null;
 		
 		int board_num = Integer.parseInt(request.getParameter("orders"));	// 삭제 후 다시 해당 페이지 띄우기 위해 필요함.
+		String board_sort = request.getParameter("sort");	
+		String member_id = request.getParameter("id");		// 현재 로그인한 회원
 		int comment_num = Integer.parseInt(request.getParameter("comment_num"));
 	
 		CommentDeleteService commentDeleteService = new CommentDeleteService();
@@ -38,7 +40,8 @@ public class CommentDeleteAction implements Action {
 	
 			forward = new ActionForward();
 			forward.setRedirect(true);
-			forward.setPath("boardDetail.bo?orders="+board_num);	  
+			String encoded_sort = URLEncoder.encode(board_sort, "utf-8");
+			forward.setPath("boardDetail.bo?orders="+board_num+"&sort="+encoded_sort+"&id="+member_id);	  
 		}
 		
 		return forward;

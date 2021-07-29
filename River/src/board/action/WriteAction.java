@@ -28,14 +28,16 @@ public class WriteAction implements Action {
 		MultipartRequest multi = new MultipartRequest(request,realFolder,fileSize,"UTF-8",new DefaultFileRenamePolicy());
 		
 		String sort = multi.getParameter("sort");	
+		
 		/* 게시글 dto 객체에 내용 담기 */		
 		boardDTO = new BoardDTO();
 		boardDTO.setSort(sort);
 		boardDTO.setTitle(multi.getParameter("title"));
 		boardDTO.setContent(multi.getParameter("content"));
 		boardDTO.setWriter_id(request.getParameter("writer_id"));	// 쿼리스트링으로 들어옴.
-		boardDTO.setAttached(multi.getOriginalFileName((String)multi.getFileNames().nextElement()));   // 첨부파일 이름만 db에 저장됨.
-	
+		boardDTO.setAttached(multi.getOriginalFileName((String)multi.getFileNames().nextElement()));   // 첨부파일 이름만 db에 저장됨.			
+		
+
 		
 		// 이제 model 객체 불러서 처리해야 함.
 		WriteService writeService = new WriteService();

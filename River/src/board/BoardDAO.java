@@ -583,7 +583,31 @@ public class BoardDAO {
 		}
 		return result;
 	}
-
+	
+	/* 좋아요 테이블 select (상세페이지용) */
+	public boolean getLikeNum(String member_id, int board_num) {
+		connect();
+		boolean result = false;		// true : 좋아요를 눌렀던 게시물
+		ResultSet rs = null;
+		
+		try {
+			pstmt = con.prepareStatement("select board_num from member_like_info where member_id=? and board_num=?");
+			pstmt.setString(1, member_id);		// 회원 id
+			pstmt.setInt(2, board_num);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = true;
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return result;		// 쿼리결과가 없으면 false, 있으면 true를 반환.
+	}
 
 	
 	
