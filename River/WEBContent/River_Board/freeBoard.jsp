@@ -101,16 +101,12 @@
   						<option>1일</option>
   						<option>1주</option>
   						<option>1개월</option>
-  						<option>6개월</option>
-  						<option>1년</option>
   						<!-- 밑에 기간 입력 칸도 만들고 싶음. -->
   					</select>
   					<select name="search_by_content">
   						<option>제목+내용</option>
   						<option>제목만</option>
   						<option>글 작성자</option>
-  						<option>댓글 내용</option>
-  						<option>댓글 작성자</option>
   					</select>
   					<!-- 2글자 이상부터 검색되게 제한하기. -->
   					<input type="text" name="search_value" placeholder="검색어를 입력해주세요" class="searchBar">

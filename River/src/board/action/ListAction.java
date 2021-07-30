@@ -21,7 +21,7 @@ public class ListAction implements Action {
 		String sort = "test";
 		sort = request.getParameter("sort");	// 게시판 종류. header에서 넘어옴.
 				
-		if(request.getParameter("page")!= null){		// 이 page는 어디서 오는가. -> board_music_list.jsp에서 넘어옴. null이면 아무런 이벤트도 없는 상태니 기본 페이지로.
+		if(request.getParameter("page")!= null){		// 이 page는 어디서 오는가. -> board_list.jsp에서 넘어옴. null이면 아무런 이벤트도 없는 상태니 기본 페이지로.
 			page = Integer.parseInt(request.getParameter("page"));
 		}
 		

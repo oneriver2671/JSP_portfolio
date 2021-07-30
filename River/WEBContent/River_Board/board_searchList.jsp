@@ -12,7 +12,7 @@
 %>
 
 <%
-	/* ListAction에서 넘어온 것들 */
+	/* SearchAction에서 넘어온 것들 */
 	ArrayList<BoardDTO> articleList = (ArrayList<BoardDTO>)request.getAttribute("articleList");
   PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 	int listCount = pageInfo.getListCount();
@@ -20,6 +20,16 @@
 	int maxPage = pageInfo.getMaxPage();
 	int startPage = pageInfo.getStartPage();
 	int endPage = pageInfo.getEndPage();
+	
+	// page 넘길 때 controller에 넘겨주기 위함. (paging처리 시엔 form태그를 쓰지 않기 때문)
+	String searchDay = "";		  // 검색조건 중, 기간
+	String searchSort = "";		  // 검색조건 중, 종류
+	String searchContent = "";  // 검색조건 중, 검색어
+	searchDay = (String)request.getAttribute("searchDay");	
+	searchSort = (String)request.getAttribute("searchSort");
+	searchContent = (String)request.getAttribute("searchContent");
+	
+	
 %>
 
 
@@ -93,19 +103,19 @@ function loginCheck(id){
   			<div>
   			<!-- 5페이지 이상 넘어가면, >표시로 6~10페이지 출력되게. -->
  					<%if(nowPage>1){ %>
-						<a href="boardList.bo?sort=<%=request.getParameter("sort")%>&page=<%=nowPage-1 %>">◀</a>&nbsp;
+						<a href="boardSearch.bo?sort=<%=request.getParameter("sort")%>&page=<%=nowPage-1 %>&search_by_day=<%=searchDay %>&search_by_content=<%=searchSort %>&search_value=<%=searchContent%>">◀</a>&nbsp;
 					<%} %>
 				
 					<%for(int a=startPage; a<=endPage; a++){
 							if(a==nowPage){%>
 								[<%=a %>]
 						<%} else{ %>
-							<a href="boardList.bo?sort=<%=request.getParameter("sort")%>&page=<%=a %>">[<%=a %>]
+							<a href="boardSearch.bo?sort=<%=request.getParameter("sort")%>&page=<%=a %>&search_by_day=<%=searchDay %>&search_by_content=<%=searchSort %>&search_value=<%=searchContent%>">[<%=a %>]
 						</a>&nbsp;
 							<%} %>
 					<%} %>
 					<%if(nowPage<maxPage){ %>
-							<a href="boardList.bo?sort=<%=request.getParameter("sort")%>&page=<%=nowPage+1 %>">▶</a>
+							<a href="boardSearch.bo?sort=<%=request.getParameter("sort")%>&page=<%=nowPage+1 %>&search_by_day=<%=searchDay %>&search_by_content=<%=searchSort %>&search_value=<%=searchContent%>">▶</a>
 						<%} %> 
   			</div>
   			<div>

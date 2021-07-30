@@ -20,12 +20,11 @@ public class ListService {
 
 	/* 게시글 select 메소드 */
 	public ArrayList<BoardDTO> getArticleList(String sort, int page, int limit) throws Exception{
+		int listCount = 0;
 		ArrayList<BoardDTO> articleList = null;
 		BoardDAO boardDAO = BoardDAO.getInstance();
 		articleList = boardDAO.selectArticleList(sort, page, limit);
 	
 		return articleList;
 	}
-		
-	
 }

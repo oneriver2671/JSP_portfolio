@@ -201,10 +201,8 @@ public class BoardDAO {
 		int startrow = (page-1)*15; 	
 		
 		try {
-			// stmt = con.createStatement();
 			ResultSet rs = null;
 			
-			/* 다른 조건도 작업 필요 */
 			// 전체기간
 			if(day.equals("전체기간")) {
 				if(sort.equals("제목+내용")) {
@@ -215,14 +213,20 @@ public class BoardDAO {
 					pstmt.setInt(4, startrow);
 					rs = pstmt.executeQuery();
 				}
-				if(sort.equals("제목만")) {
+				else if(sort.equals("제목만")) {
 					pstmt = con.prepareStatement("select * from board where sort=? and title like ? order by orders desc limit ?, 15;");
 					pstmt.setString(1, board_sort);
 					pstmt.setString(2, "%"+content+"%");
 					pstmt.setInt(3, startrow);
 					rs = pstmt.executeQuery();
 				}
-			
+				else if(sort.equals("글 작성자")) {
+					pstmt = con.prepareStatement("select * from board where sort=? and writer_id like ? order by orders desc limit ?, 15;");
+					pstmt.setString(1, board_sort);
+					pstmt.setString(2, "%"+content+"%");
+					pstmt.setInt(3, startrow);
+					rs = pstmt.executeQuery();
+				}
 			}
 			// 1일
 			if(day.equals("1일")) {
@@ -234,20 +238,23 @@ public class BoardDAO {
 					pstmt.setInt(4, startrow);
 					rs = pstmt.executeQuery();				
 				}
-				if(sort.equals("제목만")) {
-//					rs = stmt.executeQuery("select * from board where writed_date >= date_add(now(), interval -1 day) and title like '%"+content+"%'"
-//							+ " order by orders desc;");	
+				else if(sort.equals("제목만")) {
 					pstmt = con.prepareStatement("select * from board where sort=? and writed_date >= date_add(now(), interval -1 day) and title like ? order by orders desc limit ?, 15;");
 					pstmt.setString(1, board_sort);
 					pstmt.setString(2, "%"+content+"%");
 					pstmt.setInt(3, startrow);
 					rs = pstmt.executeQuery();
-				}	
+				}
+				else if(sort.equals("글 작성자")) {
+					pstmt = con.prepareStatement("select * from board where sort=? and writer_id like ? and writed_date >= date_add(now(), interval -1 day) order by orders desc limit ?, 15;");
+					pstmt.setString(1, board_sort);
+					pstmt.setString(2, "%"+content+"%");
+					pstmt.setInt(3, startrow);
+					rs = pstmt.executeQuery();
+				}
 			}
 			if(day.equals("1주")) {
 				if(sort.equals("제목+내용")) {
-//					rs = stmt.executeQuery("select * from board where writed_date >= date_add(now(), interval -1 week) and (title like '%"+content+"%' or content like '%"+content+"%')"
-//							+ " order by orders desc;");	
 					pstmt = con.prepareStatement("select * from board where sort=? and writed_date >= date_add(now(), interval -1 week) and (title like ? or content like ?) order by orders desc limit ?, 15;");
 					pstmt.setString(1, board_sort);
 					pstmt.setString(2, "%"+content+"%");
@@ -255,15 +262,44 @@ public class BoardDAO {
 					pstmt.setInt(4, startrow);
 					rs = pstmt.executeQuery();
 				}
-				if(sort.equals("제목만")) {
-//					rs = stmt.executeQuery("select * from board where writed_date >= date_add(now(), interval -1 week) and title like '%"+content+"%'"
-//							+ " order by orders desc;");
+				else if(sort.equals("제목만")) {
 					pstmt = con.prepareStatement("select * from board where sort=? and writed_date >= date_add(now(), interval -1 week) and title like ? order by orders desc limit ?, 15;");
 					pstmt.setString(1, board_sort);
 					pstmt.setString(2, "%"+content+"%");
 					pstmt.setInt(3, startrow);
 					rs = pstmt.executeQuery();
-				}	
+				}
+				else if(sort.equals("글 작성자")) {
+					pstmt = con.prepareStatement("select * from board where sort=? and writer_id like ? and writed_date >= date_add(now(), interval -1 week) order by orders desc limit ?, 15;");
+					pstmt.setString(1, board_sort);
+					pstmt.setString(2, "%"+content+"%");
+					pstmt.setInt(3, startrow);
+					rs = pstmt.executeQuery();
+				}
+			}
+			if(day.equals("1개월")) {
+				if(sort.equals("제목+내용")) {
+					pstmt = con.prepareStatement("select * from board where sort=? and writed_date >= date_add(now(), interval -1 month) and (title like ? or content like ?) order by orders desc limit ?, 15;");
+					pstmt.setString(1, board_sort);
+					pstmt.setString(2, "%"+content+"%");
+					pstmt.setString(3, "%"+content+"%");
+					pstmt.setInt(4, startrow);
+					rs = pstmt.executeQuery();
+				}
+				else if(sort.equals("제목만")) {
+					pstmt = con.prepareStatement("select * from board where sort=? and writed_date >= date_add(now(), interval -1 month) and title like ? order by orders desc limit ?, 15;");
+					pstmt.setString(1, board_sort);
+					pstmt.setString(2, "%"+content+"%");
+					pstmt.setInt(3, startrow);
+					rs = pstmt.executeQuery();
+				}
+				else if(sort.equals("글 작성자")) {
+					pstmt = con.prepareStatement("select * from board where sort=? and writer_id like ? and writed_date >= date_add(now(), interval -1 month) order by orders desc limit ?, 15;");
+					pstmt.setString(1, board_sort);
+					pstmt.setString(2, "%"+content+"%");
+					pstmt.setInt(3, startrow);
+					rs = pstmt.executeQuery();
+				}
 			}
 		
 			while(rs.next()) {
@@ -287,6 +323,115 @@ public class BoardDAO {
 			disconnect();
 		}
 		return boardList;		// 이 메소드를 사용하는 곳으로 ArrayList를 리턴.
+	}
+	
+	
+	/* 검색조건별 게시물 갯수 세는 메소드 (for paging) */
+	public int searchListCount(String board_sort, String day, String sort, String content) {	// sort : 게시판 종류
+		connect();
+		int listCount = 0;
+		ResultSet rs = null;
+		
+		try {
+			// 전체기간
+			if(day.equals("전체기간")) {
+				if(sort.equals("제목+내용")) {
+					pstmt = con.prepareStatement("select count(*) from board where sort=? and (title like ? or content like ?) ;");
+					pstmt.setString(1, board_sort);
+					pstmt.setString(2, "%"+content+"%");
+					pstmt.setString(3, "%"+content+"%");
+					rs = pstmt.executeQuery();
+				}
+				else if(sort.equals("제목만")) {
+					pstmt = con.prepareStatement("select count(*) from board where sort=? and title like ?;");
+					pstmt.setString(1, board_sort);
+					pstmt.setString(2, "%"+content+"%");
+					rs = pstmt.executeQuery();
+				}
+				else if(sort.equals("글 작성자")) {
+					pstmt = con.prepareStatement("select count(*) from board where sort=? and writer_id like ?;");
+					pstmt.setString(1, board_sort);
+					pstmt.setString(2, "%"+content+"%");
+					rs = pstmt.executeQuery();
+				}
+			}
+			// 1일
+			else if(day.equals("1일")) {
+				if(sort.equals("제목+내용")) {
+					pstmt = con.prepareStatement("select count(*) from board where sort=? and (title like ? or content like ?) and writed_date >= date_add(now(), interval -1 day);");
+					pstmt.setString(1, board_sort);
+					pstmt.setString(2, "%"+content+"%");
+					pstmt.setString(3, "%"+content+"%");
+					rs = pstmt.executeQuery();
+				}
+				else if(sort.equals("제목만")) {
+					pstmt = con.prepareStatement("select count(*) from board where sort=? and title like ? and writed_date >= date_add(now(), interval -1 day);");
+					pstmt.setString(1, board_sort);
+					pstmt.setString(2, "%"+content+"%");
+					rs = pstmt.executeQuery();
+				}
+				else if(sort.equals("글 작성자")) {
+					pstmt = con.prepareStatement("select count(*) from board where sort=? and writer_id like ? and writed_date >= date_add(now(), interval -1 day);");
+					pstmt.setString(1, board_sort);
+					pstmt.setString(2, "%"+content+"%");
+					rs = pstmt.executeQuery();
+				}
+			}
+			// 1주
+			else if(day.equals("1주")) {
+				if(sort.equals("제목+내용")) {
+					pstmt = con.prepareStatement("select count(*) from board where sort=? and (title like ? or content like ?) and writed_date >= date_add(now(), interval -1 week);");
+					pstmt.setString(1, board_sort);
+					pstmt.setString(2, "%"+content+"%");
+					pstmt.setString(3, "%"+content+"%");
+					rs = pstmt.executeQuery();
+				}
+				else if(sort.equals("제목만")) {
+					pstmt = con.prepareStatement("select count(*) from board where sort=? and title like ? and writed_date >= date_add(now(), interval -1 week);");
+					pstmt.setString(1, board_sort);
+					pstmt.setString(2, "%"+content+"%");
+					rs = pstmt.executeQuery();
+				}
+				else if(sort.equals("글 작성자")) {
+					pstmt = con.prepareStatement("select count(*) from board where sort=? and writer_id like ? and writed_date >= date_add(now(), interval -1 week);");
+					pstmt.setString(1, board_sort);
+					pstmt.setString(2, "%"+content+"%");
+					rs = pstmt.executeQuery();
+				}
+			}
+			// 1개월
+			else if(day.equals("1개월")) {
+				if(sort.equals("제목+내용")) {
+					pstmt = con.prepareStatement("select count(*) from board where sort=? and (title like ? or content like ?) and writed_date >= date_add(now(), interval -1 month);");
+					pstmt.setString(1, board_sort);
+					pstmt.setString(2, "%"+content+"%");
+					pstmt.setString(3, "%"+content+"%");
+					rs = pstmt.executeQuery();
+				}
+				else if(sort.equals("제목만")) {
+					pstmt = con.prepareStatement("select count(*) from board where sort=? and title like ? and writed_date >= date_add(now(), interval -1 month);");
+					pstmt.setString(1, board_sort);
+					pstmt.setString(2, "%"+content+"%");
+					rs = pstmt.executeQuery();
+				}
+				else if(sort.equals("글 작성자")) {
+					pstmt = con.prepareStatement("select count(*) from board where sort=? and writer_id like ? and writed_date >= date_add(now(), interval -1 month);");
+					pstmt.setString(1, board_sort);
+					pstmt.setString(2, "%"+content+"%");
+					rs = pstmt.executeQuery();
+				}
+			}
+			
+			if(rs.next()) {
+				listCount = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return listCount;
 	}
 	
 	
@@ -609,6 +754,11 @@ public class BoardDAO {
 		return result;		// 쿼리결과가 없으면 false, 있으면 true를 반환.
 	}
 
+	
+	
+	
+	
+	
 	
 	
 	/*---------------- 페이지 넘기기를 위한 작업 (자유게시판용) ---------------- */
