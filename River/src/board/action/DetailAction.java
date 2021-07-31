@@ -23,6 +23,7 @@ public class DetailAction implements Action {
 		String sort = request.getParameter("sort");
 		String page = request.getParameter("page");		// 이거 굳이 필요함? 어떻게 쓰이는지 추적해보자.
 		String member_id = request.getParameter("id");		// 현재 로그인한 회원 정보
+		if(member_id==null) member_id = "";		// board_update.jsp에서 넘어올 땐 null로 넘어옴.
 		
 		// 게시글 출력용 model 객체 생성
 		DetailService detailService = new DetailService();
@@ -52,7 +53,7 @@ public class DetailAction implements Action {
 	   	request.setAttribute("minNum", minNum);
 	   	request.setAttribute("comment", commentList);
 	   	request.setAttribute("isLike", isLike);   // 게시물 좋아요 정보 (boolean 반환)
-   		forward.setPath("../River_Board/board_view.jsp");
+   		forward.setPath("board_view.jsp");
    		return forward;
 	}
 

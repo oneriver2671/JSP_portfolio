@@ -31,9 +31,9 @@ public class ListAction implements Action {
 		articleList = listService.getArticleList(sort, page, limit);  // paging처리를 위한 변수 추가.
 		
 		
-		/*-------- paging 처리 (이해 잘 안됨) --------- */
-		int maxPage = (int)((double)listCount/limit+0.95);	  // 이부분 왜 0.95 더함??
-		int startPage =  (((int)((double)page/10 + 0.9)) - 1) * 10 + 1;	 // 음.. 이렇게까지..?
+		/*-------- paging 처리 --------- */
+		int maxPage = (int)((double)listCount/limit+0.95);	
+		int startPage =  (((int)((double)page/10 + 0.9)) - 1) * 10 + 1;	 
 		int endPage = startPage + 10-1;
 		if(endPage > maxPage) {
 			endPage = maxPage;
@@ -50,7 +50,7 @@ public class ListAction implements Action {
 		request.setAttribute("pageInfo", pageInfo);	
 		request.setAttribute("articleList", articleList);	
 		ActionForward forward = new ActionForward();
-   		forward.setPath("../River_Board/board_list.jsp");
+   		forward.setPath("board_list.jsp");
    		return forward;
 	}
 

@@ -67,7 +67,7 @@ public class SearchAction implements Action {
 		request.setAttribute("searchContent", content);	
 		
 		ActionForward forward = new ActionForward();
-   		forward.setPath("../River_Board/board_searchList.jsp");
+   		forward.setPath("board_searchList.jsp");
    		return forward;
 	}
 

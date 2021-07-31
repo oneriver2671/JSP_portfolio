@@ -23,7 +23,7 @@ public class ModifyAction implements Action {
 		ActionForward forward = null;
 		BoardDTO boardDTO = null;
 		String realFolder="";
-		String saveFolder="/River_Board/boardUpload";	// 경로 ok.
+		String saveFolder="/boardUpload";	// 경로 ok.
 		int fileSize=5*1024*1024;
 		ServletContext context = request.getServletContext();
 		realFolder=context.getRealPath(saveFolder);   		

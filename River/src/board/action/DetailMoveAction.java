@@ -52,7 +52,7 @@ public class DetailMoveAction implements Action {
 	   	request.setAttribute("minNum", minNum);
 	 	request.setAttribute("comment", commentList);
 		request.setAttribute("isLike", isLike);   // 게시물 좋아요 정보 (boolean 반환)
-   		forward.setPath("../River_Board/board_view.jsp");
+   		forward.setPath("board_view.jsp");
    		return forward;
 	}
 

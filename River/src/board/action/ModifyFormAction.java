@@ -19,7 +19,7 @@ public class ModifyFormAction implements Action {
 	   	BoardDTO article = detailService.getArticle(board_num);
 	   	
 	   	request.setAttribute("article", article);	// dto 정보를 통째로 넘겨줌.
-   		forward.setPath("../River_Board/board_update.jsp");
+   		forward.setPath("board_update.jsp");
    		return forward;
    		
 	}
