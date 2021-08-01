@@ -8,12 +8,7 @@ a{
 a:visited{
 	text-decoration: none;
 }
-header a {
-  color: whitesmoke;
-}
-header a:visited {
-  color: whitesmoke;
-}
+
 li {
   list-style: none;
 }
@@ -27,9 +22,11 @@ body {
 
 
 /*------ section 시작 ------*/
+
 #main_section {
   position: relative;
   width: 1200px;
+  height: 800px;
   margin-left: auto;
   margin-right: auto;
   background-color: whitesmoke;
@@ -114,7 +111,10 @@ body {
 	color: black;
 }
 
+
 #bot_section{
+	position: absolute;
+	bottom: 0;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -138,9 +138,38 @@ body {
 	width: 1200px;
 	height: 40px;
 }
+
 .page_num{
-	padding: 3px 8px;
-	margin: 0 8px;
+	font-size: 8pt;
+	padding: 6px 8px;
+	margin: 0;
+	border-top: solid 1px gray;
+	border-bottom: solid 1px gray;
+	border-left: solid 1px gray;
+}
+.page_num_now{
+	font-size: 8pt;
+	background-color: #41414c;
+	color: whitesmoke;
+	padding: 6px 8px;
+	margin: 0;
+	border-top: solid 1px gray;
+	border-bottom: solid 1px gray;
+	border-left: solid 1px gray;
+}
+.page_num_left{
+	font-size: 8pt;
+	padding: 6px 6px;
+	margin: 0;
+	border-top: solid 1px gray;
+	border-bottom: solid 1px gray;
+	border-left: solid 1px gray;
+}
+
+.page_num_right{
+	font-size: 8pt;
+	padding: 6px 6px;
+	margin: 0;
 	border: solid 1px gray;
 }
 
@@ -158,45 +187,3 @@ body {
 }
 
 /*------ section 끝 -------*/
-
-/*--- footer 시작 ---*/
-footer {
-  /* margin-top: 100px; */
-  margin-left: auto;
-  margin-right: auto;
-  height: 100px;
-  background-color: #1d2335;
-  color: whitesmoke;
-  position: relative;
-}
-#footer_bar {
-  width: 1200px;
-  height: 100px;
-  margin-left: auto;
-  margin-right: auto;
-  /* border: solid 2px gray; */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.footer_linkBox {
-  padding: 0;
-  width: 400px;
-  height: 40px;
-  /* float: left; */
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  /* border: solid 2px green; */
-}
-
-.footer_snsBox {
-  padding: 0;
-  width: 200px;
-  height: 40px;
-  /* float: right; */
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  /* border: solid 2px green; */
-}

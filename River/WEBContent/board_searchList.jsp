@@ -103,19 +103,18 @@ function loginCheck(id){
   			<div>
   			<!-- 5페이지 이상 넘어가면, >표시로 6~10페이지 출력되게. -->
  					<%if(nowPage>1){ %>
-						<a href="boardSearch.bo?sort=<%=request.getParameter("sort")%>&page=<%=nowPage-1 %>&search_by_day=<%=searchDay %>&search_by_content=<%=searchSort %>&search_value=<%=searchContent%>">◀</a>&nbsp;
+						<a href="boardSearch.bo?sort=<%=request.getParameter("sort")%>&page=<%=nowPage-1 %>&search_by_day=<%=searchDay %>&search_by_content=<%=searchSort %>&search_value=<%=searchContent%>" class="page_num_left">＜</a>
 					<%} %>
 				
 					<%for(int a=startPage; a<=endPage; a++){
 							if(a==nowPage){%>
-								[<%=a %>]
+								<span class="page_num_now"><%=a %></span>
 						<%} else{ %>
-							<a href="boardSearch.bo?sort=<%=request.getParameter("sort")%>&page=<%=a %>&search_by_day=<%=searchDay %>&search_by_content=<%=searchSort %>&search_value=<%=searchContent%>">[<%=a %>]
-						</a>&nbsp;
+							<a href="boardSearch.bo?sort=<%=request.getParameter("sort")%>&page=<%=a %>&search_by_day=<%=searchDay %>&search_by_content=<%=searchSort %>&search_value=<%=searchContent%>" class="page_num"><%=a %></a>
 							<%} %>
 					<%} %>
 					<%if(nowPage<maxPage){ %>
-							<a href="boardSearch.bo?sort=<%=request.getParameter("sort")%>&page=<%=nowPage+1 %>&search_by_day=<%=searchDay %>&search_by_content=<%=searchSort %>&search_value=<%=searchContent%>">▶</a>
+							<a href="boardSearch.bo?sort=<%=request.getParameter("sort")%>&page=<%=nowPage+1 %>&search_by_day=<%=searchDay %>&search_by_content=<%=searchSort %>&search_value=<%=searchContent%>" class="page_num_right">＞</a>
 						<%} %> 
   			</div>
   			<div>

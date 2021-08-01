@@ -25,6 +25,7 @@ body {
 #main_section {
   position: relative;
   width: 1200px;
+  height: 800px;
   margin-left: auto;
   margin-right: auto;
   background-color: whitesmoke;
@@ -110,6 +111,8 @@ body {
 }
 
 #bot_section{
+	position: absolute;
+	bottom: 0;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -119,9 +122,13 @@ body {
 	margin-right: auto;
 	background-color: #dddddd;
 }
-#bot_section > div:first-child{
-	/* border-bottom: solid 1px gray; */
+#bot_section a{
+	color: black;
 }
+#bot_section a:visited{
+	color: black;
+}
+
 #bot_section > div{
 	display: flex;
 	justify-content: center;
@@ -149,51 +156,6 @@ body {
 }
 
 /*------ section 끝 -------*/
-
-/*--- footer 시작 ---*/
-footer {
-  /* margin-top: 100px; */
-  margin-left: auto;
-  margin-right: auto;
-  height: 100px;
-  background-color: #1d2335;
-  color: whitesmoke;
-  position: relative;
-}
-#footer_bar {
-  width: 1200px;
-  height: 100px;
-  margin-left: auto;
-  margin-right: auto;
-  /* border: solid 2px gray; */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.footer_linkBox {
-  padding: 0;
-  width: 400px;
-  height: 40px;
-  /* float: left; */
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  /* border: solid 2px green; */
-}
-
-.footer_snsBox {
-  padding: 0;
-  width: 200px;
-  height: 40px;
-  /* float: right; */
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  /* border: solid 2px green; */
-}
-
-
-
 
 
 

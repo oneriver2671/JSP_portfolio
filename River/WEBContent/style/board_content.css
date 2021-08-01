@@ -25,6 +25,7 @@ a:visited {
 #main_section {
   position: relative;
   width: 1200px;
+  min-height: 650px;
   margin-left: auto;
   margin-right: auto;
   padding-top: 50px;
@@ -292,48 +293,5 @@ a:visited {
 }
 
 /*------ section 끝 -------*/
-
-/*--- footer 시작 ---*/
-footer {
-  /* margin-top: 100px; */
-  margin-left: auto;
-  margin-right: auto;
-  height: 100px;
-  background-color: #1d2335;
-  color: whitesmoke;
-  position: relative;
-}
-#footer_bar {
-  width: 1200px;
-  height: 100px;
-  margin-left: auto;
-  margin-right: auto;
-  /* border: solid 2px gray; */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.footer_linkBox {
-  padding: 0;
-  width: 400px;
-  height: 40px;
-  /* float: left; */
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  /* border: solid 2px green; */
-}
-
-.footer_snsBox {
-  padding: 0;
-  width: 200px;
-  height: 40px;
-  /* float: right; */
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  /* border: solid 2px green; */
-}
-
 
 

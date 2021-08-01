@@ -86,12 +86,12 @@
   		<div id="bot_section">
   			<div>
 		  		<% if(pageNum != 1){ %>
-		  			<a href="freeBoard.jsp?pageNum=<%= pageNum - 1 %>">◁ 이전</a>
+		  			<a href="board_free_m1.jsp?pageNum=<%= pageNum - 1 %>">◁ 이전</a>
 		  		
 		  		<% } %>
 		  		<div class="page_num"><%= pageNum %></div>
 		  		<% if(dao.nextPage(pageNum)){ %>
-						<a href="freeBoard.jsp?pageNum=<%= pageNum + 1 %>">다음 ▷</a>  			 
+						<a href="board_free_m1.jsp?pageNum=<%= pageNum + 1 %>">다음 ▷</a>  			 
 		  		 <% } %>
   			</div>
   			<div>

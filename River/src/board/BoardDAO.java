@@ -766,7 +766,7 @@ public class BoardDAO {
 	// 마지막 게시물 번호 추출 목적의 메소드
 	public int getNext() {
 		connect();
-		String sql = "select orders from board order by orders desc";
+		String sql = "select orders from board where sort='자유게시판' order by orders desc";
 		
 		try {
 			//  PreparedStatement 는 SQL문에서 Like키워드를 사용할경우 사용할수없다.
@@ -828,7 +828,7 @@ public class BoardDAO {
 	public boolean nextPage(int pageNum) {	
 		connect();
 
-		String sql = "select * from board where orders<?;";
+		String sql = "select * from board where orders<? and sort='자유게시판' ;";
 		
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
