@@ -1,5 +1,7 @@
 package board.svc;
 
+import java.io.PrintWriter;
+
 import board.BoardDAO;
 
 public class CommentDeleteService {
@@ -11,7 +13,7 @@ public class CommentDeleteService {
 		if(deleteCount > 0){
 			isRemoveSuccess = true;
 		}
-
+		
 		return isRemoveSuccess;
 	}
 }

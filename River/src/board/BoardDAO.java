@@ -584,16 +584,43 @@ public class BoardDAO {
 		String board_sort = dto.getBoard_sort();
 		int board_num = dto.getBoard_num();
 		String content = dto.getContent();
-		
+		int ref_comment_num = dto.getRef_comment_num();
+		int ref_comment_lev = dto.getRef_comment_lev();
 		int result = 0;
+		int num = 0;	  // comment_num에 세팅될 값.
 		
 		try {
-			pstmt = con.prepareStatement("insert into board_comment values(default, ?, ?, now(), ?, ?);");
-			pstmt.setString(1, writer_id);
-			pstmt.setString(2, content);
-			pstmt.setInt(3, board_num);
-			pstmt.setString(4, board_sort);
+			// auto_increment 직접 해줌
+			pstmt = con.prepareStatement("select max(comment_num) from board_comment");
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				num = rs.getInt(1) + 1;		
+			} else {
+				num = 1;	  // 값이 없을 시. (최초)
+			}
+			
+	
+			pstmt = con.prepareStatement("insert into board_comment values(?, ?, ?, now(), ?, ?, ?, ?);");
+			pstmt.setInt(1, num);
+			pstmt.setString(2, writer_id);
+			pstmt.setString(3, content);
+			pstmt.setInt(4, board_num);
+			pstmt.setString(5, board_sort);
+			
+			System.out.println(ref_comment_lev);
+			
+			// 댓글 입력 상황 시,
+			if(ref_comment_lev == 0) {	 
+				pstmt.setInt(6, num);       // 자기 자신의 번호 입력					
+			} 
+			// 대댓글 입력 상황 시,
+			else { 
+				pstmt.setInt(6, ref_comment_num);      // 부모의 번호 입력
+			}
+			
+			pstmt.setInt(7, ref_comment_lev);
 			result = pstmt.executeUpdate();
+			 
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -613,7 +640,7 @@ public class BoardDAO {
 		
 	
 		try {
-			pstmt = con.prepareStatement("select * from board_comment where board_num=? order by comment_num desc;");
+			pstmt = con.prepareStatement("select * from board_comment where board_num=? order by ref_comment_num asc, ref_comment_lev asc;");
 			pstmt.setInt(1, board_num);
 			rs = pstmt.executeQuery();
 			
@@ -623,6 +650,8 @@ public class BoardDAO {
 				commentDTO.setWriter_id(rs.getString(2));
 				commentDTO.setContent(rs.getString(3));
 				commentDTO.setWrited_date(rs.getString(4));
+				commentDTO.setRef_comment_num(rs.getInt(7));
+				commentDTO.setRef_comment_lev(rs.getInt(8));
 				
 				commentList.add(commentDTO);
 			}

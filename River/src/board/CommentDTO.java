@@ -7,6 +7,8 @@ public class CommentDTO {
 	String writed_date;		// 작성날짜 및 시간
 	int board_num;			// 게시글 번호
 	String board_sort;		// 게시판 종류
+	int ref_comment_num;	// 부모 댓글 번호 (대댓글 시)
+	int ref_comment_lev;	// 댓글 레벨 (depth)
 	
 	
 	public int getComment_num() {
@@ -44,5 +46,17 @@ public class CommentDTO {
 	}
 	public void setBoard_sort(String board_sort) {
 		this.board_sort = board_sort;
+	}
+	public int getRef_comment_num() {
+		return ref_comment_num;
+	}
+	public void setRef_comment_num(int ref_comment_num) {
+		this.ref_comment_num = ref_comment_num;
+	}
+	public int getRef_comment_lev() {
+		return ref_comment_lev;
+	}
+	public void setRef_comment_lev(int ref_comment_lev) {
+		this.ref_comment_lev = ref_comment_lev;
 	}
 }

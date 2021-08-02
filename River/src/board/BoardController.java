@@ -29,9 +29,6 @@ public class BoardController extends HttpServlet {
 		ActionForward forward=null;
 		Action action = null;
 		
-		System.out.println(command);
-
-
 		/* 게시글 '목록' */
 		if(command.equals("/boardList.bo")){	
 			// ------- 이런식으로 쓰는게 최선인가? 그냥 boardList.bo로 들어오게 하는 법은 없나?? --------
