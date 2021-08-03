@@ -684,6 +684,31 @@ public class BoardDAO {
 		return result;
 	}
 	
+	/* 댓글 수정 */
+	public int modifyComment(int comment_num, String content) {
+		connect();
+
+
+		int result = 0;
+		
+		try {
+			pstmt = con.prepareStatement("update board_comment set content = ? where comment_num = ?");
+			pstmt.setString(1, content);
+			pstmt.setInt(2, comment_num);
+			
+			result = pstmt.executeUpdate();
+			 
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return result;
+	}
+	
+	
+	
 	/* 좋아요 증가 */
 	public int addLikeNum(int board_num) {
 		connect();

@@ -1,12 +1,10 @@
 package board.action;
 
-import java.io.PrintWriter;
 import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import board.BoardDTO;
 import board.CommentDTO;
 import board.svc.CommentService;
 import vo.ActionForward;
@@ -16,7 +14,6 @@ public class CommentWriteAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward = null;
-		BoardDTO boardDTO = null;
 		CommentDTO commentDTO = null;
 		
 		// board_view.jsp에서 넘어온 값들

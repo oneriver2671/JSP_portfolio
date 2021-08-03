@@ -123,6 +123,15 @@ public class BoardController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		/* 댓글 수정 */
+		else if(command.equals("/boardCommentModify.bo")){	
+			action = new CommentModifyAction();
+			try{
+				forward = action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
 		/* 좋아요 클릭 시 */
 		else if(command.equals("/boardLikeNum.bo")){	
 			action = new LikeNumAction();

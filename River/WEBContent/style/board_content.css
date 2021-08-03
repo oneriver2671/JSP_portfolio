@@ -236,6 +236,12 @@ a:visited {
 	margin-left: 10px;
 	margin-right: 10px;
 }
+.comment_new_input_re{
+	width: 620px;
+	height: 30px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
 .comment_new_cancel{
 	margin-right: 5px;
 	padding: 7px 10px;

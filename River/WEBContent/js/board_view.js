@@ -70,7 +70,7 @@ $(document).ready(function(){
 		if(_member_id == 'null'){
 			alert('로그인 후 작성 가능합니다.');
 		} else{
-			$('#comment_write input').focus();
+			$('#comment_write input[type=text]').focus();
 		}
 	});
 	
@@ -125,11 +125,41 @@ $(document).ready(function(){
 	/* 댓글 수정 기능 */
 	$('.comment_modify_form').hide();		// 기본 세팅.
 	$('.comment_modify').click(function(){
+		$(this).parent().parent().children('.comment_content').hide();
 		$(this).parent().children('.comment_modify_form').show();
 	});
 	
+	// 수정 버튼 클릭
+	$('.comment_modify_action').click(function(){
+		
+			var _comment_num = $(this).parent().children('.comment_num_hidden').val();
+			var _content = $(this).parent().children('.comment_new_input').val();
+			var _content_re = $(this).parent().children('.comment_new_input_re').val();
+			if(_content == null){				
+				_content = _content_re;
+			}
+		
+			$.ajax({
+			type: "post",
+			async: true,
+			url: "boardCommentModify.bo",
+			data: {comment_num: _comment_num, content: _content},
+			dataType: "text",
+			error : function(request, error){
+				alert("ajax 연결 실패"); 
+				alert("code:"+ request.status + "\n" + "message:"+request.responseText+"\n"+"error:"+error);
+			},
+			success : function(){
+				location.reload();		// 페이지 새로고침 없이 비동기식으로 해결하고 싶은데...
+			}
+		})
+	
+	});
+	
+	// 취소 버튼 클릭
 	$('.comment_modify_cancel').click(function(){
 		$(this).parent().hide();
+		$(this).parent().parent().parent().children('.comment_content').show();
 	});
 	
 	

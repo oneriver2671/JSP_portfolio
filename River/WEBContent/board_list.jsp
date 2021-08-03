@@ -76,7 +76,9 @@ function loginCheck(id){
 				%>
 						<tr>
 							<td><%= dto.getOrders() %></td>
-							<td><a href="boardDetail.bo?orders=<%=dto.getOrders()%>&sort=<%=request.getParameter("sort")%>&id=<%=id%>"><%= dto.getTitle()%></a></td>
+							<td><a href="boardDetail.bo?orders=<%=dto.getOrders()%>&sort=<%=request.getParameter("sort")%>&id=<%=id%>"><%= dto.getTitle()%></a>
+							<%if(dto.getAttached()==null || !dto.getAttached().equals("null")){ %> <i class="fas fa-paperclip"></i> <%} %>
+							</td>
 							<td><%= dto.getWriter_id() %></td>
 							<td><%= dto.getWrited_date().substring(0, 4)%>.<%=dto.getWrited_date().substring(5, 7)%>.<%=dto.getWrited_date().substring(8, 10)%></td>
 							<td><%= dto.getCheck_num() %></td>

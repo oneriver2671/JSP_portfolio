@@ -117,9 +117,15 @@
 	 						<span class="comment_reply">
  							<%if(id!=null && id.equals(commentDTO.getWriter_id())){ %>
  								<!-- 수정 클릭 : 일단 view단에서의 변화필요 ->   -->
-	 							<span>수정</span>
+	 							<span class="comment_modify">수정</span>
 	 							<a href="boardCommentDelete.bo?orders=<%=dto.getOrders() %>&comment_num=<%=commentDTO.getComment_num() %>&sort=<%=dto.getSort() %>&id=<%=id %>" onclick="return deleteComment()">삭제</a>
  							<%} %>
+ 							 <div class="comment_modify_form">
+ 								 	<input type="hidden" class='comment_num_hidden' name="comment_num" value=<%=commentDTO.getComment_num() %>>	<!-- 대댓글 작성 시 필요함 -->
+									<input type='text' class='comment_new_input_re' name='content_modify' value=<%=commentDTO.getContent() %>>
+									<input type='button' class='comment_modify_cancel' value='취소'>
+									<input type='button' class='comment_modify_action' name='comment_modify_action' value='수정'>
+							 </div> 
  							</span>
  						</div>
 	 				 
@@ -141,7 +147,7 @@
 									<input type='text' class='comment_new_input' name='content_modify' value=<%=commentDTO.getContent() %>>
 									<input type='button' class='comment_modify_cancel' value='취소'>
 									<input type='button' class='comment_modify_action' name='comment_modify_action' value='수정'>
-								</div> 
+							 </div> 
  							<%} %>
  							</span>
  								 <div class="comment_write_new">
