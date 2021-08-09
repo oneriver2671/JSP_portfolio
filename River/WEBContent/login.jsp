@@ -13,9 +13,21 @@
   <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="js/login.js"></script>
-  <!-- 다음 우편번호 검색 기능 -->
-  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
+
+<script>
+$(document).ready(function(){
+  $('.header_level2, #header_box').hide();
+
+  $('#navbar').mouseover(function(){
+    $('.header_level2, #header_box').fadeIn(500);
+  });
+  $('#navbar, #header_box').mouseleave(function(){
+    $('.header_level2, #header_box').fadeOut(500);
+  });
+});
+</script>
+
 <body>
 <jsp:include page="searchBar.jsp"></jsp:include>		<!-- 검색창 담겨있음 -->
 <div id="wrap">

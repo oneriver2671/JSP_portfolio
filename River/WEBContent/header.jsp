@@ -72,7 +72,7 @@ function logout(){
           <ul>
             <li class="header_level1_1">공연안내/예매
               <ul class="header_level2">
-                <li>공연 예매</li>
+                <li><a href="perform_list.jsp">공연 예매</a></li>
                 <li>예매 안내</li>
                 <li>패키지 예매</li>
                 <li>예매 확인/취소</li>

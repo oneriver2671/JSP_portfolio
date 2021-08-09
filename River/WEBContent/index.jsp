@@ -41,6 +41,22 @@
 </head>
 
 <body>
+
+<script>
+/* jQuery */
+$(document).ready(function(){
+  $('.header_level2, #header_box').hide();
+
+  $('#navbar').mouseover(function(){
+    $('.header_level2, #header_box').fadeIn(500);
+  });
+  $('#navbar, #header_box').mouseleave(function(){
+    $('.header_level2, #header_box').fadeOut(500);
+  });
+</script>
+
+
+
 <div id="wrap">
 <jsp:include page="header.jsp"></jsp:include>		<!-- header 담겨있음 -->
 <jsp:include page="searchBar.jsp"></jsp:include>		<!-- 검색창 담겨있음 -->
