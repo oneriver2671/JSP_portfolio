@@ -135,6 +135,9 @@ location.href="logout.jsp";
 </header>   <!-- header 끝 -->
 
 <section>
+<%if(id!=null && id.equals("manager")){ %>
+<div id="for_manager">관리자용 입력 페이지 => <a href="perform_add.jsp">이동</a> </div>
+<%} %>
 <div id="section_top">
 	<div id="calendar_category">
 		<div id="cal_month">월간 일정</div>

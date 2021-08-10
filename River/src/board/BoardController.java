@@ -23,16 +23,17 @@ public class BoardController extends HttpServlet {
 		// response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=UTF-8");  // 이거 없으면 out.println(<script>~) 부분 한글깨짐.
 		
-		String RequestURI=request.getRequestURI();
-		String contextPath=request.getContextPath();
-		String command=RequestURI.substring(contextPath.length());	
-		ActionForward forward=null;
+		String RequestURI = request.getRequestURI();
+		String contextPath = request.getContextPath();
+		String command = RequestURI.substring(contextPath.length());	
+		ActionForward forward = null;
 		Action action = null;
 		
 		/* 게시글 '목록' */
 		if(command.equals("/boardList.bo")){	
 			// ------- 이런식으로 쓰는게 최선인가? 그냥 boardList.bo로 들어오게 하는 법은 없나?? --------
 			String sort = request.getParameter("sort");
+			
 			action = new ListAction();
 			try{
 				forward = action.execute(request, response);

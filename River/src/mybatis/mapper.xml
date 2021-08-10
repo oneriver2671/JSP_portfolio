@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="do">
+
+
+
+<insert id="performInsert" parameterType="perform.PerformDTO">
+	insert into perform_info values(
+	default, #{perform_title}, #{perform_date}, #{location}, #{program_title}, #{artist_main},
+	#{artist_collabo}, #{running_time}, #{intermission}, #{main_img}, #{sub_img}, #{intro_text},
+	#{artist_introText}, #{perform_host}, #{limit_age}, default, default, #{open_date})
+</insert>
+
+
+<!--  예시
+	<select id="custSelect" resultType="model.custDTO">
+		select * from custinfo
+	</select>
+	
+	<insert id="custInsert" parameterType="model.custDTO">
+		insert into custinfo(custname, phone, address, city) values(
+		#{custname}, #{phone}, #{address}, #{city})
+	</insert>
+	
+	<delete id="custDelete" parameterType="int">
+		delete from custinfo where custno = #{deleteNo}
+	</delete>
+	
+	<update id="custUpdate" parameterType="model.custDTO">
+		update custinfo set custname=#{custname}, phone=#{phone}, address=#{address}, city=#{city}
+			where custno = #{custno}
+	</update>
+-->
+	
+</mapper>
