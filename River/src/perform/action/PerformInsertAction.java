@@ -185,7 +185,7 @@ public class PerformInsertAction implements PerformAction {
 			System.out.println("입력 성공");
 			forward = new ActionForward();
 			forward.setRedirect(true);
-			forward.setPath("perform_list.jsp");	// 매핑주소로 대체될 것.
+			forward.setPath("performList.pe");	// 매핑주소로 대체될 것.
 		}
 	
 		

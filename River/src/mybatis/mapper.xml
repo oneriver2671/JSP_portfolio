@@ -14,20 +14,13 @@
 </insert>
 
 <select id="getPerformList" resultType="perform.PerformDTO">
-	select perform_num, perform_title, perform_date, location, artist_main, artist_collabo, 
+	select perform_num, perform_title, perform_date, location, artist_main, main_img, possible_seat, open_date,
+	price_R, price_S, price_A, price_B from perform_info
 </select>
 
 
 <!--  예시
-	<select id="custSelect" resultType="model.custDTO">
-		select * from custinfo
-	</select>
-	
-	<insert id="custInsert" parameterType="model.custDTO">
-		insert into custinfo(custname, phone, address, city) values(
-		#{custname}, #{phone}, #{address}, #{city})
-	</insert>
-	
+
 	<delete id="custDelete" parameterType="int">
 		delete from custinfo where custno = #{deleteNo}
 	</delete>

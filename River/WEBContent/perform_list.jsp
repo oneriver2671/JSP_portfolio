@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "java.util.List" %>
+<%@ page import = "perform.PerformDTO" %>
 
 <%
 	request.setCharacterEncoding("utf-8");
@@ -72,7 +74,7 @@ location.href="logout.jsp";
         <ul>
           <li class="header_level1_1">공연안내/예매
             <ul class="header_level2">
-              <li><a href="perform_list.jsp">공연 예매</a></li>
+              <li><a href="performList.pe">공연 예매</a></li>
               <li>예매 안내</li>
               <li>패키지 예매</li>
               <li>예매 확인/취소</li>
@@ -171,32 +173,30 @@ location.href="logout.jsp";
 
 <div id="section_main">
 <!-- 15개씩 paging 처리 -->
-	<article>
-		<img src="images/article/main1_444x618.jpg" class="article_img">
-		<h3 class="article_title">여기는 제목</h3>
-		<div class="article_outline">
-			<div><span>일자</span><span>2021-08-07 (토)</span></div>
-			<div><span>시간</span><span>18:00</span></div>
-			<div><span>장소</span><span>예술의전당 콘서트홀</span></div>
-			<div><span>가격</span><span>R석 10만원, S석 7만원, A석 5만원, B석 3만원</span></div>
-			<div><span>출연</span><span>바이올린 | 김수연 Suyoen Kim, Violin 피아노ㅣ이진상, Jinsang Lee, Piano</span></div>
-		</div>
-		<!-- 예매가 불가능할 시, '예매불가'처리 -->
-		<a href="" class="article_btn">예매하기</a>
-	</article>
-	<article>
-		<img src="images/article/main2_(444x618).jpg" class="article_img">
-		<h3 class="article_title">여기는 제목</h3>
-		<div class="article_outline">
-			<div><span>일자</span><span>2021-08-07 (토)</span></div>
-			<div><span>시간</span><span>18:00</span></div>
-			<div><span>장소</span><span>예술의전당 콘서트홀</span></div>
-			<div><span>가격</span><span>R석 10만원, S석 7만원, A석 5만원, B석 3만원</span></div>
-			<div><span>출연</span><span>바이올린 | 김수연 Suyoen Kim, Violin 피아노ㅣ이진상, Jinsang Lee, Piano</span></div>
-		</div>
-		<!-- 예매가 불가능할 시, '예매불가'처리 -->
-		<a href="" class="article_btn">예매하기</a>
-	</article>
+<%
+	List<PerformDTO> performList = (List)request.getAttribute("performList");
+	for(int i=0; i<performList.size(); i++){
+		PerformDTO performDTO = performList.get(i); 
+		// 첨부파일 가져오는게 필요한데... include할까?
+		%>
+		
+		<article>
+			<img src="performUpload/<%=performDTO.getMain_img() %>" class="article_img">
+			<h3 class="article_title"><%=performDTO.getPerform_title() %></h3>
+			<div class="article_outline">
+				<!-- 일자 요일처리 필요 ★ -->
+				<div><span>일자</span><span><%=performDTO.getPerform_date().substring(0, 10) %></span></div>
+				<div><span>시간</span><span><%=performDTO.getPerform_date().substring(11, 16) %></span></div>
+				<div><span>장소</span><span><%=performDTO.getLocation() %></span></div>
+				<!-- 가격 처리 필요 (0이면 표시x, 무료도 처리 필요함 -> R석에 1을 입력하면 무료로 처리하자.) ★ -->
+				<div><span>가격</span><span>R석 <%=performDTO.getPrice_R() %>, S석 <%=performDTO.getPrice_S() %>, A석 <%=performDTO.getPrice_A() %>, B석 <%=performDTO.getPrice_B() %></span></div>
+				<div><span>출연</span><span><%=performDTO.getArtist_main() %></span></div>
+			</div>
+			<!-- 예매가 불가능할 시, '예매불가'처리 -->
+			<a href="performDetail.pe" class="article_btn">예매하기</a>	
+		</article>
+	<%} %>
+	
 </div>
 
 

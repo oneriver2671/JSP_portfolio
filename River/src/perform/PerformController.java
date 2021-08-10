@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import perform.action.PerformAction;
+import perform.action.PerformDetailAction;
 import perform.action.PerformInsertAction;
+import perform.action.PerformListAction;
 import vo.ActionForward;
 
 @WebServlet("*.pe")
@@ -32,7 +34,7 @@ public class PerformController extends HttpServlet {
 		/* 공연 목록 출력 */
 		if(command.equals("/performList.pe")) {
 			
-//			action = new PerformInsertAction();
+			action = new PerformListAction();
 			try{
 				forward = action.execute(request, response);
 			}catch(Exception e){
@@ -45,6 +47,18 @@ public class PerformController extends HttpServlet {
 		if(command.equals("/performAdd.pe")) {
 			
 			action = new PerformInsertAction();
+			try{
+				forward = action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
+		}
+		
+		/* 공연 상세페이지 */
+		if(command.equals("/performDetail.pe")) {
+			
+			action = new PerformDetailAction();
 			try{
 				forward = action.execute(request, response);
 			}catch(Exception e){

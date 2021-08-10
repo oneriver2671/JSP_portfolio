@@ -3,7 +3,6 @@
 <%@ page import="java.io.File"%>
 <%@ page import="java.io.*"%>
 
-<!-- 여기 아래에 있는 건 다 잘 모르는 것들... 직접 만들 일은 없으려나? 그냥 복붙용? -->
 <%
 	String fileName = request.getParameter("downFile");		// a태그로 넘어온 파일의 이름.
 

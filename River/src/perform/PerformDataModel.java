@@ -1,5 +1,7 @@
 package perform;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -26,5 +28,17 @@ public class PerformDataModel {
 		
 		return result;
 	}
-
+	
+	/* 공연 List 출력 */
+	public List<PerformDTO> getPerformList(){
+		List<PerformDTO> performList = null;
+		
+		SqlSession sqlSession = factory.openSession();
+		performList = sqlSession.selectList("getPerformList");
+		sqlSession.close();
+		
+		return performList;
+	}
+	
+	
 }
