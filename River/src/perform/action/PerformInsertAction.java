@@ -11,6 +11,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import perform.PerformDTO;
+
 import perform.svc.PerformInsertService;
 import vo.ActionForward;
 
@@ -102,8 +103,51 @@ public class PerformInsertAction implements PerformAction {
 			possible_seat = 2036;
 		}
 		
+		// 가격 null값 처리
+		int price_R;
+		int price_S;
+		int price_A;
+		int price_B;
+		int priceLow_R;
+		int priceLow_S;
+		int priceLow_A;
+		if(multi.getParameter("seat_price_R").equals("")) {
+			price_R = 0;
+		} else {
+			price_R = Integer.parseInt(multi.getParameter("seat_price_R"));
+		}
+		if(multi.getParameter("seat_price_S").equals("")) {
+			price_S = 0;
+		} else {
+			price_S = Integer.parseInt(multi.getParameter("seat_price_S"));
+		}
+		if(multi.getParameter("seat_price_A").equals("")) {
+			price_A = 0;
+		} else {
+			price_A = Integer.parseInt(multi.getParameter("seat_price_A"));
+		}
+		if(multi.getParameter("seat_price_B").equals("")) {
+			price_B = 0;
+		} else {
+			price_B = Integer.parseInt(multi.getParameter("seat_price_B"));
+		}
+		if(multi.getParameter("seat_priceLow_R").equals("")) {
+			priceLow_R = 0;
+		} else {
+			priceLow_R = Integer.parseInt(multi.getParameter("seat_priceLow_R"));
+		}
+		if(multi.getParameter("seat_priceLow_S").equals("")) {
+			priceLow_S = 0;
+		} else {
+			priceLow_S = Integer.parseInt(multi.getParameter("seat_priceLow_S"));
+		}
+		if(multi.getParameter("seat_priceLow_A").equals("")) {
+			priceLow_A = 0;
+		} else {
+			priceLow_A = Integer.parseInt(multi.getParameter("seat_priceLow_A"));
+		}
 		
-
+		
 		/* 공연정보 dto에 담기 */
 		performDTO = new PerformDTO();
 		performDTO.setPerform_title(multi.getParameter("title"));
@@ -122,7 +166,15 @@ public class PerformInsertAction implements PerformAction {
 		performDTO.setLimit_age(limit_age);
 		performDTO.setPossible_seat(possible_seat);
 		performDTO.setOpen_date(open_date);
+		performDTO.setPrice_R(price_R);
+		performDTO.setPrice_S(price_S);
+		performDTO.setPrice_A(price_A);
+		performDTO.setPrice_B(price_B);
+		performDTO.setPriceLow_R(priceLow_R);
+		performDTO.setPriceLow_S(priceLow_S);
+		performDTO.setPriceLow_A(priceLow_A);
 		
+
 		
 		// model 객체 호출
 		PerformInsertService performInsertService = new PerformInsertService();

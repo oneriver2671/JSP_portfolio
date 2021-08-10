@@ -9,8 +9,13 @@
 	insert into perform_info values(
 	default, #{perform_title}, #{perform_date}, #{location}, #{program_title}, #{artist_main},
 	#{artist_collabo}, #{running_time}, #{intermission}, #{main_img}, #{sub_img}, #{intro_text},
-	#{artist_introText}, #{perform_host}, #{limit_age}, default, default, #{open_date})
+	#{artist_introText}, #{perform_host}, #{limit_age}, default, default, #{open_date},
+	#{price_R}, #{price_S}, #{price_A}, #{price_B}, #{priceLow_R}, #{priceLow_S}, #{priceLow_A})
 </insert>
+
+<select id="getPerformList" resultType="perform.PerformDTO">
+	select perform_num, perform_title, perform_date, location, artist_main, artist_collabo, 
+</select>
 
 
 <!--  예시

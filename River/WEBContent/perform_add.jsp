@@ -47,7 +47,7 @@ table td:first-child{
 table tr:first-child td{
 	border-top: solid 1px gray;
 }
-input[type=text]{
+.inputText{
 	width: 500px;
 	height: 30px;
 	border: none;
@@ -75,6 +75,10 @@ textarea{
 	width: 500px;
 	height: 60px;
 }
+.priceInput{
+	width: 70px;
+	height: 30px;
+}
 
 </style>
 
@@ -88,9 +92,7 @@ function addComplete(){
 		var intermission = $('#intermission').val();
 		
 		if(title!="" && programTitle!="" && mainArtist!="" && runningTime!="" && intermission!=""){
-			if(confirm("제목: "+title+"\n프로그램명: "+programTitle+"\n메인공연자: "+mainArtist
-					+"\n추가하시겠습니까?") == true){
-				
+			if(confirm("추가하시겠습니까?") == true){
 				return true;
 			} else{		// 취소 버튼
 				return false;
@@ -119,7 +121,7 @@ function addComplete(){
 		<table>
 			<tr>
 				<td>공연 제목 *</td>
-				<td><input type="text" name="title" id="title" placeholder="공연 제목을 입력하세요."></td>
+				<td><input type="text" name="title" id="title" class="inputText" placeholder="공연 제목을 입력하세요."></td>
 			</tr>
 			<tr>
 				<td>공연 날짜 *</td>
@@ -212,24 +214,24 @@ function addComplete(){
 			<tr>
 				<td>작품명 *</td>
 				<td>			<!-- 이부분 비동기식으로 처리해, 여기에 List 찍을거임. -->
-					<input type="text" id="programTitle" name="program_title" placeholder="작품명은 슬래쉬(/)로 구분해주세요.">
+					<input type="text" id="programTitle" class="inputText" name="program_title" placeholder="작품명은 슬래쉬(/)로 구분해주세요.">
 				</td>
 			</tr>
 			<tr>
 				<td>메인 공연자 *</td>
-				<td><input type="text" id="mainArtist" name="artist_main"></td>
+				<td><input type="text" id="mainArtist" class="inputText" name="artist_main"></td>
 			</tr>
 			<tr>
 				<td>조연</td>
-				<td><input type="text" name="artist_sub" placeholder="조연 공연자는 슬래쉬(/)로 구분해주세요.">  </td>
+				<td><input type="text" class="inputText" name="artist_sub" placeholder="조연 공연자는 슬래쉬(/)로 구분해주세요.">  </td>
 			</tr>
 			<tr>
 				<td>러닝타임 *</td>
-				<td><input type="text" name="running_time" id="runningTime" placeholder="분 단위로 숫자만 입력하세요."></td>
+				<td><input type="text" class="inputText" name="running_time" id="runningTime" placeholder="분 단위로 숫자만 입력하세요."></td>
 			</tr>
 			<tr>
 				<td>인터미션 *</td>
-				<td> <input type="text" name="intermission" id="intermission" placeholder="분 단위로 숫자만 입력하세요."></td>
+				<td> <input type="text" class="inputText" name="intermission" id="intermission" placeholder="분 단위로 숫자만 입력하세요."></td>
 			</tr>
 			<tr>
 				<td>메인 이미지 첨부 *</td>
@@ -249,14 +251,14 @@ function addComplete(){
 			</tr>
 			<tr>
 				<td>주최</td>
-				<td><input type="text" name="perform_host"></td>
+				<td><input type="text" class="inputText" name="perform_host"></td>
 			</tr>
 			<tr>
 				<td>제한연령</td>
-				<td> <input type="text" name="limit_age" placeholder="숫자만 입력하세요."></td>
+				<td> <input type="text" class="inputText" name="limit_age" placeholder="숫자만 입력하세요."></td>
 			</tr>
 			<tr>
-				<td>티켓오픈일</td>
+				<td>티켓오픈일 *</td>
 				<td>
 					<select name="open_year">
 						<option>2021</option>
@@ -330,6 +332,23 @@ function addComplete(){
 						<option>40</option>
 						<option>50</option>
 				</select> 분
+				</td>
+			</tr>
+			<tr>
+				<td>가격 *</td>
+				<td>
+					R석: <input type="text" name="seat_price_R" class="priceInput" placeholder="숫자만"> 
+					S석: <input type="text" name="seat_price_S" class="priceInput" placeholder="숫자만"> 
+					A석: <input type="text" name="seat_price_A" class="priceInput" placeholder="숫자만"> 
+					B석: <input type="text" name="seat_price_B" class="priceInput" placeholder="숫자만"> 
+				</td>
+			</tr>
+			<tr>
+				<td>시야방해석 가격 *</td>
+				<td>
+					시야방해 R석: <input type="text" name="seat_priceLow_R" class="priceInput" placeholder="숫자만"> 
+					시야방해 S석: <input type="text" name="seat_priceLow_S" class="priceInput" placeholder="숫자만"> 
+					시야방해 A석: <input type="text" name="seat_priceLow_A" class="priceInput" placeholder="숫자만"> 
 				</td>
 			</tr>
 		</table>

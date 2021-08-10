@@ -20,6 +20,13 @@ public class PerformDTO {
 	int like_num;		    // 좋아요 수
 	int possible_seat;		// 남은 자리수
 	String open_date;		// 티켓예매 날짜
+	int price_R;			// R석 가격
+	int price_S;			// S석 가격
+	int price_A;			// A석 가격
+	int price_B;			// B석 가격
+	int priceLow_R;			// 시야방해 R석 가격
+	int priceLow_S;			// 시야방해 S석 가격
+	int priceLow_A;			// 시야방해 A석 가격
 	
 	
 	public int getPerform_num() {
@@ -112,12 +119,6 @@ public class PerformDTO {
 	public void setLimit_age(int limit_age) {
 		this.limit_age = limit_age;
 	}
-	public String getOpen_date() {
-		return open_date;
-	}
-	public void setOpen_date(String open_date) {
-		this.open_date = open_date;
-	}
 	public int getLike_num() {
 		return like_num;
 	}
@@ -130,5 +131,56 @@ public class PerformDTO {
 	public void setPossible_seat(int possible_seat) {
 		this.possible_seat = possible_seat;
 	}
+	public String getOpen_date() {
+		return open_date;
+	}
+	public void setOpen_date(String open_date) {
+		this.open_date = open_date;
+	}
+	public int getPrice_R() {
+		return price_R;
+	}
+	public void setPrice_R(int price_R) {
+		this.price_R = price_R;
+	}
+	public int getPrice_S() {
+		return price_S;
+	}
+	public void setPrice_S(int price_S) {
+		this.price_S = price_S;
+	}
+	public int getPrice_A() {
+		return price_A;
+	}
+	public void setPrice_A(int price_A) {
+		this.price_A = price_A;
+	}
+	public int getPrice_B() {
+		return price_B;
+	}
+	public void setPrice_B(int price_B) {
+		this.price_B = price_B;
+	}
+	public int getPriceLow_R() {
+		return priceLow_R;
+	}
+	public void setPriceLow_R(int priceLow_R) {
+		this.priceLow_R = priceLow_R;
+	}
+	public int getPriceLow_S() {
+		return priceLow_S;
+	}
+	public void setPriceLow_S(int priceLow_S) {
+		this.priceLow_S = priceLow_S;
+	}
+	public int getPriceLow_A() {
+		return priceLow_A;
+	}
+	public void setPriceLow_A(int priceLow_A) {
+		this.priceLow_A = priceLow_A;
+	}
+	
+	
+	
 	
 }
