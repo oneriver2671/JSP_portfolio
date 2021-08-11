@@ -22,17 +22,16 @@ section{
 #wrap{
  background-color: #41414c;
 }
-form{
-	margin-left: 50px;
-}
+
 h2{
 	margin: 0;
-	padding: 60px 0 20px 40px;
+	padding-top: 50px;
+	padding-bottom: 20px;
+	text-align: center;
 }
 table{
-
 	border-spacing: 0;
-	
+	margin: 0 auto;
 }
 table td{
 	border-bottom: solid 1px gray;
@@ -53,16 +52,15 @@ table tr:first-child td{
 	border: none;
 }
 input[type=reset]{
-	margin-top: 10px;
-	margin-left: 470px;
-	padding: 7px 25px;
+	margin: 20px 10px 0 470px;
+	padding: 10px 40px;
 	background-color: #646277;
 	color: whitesmoke;
 	border: none;
 	font-weight: bold;
 }
 input[type=submit]{
-	padding: 7px 25px;
+	padding: 10px 40px;
 	background-color: #CC0000;
 	color: whitesmoke;
 	border: none;
@@ -91,7 +89,7 @@ function addComplete(){
 		var runningTime = $('#runningTime').val();
 		var intermission = $('#intermission').val();
 		
-		if(title!="" && programTitle!="" && mainArtist!="" && runningTime!="" && intermission!=""){
+		if(title!="" && mainArtist!="" && runningTime!="" && intermission!=""){
 			if(confirm("추가하시겠습니까?") == true){
 				return true;
 			} else{		// 취소 버튼
@@ -99,7 +97,7 @@ function addComplete(){
 				}
 			}
 		else{
-			alert('제목, 작품명, 메인 공연자, 러닝타임, 인터미션은 필수 입력 요소입니다.');
+			alert('제목, 메인 공연자, 러닝타임, 인터미션은 필수 입력 요소입니다.');
 			return false;
 		}
 			
@@ -212,18 +210,14 @@ function addComplete(){
 				</td>
 			</tr>
 			<tr>
-				<td>작품명 *</td>
-				<td>			<!-- 이부분 비동기식으로 처리해, 여기에 List 찍을거임. -->
+				<td>작품명</td>
+				<td>			
 					<input type="text" id="programTitle" class="inputText" name="program_title" placeholder="작품명은 슬래쉬(/)로 구분해주세요.">
 				</td>
 			</tr>
 			<tr>
 				<td>메인 공연자 *</td>
 				<td><input type="text" id="mainArtist" class="inputText" name="artist_main"></td>
-			</tr>
-			<tr>
-				<td>조연</td>
-				<td><input type="text" class="inputText" name="artist_sub" placeholder="조연 공연자는 슬래쉬(/)로 구분해주세요.">  </td>
 			</tr>
 			<tr>
 				<td>러닝타임 *</td>
@@ -312,6 +306,10 @@ function addComplete(){
 						<option>31</option>
 					</select> 일
 					<select name="open_hour">
+						<option>08</option>
+						<option>09</option>
+						<option>10</option>
+						<option>11</option>
 						<option>12</option>
 						<option>13</option>
 						<option>14</option>
@@ -344,7 +342,7 @@ function addComplete(){
 				</td>
 			</tr>
 			<tr>
-				<td>시야방해석 가격 *</td>
+				<td>시야방해석 가격</td>
 				<td>
 					시야방해 R석: <input type="text" name="seat_priceLow_R" class="priceInput" placeholder="숫자만"> 
 					시야방해 S석: <input type="text" name="seat_priceLow_S" class="priceInput" placeholder="숫자만"> 

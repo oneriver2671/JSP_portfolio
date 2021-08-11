@@ -285,6 +285,7 @@ section{
 	font-weight: bold;
 }
 .article_outline span:last-child{
+	width: 450px;
 	margin: 0;
 	padding-left: 15px;
 }

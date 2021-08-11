@@ -1,14 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%> 
+<%@ page import = "perform.PerformDTO" %>
 <%
 	request.setCharacterEncoding("utf-8");
-	String id = (String)session.getAttribute("id");			// 로그인 상태 회원 정보.		
+	String id = (String)session.getAttribute("id");			// 로그인 상태 회원 정보
 %>
+<%
+  PerformDTO performDTO = (PerformDTO)request.getAttribute("performDTO");		// 공연정보 불러오기
+  
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>공연예매</title>
  <!-- CSS 파일 -->
  <link rel="stylesheet" type="text/css" href="style/perform_detail.css" media="screen" />
 
@@ -67,7 +73,7 @@ location.href="logout.jsp";
         <ul>
           <li class="header_level1_1">공연안내/예매
             <ul class="header_level2">
-              <li><a href="perform_list.jsp">공연 예매</a></li>
+              <li><a href="performList.pe">공연 예매</a></li>
               <li>예매 안내</li>
               <li>패키지 예매</li>
               <li>예매 확인/취소</li>
@@ -132,19 +138,18 @@ location.href="logout.jsp";
 
 <section>
 	<div id="section_top">
-		<img src="images/article/main1_444x618.jpg" id="main_img">
-		<div id="article_title">김봄소리 바이올린 리사이틀 [Violin on Stage]</div>
+		<img src="performUpload/<%=performDTO.getMain_img() %>" id="main_img">
+		<div id="article_title"><%=performDTO.getPerform_title() %></div>
 		<div class="article_outline">
-			<div><span>일자</span><span>2021-08-07 (토)</span></div>
-			<div><span>공연시간</span><span>18:00</span></div>
-			<div><span>공연장소</span><span>예술의전당 콘서트홀</span></div>
-			<div><span>가격</span><span>R석 10만원, S석 7만원, A석 5만원, B석 3만원</span></div>
-			<div><span>러닝타임</span><span>90분 (인터미션 15분)</span></div>
-			<div><span>문의</span><span>02-000-0000</span></div>
-			<div><span>관람연령</span><span>만 7세 이상 입장(미취학아동 입장불가)</span></div>
-			<div class="article_outline_ticket"><span>티켓오픈일</span><span>2021.06.17 (11:00)</span></div>
-			<div><span>출연</span><span>바이올린 | 김수연 Suyoen Kim, Violin 피아노ㅣ이진상, Jinsang Lee, Piano</span></div>
-			<div><span>주최</span><span>(주)뮤직앤아트컴퍼니</span></div>
+			<div><span>일자</span><span><%=performDTO.getPerform_date().substring(0, 10) %></span></div>
+			<div><span>공연시간</span><span><%=performDTO.getPerform_date().substring(11, 16) %></span></div>
+			<div><span>공연장소</span><span><%=performDTO.getLocation() %></span></div>
+			<div><span>가격</span><span>R석 <%=performDTO.getPrice_R() %>, S석 <%=performDTO.getPrice_S() %>, A석 <%=performDTO.getPrice_A() %>, B석 <%=performDTO.getPrice_B() %></span></div>
+			<div><span>러닝타임</span><span><%=performDTO.getRunning_time() %>분 (인터미션 <%=performDTO.getIntermission() %>분)</span></div>
+			<div><span>관람연령</span><span>만 <%=performDTO.getLimit_age() %>세 이상 입장(미취학아동 입장불가)</span></div>
+			<div class="article_outline_ticket"><span>티켓오픈일</span><span><%=performDTO.getOpen_date().substring(0, 10) %> (<%=performDTO.getOpen_date().substring(11, 16) %>)</span></div>
+			<div><span>출연</span><span><%=performDTO.getArtist_main() %></span></div>
+			<div><span>주최</span><span><%=performDTO.getPerform_host() %></span></div>
 		</div>
 		<div id="sns_share">
 			<span>SNS 공유하기</span>
@@ -157,13 +162,14 @@ location.href="logout.jsp";
 		</div>
 		<div id="reservation_outline">
 		<div class="reser_out1"><span>예매가능시간 : <span style="color:#CC0000">공연 2시간 전까지</span></span></div>
+		<!-- 이부분 DB처리 필요 ★ (잔여좌석 특히!!) ★ -->
 			<div class="reser_out2">
 				<span>예매 가능 공연 일자</span>
 				<select name="select_time">
-					<option>관람시간을 선택해 주세요</option>
+					<option><%=performDTO.getPerform_date().substring(0, 4) %>년 <%=performDTO.getPerform_date().substring(5, 7) %>월 <%=performDTO.getPerform_date().substring(8, 10) %>일</option>
 				</select>
 				<select name="select_turn">
-					<option>관람 회차를 선택해 주세요</option>
+					<option><%=performDTO.getPerform_date().substring(11, 16) %></option>
 				</select>
 			</div>
 			<div class="reser_out3">예매가능 잔여좌석</div>
@@ -198,9 +204,7 @@ location.href="logout.jsp";
 			======================================================================================================= 
 			<div id="section_middle_notice_ticket">
 				<br><h2>티켓오픈일정</h2> <br>
-				2021.06.22(화) 2PM 빈야드 회원 선오픈 (롯데콘서트홀) <br>
-				2021.06.23(수) 2PM 일반오픈 (롯데콘서트홀-예스24-티켓링크-옥션티켓-11번가) / 인터파크 티켓) <br>
-				<div style="color:#CC0000">※ 일반오픈석 준비를 위해 6.23(수) 오후 1:00 ~ 1:59까지 예매가 일시 중단됩니다.</div> <br>
+				<%=performDTO.getOpen_date().substring(0, 10) %> <%=performDTO.getOpen_date().substring(11, 16) %> 일반오픈 (롯데콘서트홀-예스24-티켓링크-옥션티켓-11번가) / 인터파크 티켓) <br><br>
 				
 				※ 본 공연은 1인 4매까지 예매가 가능하며, 온라인/전화예매만 가능합니다.(공연장 방문예매불가) <br>
 				   고객센터 전화량이 많은 경우에 전화 예매가 어려울 수 있으니 가급적 온라인 예매를 권장 드립니다. <br><br>
@@ -250,10 +254,12 @@ location.href="logout.jsp";
 			</div>
 		</div>
 		
-		<div id="section_middle_intro">
-			<div class="section_middle_title"><img src="images/article/bu_concert_info01.gif"> 작품 설명</div>
-			<img src="images/article/detail_img_kimbom.jpg" id="section_middle_introImg">	
-		</div>
+		<%if(performDTO.getSub_img()!=null){ %>
+			<div id="section_middle_intro">
+				<div class="section_middle_title"><img src="images/article/bu_concert_info01.gif"> 작품 설명</div>
+				<img src="performUpload/<%=performDTO.getSub_img() %>" id="section_middle_introImg">	
+			</div>
+		<%} %>
 		
 		<div id="section_middle_ticketGuide">
 			<div class="section_middle_title"><img src="images/article/bu_concert_info01.gif"> 티켓 수령안내</div>

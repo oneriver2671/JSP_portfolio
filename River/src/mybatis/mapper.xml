@@ -4,26 +4,43 @@
 <mapper namespace="do">
 
 
-
+<!-- 공연정보 입력 -->
 <insert id="performInsert" parameterType="perform.PerformDTO">
 	insert into perform_info values(
 	default, #{perform_title}, #{perform_date}, #{location}, #{program_title}, #{artist_main},
-	#{artist_collabo}, #{running_time}, #{intermission}, #{main_img}, #{sub_img}, #{intro_text},
-	#{artist_introText}, #{perform_host}, #{limit_age}, default, default, #{open_date},
-	#{price_R}, #{price_S}, #{price_A}, #{price_B}, #{priceLow_R}, #{priceLow_S}, #{priceLow_A})
+	#{running_time}, #{intermission}, #{main_img}, #{sub_img}, #{intro_text},	#{artist_introText},
+  #{perform_host}, #{limit_age}, default, default, #{open_date},
+	#{price_R}, #{price_S}, #{price_A}, #{price_B}, #{priceLow_R}, #{priceLow_S}, #{priceLow_A},
+	#{perform_day}, #{open_day})
 </insert>
 
+<!-- 공연 List 출력 -->
 <select id="getPerformList" resultType="perform.PerformDTO">
-	select perform_num, perform_title, perform_date, location, artist_main, main_img, possible_seat, open_date,
-	price_R, price_S, price_A, price_B from perform_info
+	select perform_num, perform_title, perform_date, perform_day, location, artist_main, main_img, possible_seat, open_date,
+	price_R, price_S, price_A, price_B from perform_info order by perform_num desc
 </select>
+
+<!-- 공연 List 출력 (관리자용) -->
+<select id="getPerformListManager" resultType="perform.PerformDTO">
+	select perform_num, perform_title, perform_date, location from perform_info order by perform_num desc
+</select>
+
+<!-- 공연 상세페이지 출력 -->
+<select id="getPerformDetail" resultType="perform.PerformDTO" parameterType="int">
+	select * from perform_info where perform_num = #{perform_num}
+</select>
+
+<!-- 공연정보 삭제 -->
+<delete id="performDelete" parameterType="int">
+	delete from perform_info where perform_num = #{perform_num}
+</delete>
+
+<!-- 공연정보 수정 -->
+<update id="performUpdate" parameterType="perform.PerformDTO">
+</update>
 
 
 <!--  예시
-
-	<delete id="custDelete" parameterType="int">
-		delete from custinfo where custno = #{deleteNo}
-	</delete>
 	
 	<update id="custUpdate" parameterType="model.custDTO">
 		update custinfo set custname=#{custname}, phone=#{phone}, address=#{address}, city=#{city}

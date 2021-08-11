@@ -1,6 +1,10 @@
 package perform.action;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Enumeration;
 
 import javax.servlet.ServletContext;
@@ -89,6 +93,52 @@ public class PerformInsertAction implements PerformAction {
 		String open_date = open_year + open_month + open_day + open_hour + open_minute + "00";
 		
 		
+		// 공연 '요일', 티켓오픈일 '요일' 구하기
+		String perform_dayOfWeek = null;
+		String open_dayOfWeek = null;
+	
+		LocalDate perform_date_temp = LocalDate.of(Integer.parseInt(multi.getParameter("date_year")), Integer.parseInt(multi.getParameter("date_month")), Integer.parseInt(multi.getParameter("date_day")));
+		DayOfWeek perform_dayOfWeek_enum = perform_date_temp.getDayOfWeek();
+		int perform_dayOfWeekNumber = perform_dayOfWeek_enum.getValue();
+		
+		switch(perform_dayOfWeekNumber) {
+		case(1):
+			perform_dayOfWeek = "월"; break;
+		case(2):
+			perform_dayOfWeek = "화"; break;
+		case(3):
+			perform_dayOfWeek = "수"; break;
+		case(4):
+			perform_dayOfWeek = "목"; break;
+		case(5):
+			perform_dayOfWeek = "금"; break;
+		case(6):
+			perform_dayOfWeek = "토"; break;
+		case(7):
+			perform_dayOfWeek = "일"; break;
+		}
+		
+		LocalDate open_date_temp = LocalDate.of(Integer.parseInt(multi.getParameter("open_year")), Integer.parseInt(multi.getParameter("open_month")), Integer.parseInt(multi.getParameter("open_day")));
+		DayOfWeek open_dayOfWeek_enum = open_date_temp.getDayOfWeek();
+		int open_dayOfWeekNumber = open_dayOfWeek_enum.getValue();
+		
+		switch(open_dayOfWeekNumber) {
+		case(1):
+			open_dayOfWeek = "월"; break;
+		case(2):
+			open_dayOfWeek = "화"; break;
+		case(3):
+			open_dayOfWeek = "수"; break;
+		case(4):
+			open_dayOfWeek = "목"; break;
+		case(5):
+			open_dayOfWeek = "금"; break;
+		case(6):
+			open_dayOfWeek = "토"; break;
+		case(7):
+			open_dayOfWeek = "일"; break;
+		}
+		
 		
 		// 제한연령 null값 처리
 		int limit_age;
@@ -146,7 +196,7 @@ public class PerformInsertAction implements PerformAction {
 		} else {
 			priceLow_A = Integer.parseInt(multi.getParameter("seat_priceLow_A"));
 		}
-		
+	
 		
 		/* 공연정보 dto에 담기 */
 		performDTO = new PerformDTO();
@@ -155,7 +205,6 @@ public class PerformInsertAction implements PerformAction {
 		performDTO.setLocation(multi.getParameter("location"));
 		performDTO.setProgram_title(multi.getParameter("program_title"));
 		performDTO.setArtist_main(multi.getParameter("artist_main"));
-		performDTO.setArtist_collabo(multi.getParameter("artist_sub"));
 		performDTO.setRunning_time(Integer.parseInt(multi.getParameter("running_time")));
 		performDTO.setIntermission(Integer.parseInt(multi.getParameter("intermission")));
 		performDTO.setMain_img(attached.get(0));
@@ -173,7 +222,8 @@ public class PerformInsertAction implements PerformAction {
 		performDTO.setPriceLow_R(priceLow_R);
 		performDTO.setPriceLow_S(priceLow_S);
 		performDTO.setPriceLow_A(priceLow_A);
-		
+		performDTO.setPerform_day(perform_dayOfWeek);
+		performDTO.setOpen_day(open_dayOfWeek);
 
 		
 		// model 객체 호출
@@ -187,9 +237,6 @@ public class PerformInsertAction implements PerformAction {
 			forward.setRedirect(true);
 			forward.setPath("performList.pe");	// 매핑주소로 대체될 것.
 		}
-	
-		
-		
 		
 		return forward;
 	}

@@ -10,9 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import perform.action.PerformAction;
+import perform.action.PerformDeleteAction;
 import perform.action.PerformDetailAction;
 import perform.action.PerformInsertAction;
 import perform.action.PerformListAction;
+import perform.action.PerformListManagerAction;
+import perform.action.PerformUpdateAction;
 import vo.ActionForward;
 
 @WebServlet("*.pe")
@@ -43,6 +46,18 @@ public class PerformController extends HttpServlet {
 			
 		}
 		
+		/* 공연 목록 출력 (관리자용) */
+		if(command.equals("/performListManager.pe")) {
+			
+			action = new PerformListManagerAction();
+			try{
+				forward = action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
+		}
+		
 		/* 공연 추가 */
 		if(command.equals("/performAdd.pe")) {
 			
@@ -54,6 +69,31 @@ public class PerformController extends HttpServlet {
 			}
 			
 		}
+		
+		/* 공연정보 삭제 */
+		if(command.equals("/performDelete.pe")) {
+			
+			action = new PerformDeleteAction();
+			try{
+				forward = action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
+		}
+		
+		/* 공연정보 수정 */
+		if(command.equals("/performUpdate.pe")) {
+			
+			action = new PerformUpdateAction();
+			try{
+				forward = action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
+		}
+		
 		
 		/* 공연 상세페이지 */
 		if(command.equals("/performDetail.pe")) {

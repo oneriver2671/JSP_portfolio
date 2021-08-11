@@ -25,5 +25,17 @@ public class PerformListService {
 	
 		return performList;
 	}
+	
+	/* 게시글 select 메소드 (관리자용) */
+	public List<PerformDTO> getPerformListManager() throws Exception{
+		List<PerformDTO> performList = null;
+		PerformDataModel performDataModel = PerformDataModel.instance();
+		performList = performDataModel.getPerformListManager();
+	
+		return performList;
+	}
+	
+	
+	
 
 }

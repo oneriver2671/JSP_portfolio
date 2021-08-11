@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>공연안내</title>
   <!-- CSS 파일 -->
   <link rel="stylesheet" type="text/css" href="style/perform_list.css" media="screen" />
  
@@ -138,7 +138,8 @@ location.href="logout.jsp";
 
 <section>
 <%if(id!=null && id.equals("manager")){ %>
-<div id="for_manager">관리자용 입력 페이지 => <a href="perform_add.jsp">이동</a> </div>
+<div class="for_manager">관리자용 입력 페이지 => <a href="perform_add.jsp">이동</a> </div>
+<div class="for_manager">관리자용 수정/삭제 페이지 => <a href="performListManager.pe">이동</a> </div>
 <%} %>
 <div id="section_top">
 	<div id="calendar_category">
@@ -181,19 +182,32 @@ location.href="logout.jsp";
 		%>
 		
 		<article>
-			<img src="performUpload/<%=performDTO.getMain_img() %>" class="article_img">
-			<h3 class="article_title"><%=performDTO.getPerform_title() %></h3>
+			<a href="performDetail.pe?perform_num=<%=performDTO.getPerform_num() %>"><img src="performUpload/<%=performDTO.getMain_img() %>" class="article_img"></a>
+			<a href="performDetail.pe?perform_num=<%=performDTO.getPerform_num() %>" class="article_title"><%=performDTO.getPerform_title() %></a>
 			<div class="article_outline">
 				<!-- 일자 요일처리 필요 ★ -->
-				<div><span>일자</span><span><%=performDTO.getPerform_date().substring(0, 10) %></span></div>
+				<div><span>일자</span><span><%=performDTO.getPerform_date().substring(0, 10) %> (<%=performDTO.getPerform_day() %>) </span></div>
 				<div><span>시간</span><span><%=performDTO.getPerform_date().substring(11, 16) %></span></div>
 				<div><span>장소</span><span><%=performDTO.getLocation() %></span></div>
 				<!-- 가격 처리 필요 (0이면 표시x, 무료도 처리 필요함 -> R석에 1을 입력하면 무료로 처리하자.) ★ -->
-				<div><span>가격</span><span>R석 <%=performDTO.getPrice_R() %>, S석 <%=performDTO.getPrice_S() %>, A석 <%=performDTO.getPrice_A() %>, B석 <%=performDTO.getPrice_B() %></span></div>
+				<div><span>가격</span>
+				<%
+					String format_priceR = String.format("%,d", performDTO.getPrice_R()); 
+					String format_priceS = String.format("%,d", performDTO.getPrice_S()); 
+					String format_priceA = String.format("%,d", performDTO.getPrice_A()); 
+					String format_priceB = String.format("%,d", performDTO.getPrice_B()); 
+				%>
+				<span>
+					<% if(performDTO.getPrice_R()!=0){ %> R석 <%=format_priceR %> | <%} %>
+					<% if(performDTO.getPrice_S()!=0){ %> S석 <%=format_priceS %> | <%} %>
+					<% if(performDTO.getPrice_A()!=0){ %> A석 <%=format_priceA %> | <%} %>
+					<% if(performDTO.getPrice_B()!=0){ %> B석 <%=format_priceB %> <%} %>
+				</span></div>
+				
 				<div><span>출연</span><span><%=performDTO.getArtist_main() %></span></div>
 			</div>
 			<!-- 예매가 불가능할 시, '예매불가'처리 -->
-			<a href="performDetail.pe" class="article_btn">예매하기</a>	
+			<a href="performDetail.pe?perform_num=<%=performDTO.getPerform_num() %>" class="article_btn">예매하기</a>	
 		</article>
 	<%} %>
 	

@@ -247,11 +247,11 @@ section {
   padding-bottom: 40px;
   background-color: whitesmoke;
 }
-#for_manager{
+.for_manager{
 	margin-left: 150px;
 	margin-bottom: 30px;
 }
-#for_manager a{
+.for_manager a{
 	text-decoration: underline;
 	font-size: 12pt;
 	font-weight: bold;
@@ -347,7 +347,10 @@ section {
 .article_title{
 	position: absolute;
 	left: 190px;
-	top: 10px;
+	top: 25px;
+	color: black;
+	font-size: 14pt;
+	font-weight: bold;
 }
 .article_outline{
 	position: absolute;
@@ -358,10 +361,10 @@ section {
 	display: flex;
 	padding: 7px 0;
 	font-size: 10pt;
-	width: 530px;
 }
 .article_outline span:first-child{
 	width: 30px;
+	height: 15px;
 	margin: 0;
 	padding: 0 5px;
 	font-weight: bold;
@@ -370,6 +373,7 @@ section {
 .article_outline span:last-child{
 	margin: 0;
 	padding-left: 15px;
+	width: 500px;
 }
 .article_btn{
 	position: absolute;
