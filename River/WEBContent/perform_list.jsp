@@ -73,8 +73,12 @@ location.href="logout.jsp";
     <div class="headerbar_main">
       <nav id="headerbar_info">
         <% if(id != null){
-          out.println("<div>\"" + id + "\"님, 환영합니다! </div>");
-        } %>
+        	if(id.equals("manager")){ %>
+        		<div>'관리자 계정'으로 로그인하셨습니다.</div>
+        	<% } else{ %>
+        		<div>"<%=id %>"님, 환영합니다!</div>
+       			<%} %>
+       		<%} %>
           <ul>
           <% if(id == null){
             out.println("<li class='headerbar_info_login'><a href='login.jsp'>로그인</a></li>");
@@ -194,8 +198,9 @@ location.href="logout.jsp";
 	List<PerformDTO> performList = (List)request.getAttribute("performList");
 	for(int i=0; i<performList.size(); i++){
 		PerformDTO performDTO = performList.get(i); 
-		%>
-		
+		Date open_date = dataFormat.parse(performDTO.getOpen_date());
+		Date perform_date = dataFormat.parse(performDTO.getPerform_date()); 
+%>	
 		<article>
 				<!-- 제목 input type에 value형태로 써주면 <aa> 이런거 다 표시 됨. why?? 무슨 차이로 인해??  -->
 			<a href="performDetail.pe?perform_num=<%=performDTO.getPerform_num() %>"><img src="performUpload/<%=performDTO.getMain_img() %>" class="article_img"></a>
@@ -216,20 +221,18 @@ location.href="logout.jsp";
 				<span>
 				 <!-- 전석 가격이 존재할 경우, 전석 이외의 가격은 보이지 않음  -->
 					<% if(performDTO.getPrice_All()!=0){ %> 전석 <%=format_priceAll %> <%} else{ %> 
-						<% if(performDTO.getPrice_R()!=0){ %> R석 <%=format_priceR %> | <%} %>
-						<% if(performDTO.getPrice_S()!=0){ %> S석 <%=format_priceS %> | <%} %>
-						<% if(performDTO.getPrice_A()!=0){ %> A석 <%=format_priceA %> | <%} %>
-						<% if(performDTO.getPrice_B()!=0){ %> B석 <%=format_priceB %> <%} %>
+						<% if(performDTO.getPrice_R()!=0){ %> R석 <%=format_priceR %> <%} %>
+						<% if(performDTO.getPrice_S()!=0){ %> | S석 <%=format_priceS %> <%} %>
+						<% if(performDTO.getPrice_A()!=0){ %> | A석 <%=format_priceA %><% } %>
+						<% if(performDTO.getPrice_B()!=0){ %> | B석 <%=format_priceB %> <%} %>
 					<%} %>
 				</span></div>
 				
 				<div><span>출연</span><span><%=performDTO.getArtist_main() %></span></div>
 			</div>
 			<!-- 현재 날짜와 비교 후, 각 상황에 맞게 3가지로 분류 -->
-			<% 
-				Date open_date = dataFormat.parse(performDTO.getOpen_date());
-				Date perform_date = dataFormat.parse(performDTO.getPerform_date());
-				if(open_date.after(today_date)){ %>
+		
+				<% if(open_date.after(today_date)){ %>
 					<div class="article_btn_prepare">티켓 오픈 준비중</div>	
 				<%} else if(perform_date.after(today_date)) { %>	
 					<a href="performDetail.pe?perform_num=<%=performDTO.getPerform_num() %>" class="article_btn">예매하기</a>	

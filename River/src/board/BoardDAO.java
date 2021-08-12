@@ -12,7 +12,7 @@ public class BoardDAO {
 	
 	// 여기서 이렇게 쓰는건 별로인가? 
 	private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-	private static final String JDBC_URL = "jdbc:mysql://localhost:3306/river";
+	private static final String JDBC_URL = "jdbc:mysql://localhost:3306/river?allowPublicKeyRetrieval=true&useSSL=false";
 	private static final String USER = "root";
 	private static final String PASSWD = "adsl48596!";
 	

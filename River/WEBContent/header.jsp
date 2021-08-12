@@ -55,8 +55,12 @@ function logout(){
       <div class="headerbar_main">
         <nav id="headerbar_info">
         <% if(id != null){
-          out.println("<div>\"" + id + "\"님, 환영합니다! </div>");
-        } %>
+        	if(id.equals("manager")){ %>
+        		<div>'관리자 계정'으로 로그인하셨습니다.</div>
+        	<% } else{ %>
+        		<div>"<%=id %>"님, 환영합니다!</div>
+       			<%} %>
+       		<%} %>
           <ul>
           <% if(id == null){
             out.println("<li class='headerbar_info_login'><a href='login.jsp'>로그인</a></li>");

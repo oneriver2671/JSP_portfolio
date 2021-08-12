@@ -61,8 +61,12 @@ location.href="logout.jsp";
     <div class="headerbar_main">
       <nav id="headerbar_info">
         <% if(id != null){
-          out.println("<div>\"" + id + "\"님, 환영합니다! </div>");
-        } %>
+        	if(id.equals("manager")){ %>
+        		<div>'관리자 계정'으로 로그인하셨습니다.</div>
+        	<% } else{ %>
+        		<div>"<%=id %>"님, 환영합니다!</div>
+       			<%} %>
+       		<%} %>
           <ul>
           <% if(id == null){
             out.println("<li class='headerbar_info_login'><a href='login.jsp'>로그인</a></li>");
@@ -160,10 +164,10 @@ location.href="logout.jsp";
 			<span>
 			<!-- 전석 가격이 존재할 경우, 전석 이외의 가격은 보이지 않음  -->
 			<% if(performDTO.getPrice_All()!=0){ %> 전석 <%=format_priceAll %> <%} else{ %>
-				<% if(performDTO.getPrice_R()!=0){ %> R석 <%=format_priceR %> | <%} %>
-				<% if(performDTO.getPrice_S()!=0){ %> S석 <%=format_priceS %> | <%} %>
-				<% if(performDTO.getPrice_A()!=0){ %> A석 <%=format_priceA %> | <%} %>
-				<% if(performDTO.getPrice_B()!=0){ %> B석 <%=format_priceB %> <%} %>
+				<% if(performDTO.getPrice_R()!=0){ %> R석 <%=format_priceR %> <%} %>
+				<% if(performDTO.getPrice_S()!=0){ %> | S석 <%=format_priceS %> <%} %>
+				<% if(performDTO.getPrice_A()!=0){ %> | A석 <%=format_priceA %> <%} %>
+				<% if(performDTO.getPrice_B()!=0){ %> | B석 <%=format_priceB %> <%} %>
 			<%} %>
 			</span></div>
 			<div><span>러닝타임</span><span><%=performDTO.getRunning_time() %>분 (인터미션 <%=performDTO.getIntermission() %>분)</span></div>
@@ -284,10 +288,11 @@ location.href="logout.jsp";
 			</div>
 		</div>
 		
-		<%if(performDTO.getSub_img()!=null){ %>
+		<%if(performDTO.getSub_img()!=null || performDTO.getIntro_text()!=null  ){ %>
 			<div id="section_middle_intro">
-				<div class="section_middle_title"><img src="images/article/bu_concert_info01.gif"> 작품 설명</div>
-				<img src="performUpload/<%=performDTO.getSub_img() %>" id="section_middle_introImg">	
+				<div class="section_middle_title"><img src="images/article/bu_concert_info01.gif"> 작품 설명 및 아티스트 소개</div>
+				<div id="section_middle_introImg"><img src="performUpload/<%=performDTO.getSub_img() %>" ></div>
+				
 			</div>
 		<%} %>
 		
