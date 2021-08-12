@@ -17,7 +17,7 @@
 <!-- 공연 List 출력 -->
 <select id="getPerformList" resultType="perform.PerformDTO" parameterType="int">
 	select perform_num, perform_title, perform_date, perform_day, location, artist_main, main_img, possible_seat, open_date,
-	price_R, price_S, price_A, price_B, price_All from perform_info order by perform_num desc
+	price_R, price_S, price_A, price_B, price_All from perform_info order by perform_num desc limit #{startrow}, 15
 
 </select>
 

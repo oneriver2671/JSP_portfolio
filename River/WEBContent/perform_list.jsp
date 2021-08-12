@@ -230,22 +230,21 @@ location.href="logout.jsp";
 <div id="bot_section">
 	<div>
 		<%if(nowPage>1){ %>
-		<a href="boardList.bo?sort=<%=request.getParameter("sort")%>&page=<%=nowPage-1 %>" class="page_num_left">＜</a>
+		<a href="performList.pe?page=<%=nowPage-1 %>" class="page_num_left">＜</a>
 	<%} %>
 
 	<%for(int a=startPage; a<=endPage; a++){
 			if(a==nowPage){%>
 				<span class="page_num_now"><%=a %></span>
 		<%} else{ %>
-			<a href="boardList.bo?sort=<%=request.getParameter("sort")%>&page=<%=a %>" class="page_num"><%=a %></a>
+			<a href="performList.pe?page=<%=a %>" class="page_num"><%=a %></a>
 			<%} %>
 	<%} %>
 	<%if(nowPage<maxPage){ %>
-			<a href="boardList.bo?sort=<%=request.getParameter("sort")%>&page=<%=nowPage+1 %>" class="page_num_right">＞</a>
+			<a href="performList.pe?page=<%=nowPage+1 %>" class="page_num_right">＞</a>
 		<%} %> 
 	</div>
 </div>
-
 
 </section>
 
