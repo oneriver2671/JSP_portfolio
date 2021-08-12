@@ -1,9 +1,13 @@
 package perform.action;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.crypto.Data;
 
 import perform.PerformDTO;
 import perform.svc.PerformListService;
@@ -44,7 +48,14 @@ public class PerformListAction implements PerformAction {
 		pageInfo.setPage(page);
 		pageInfo.setStartPage(startPage);	
 		
+
+		// 현재 날짜 구하기
+		Calendar cal = Calendar.getInstance();	  // Calendar는 추상클래스라.
+		Date today_date = cal.getTime();
+		
+		
 		// view단으로 넘길 것들
+		request.setAttribute("today_date", today_date);
 		request.setAttribute("pageInfo", pageInfo);	
 		request.setAttribute("performList", performList);
 		ActionForward forward = new ActionForward();

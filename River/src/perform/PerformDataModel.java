@@ -57,7 +57,6 @@ public class PerformDataModel {
 		PerformDTO performDTO = null;
 
 		SqlSession sqlSession = factory.openSession();
-		sqlSession.selectList("getPerformList");
 		performDTO = sqlSession.selectOne("getPerformDetail", perform_num);
 		sqlSession.close();
 		

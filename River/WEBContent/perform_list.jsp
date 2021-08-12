@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import = "java.util.List" %>
+<%@ page import = "java.util.Date" %>
+<%@ page import = "java.text.SimpleDateFormat" %>
 <%@ page import = "perform.PerformDTO" %>
 <%@ page import = "vo.PageInfo" %>
 
@@ -16,6 +18,10 @@
 	int maxPage = pageInfo.getMaxPage();
 	int startPage = pageInfo.getStartPage();
 	int endPage = pageInfo.getEndPage();
+	
+	/* 날짜 비교를 위한 Java코드 */
+	 SimpleDateFormat dataFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+	 Date today_date = (Date)request.getAttribute("today_date");		// Controller에서 넘어온 '오늘 날짜'
 %>
     
 <!DOCTYPE html>
@@ -188,15 +194,13 @@ location.href="logout.jsp";
 	List<PerformDTO> performList = (List)request.getAttribute("performList");
 	for(int i=0; i<performList.size(); i++){
 		PerformDTO performDTO = performList.get(i); 
-		// 첨부파일 가져오는게 필요한데... include할까?
 		%>
 		
 		<article>
-				<!-- 제목 input type에 value형태로 써주면 <aa> 이런거 다 표시 됨. why?? 무슨 차이??  -->
+				<!-- 제목 input type에 value형태로 써주면 <aa> 이런거 다 표시 됨. why?? 무슨 차이로 인해??  -->
 			<a href="performDetail.pe?perform_num=<%=performDTO.getPerform_num() %>"><img src="performUpload/<%=performDTO.getMain_img() %>" class="article_img"></a>
 			<a href="performDetail.pe?perform_num=<%=performDTO.getPerform_num() %>" class="article_title"><%=performDTO.getPerform_title() %></a>
 			<div class="article_outline">
-				<!-- 일자 요일처리 필요 ★ -->
 				<div><span>일자</span><span><%=performDTO.getPerform_date().substring(0, 10) %> (<%=performDTO.getPerform_day() %>) </span></div>
 				<div><span>시간</span><span><%=performDTO.getPerform_date().substring(11, 16) %></span></div>
 				<div><span>장소</span><span><%=performDTO.getLocation() %></span></div>
@@ -221,10 +225,19 @@ location.href="logout.jsp";
 				
 				<div><span>출연</span><span><%=performDTO.getArtist_main() %></span></div>
 			</div>
-			<!-- 예매가 불가능할 시, '예매불가'처리 -->
-			<a href="performDetail.pe?perform_num=<%=performDTO.getPerform_num() %>" class="article_btn">예매하기</a>	
+			<!-- 현재 날짜와 비교 후, 각 상황에 맞게 3가지로 분류 -->
+			<% 
+				Date open_date = dataFormat.parse(performDTO.getOpen_date());
+				Date perform_date = dataFormat.parse(performDTO.getPerform_date());
+				if(open_date.after(today_date)){ %>
+					<div class="article_btn_prepare">티켓 오픈 준비중</div>	
+				<%} else if(perform_date.after(today_date)) { %>	
+					<a href="performDetail.pe?perform_num=<%=performDTO.getPerform_num() %>" class="article_btn">예매하기</a>	
+				<%} else{ %>
+			    <div class="article_btn_end">공연 종료</div>
+				<%} %>
 		</article>
-	<%} %>
+	<%} %> <!-- for문 종료 -->
 	
 </div>
 <div id="bot_section">

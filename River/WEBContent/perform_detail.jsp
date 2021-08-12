@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%> 
+<%@ page import = "java.util.Date" %>
+<%@ page import = "java.text.SimpleDateFormat" %>
 <%@ page import = "perform.PerformDTO" %>
 <%
 	request.setCharacterEncoding("utf-8");
@@ -8,6 +10,9 @@
 <%
   PerformDTO performDTO = (PerformDTO)request.getAttribute("performDTO");		// 공연정보 불러오기
   
+  /* 날짜 비교를 위한 Java코드 */
+	 SimpleDateFormat dataFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+	 Date today_date = (Date)request.getAttribute("today_date");		// Controller에서 넘어온 '오늘 날짜'
 %>
 
 <!DOCTYPE html>
@@ -165,7 +170,8 @@ location.href="logout.jsp";
 			<div><span>관람연령</span><span>만 <%=performDTO.getLimit_age() %>세 이상 입장(미취학아동 입장불가)</span></div>
 			<div class="article_outline_ticket"><span>티켓오픈일</span><span><%=performDTO.getOpen_date().substring(0, 10) %>(<%=performDTO.getPerform_day() %>) <%=performDTO.getOpen_date().substring(11, 16) %></span></div>
 			<div><span>출연</span><span><%=performDTO.getArtist_main() %></span></div>
-			<div><span>주최</span><span><%=performDTO.getPerform_host() %></span></div>
+			<%if(!performDTO.getPerform_host().equals("")){ %>		<!-- '주최'는 null일 수 있으므로, 예외 처리. -->
+				<div><span>주최</span><span><%=performDTO.getPerform_host() %></span></div> <%} %>
 		</div>
 		<div id="sns_share">
 			<span>SNS 공유하기</span>
@@ -198,9 +204,17 @@ location.href="logout.jsp";
 				<div><div>시야방해S</div><div class="possible_seat">15석</div></div>				
 				<div><div>시야방해A</div><div class="possible_seat">17석</div></div>				
 			</div>
-			<input type="submit" class="reser_btn" value="예매하기">
-			<!-- <div class="reser_btn_prepare">티켓 오픈 준비중</div>  -->
-			<!-- <div class="reser_btn_end">공연 종료</div>  -->
+			<%
+			Date open_date = dataFormat.parse(performDTO.getOpen_date());
+			Date perform_date = dataFormat.parse(performDTO.getPerform_date());
+			if(open_date.after(today_date)){ %>
+				<div class="reser_btn_prepare">티켓 오픈 준비중</div>	
+			<%} else if(perform_date.after(today_date)) { %>	
+				<a href="" class="reser_btn">예매하기</a>	
+			<%} else{ %>
+	   	 <div class="reser_btn_end">공연 종료</div>
+			<%} %>
+			
 			<div class="like_btn"><i class="far fa-thumbs-up"></i>	
 	 						<!-- <i class="fas fa-thumbs-up"></i> -->	관심공연</div>
 			<div class="like_list"><i class="fas fa-list"></i></div>

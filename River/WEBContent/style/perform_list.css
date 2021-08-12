@@ -391,6 +391,30 @@ section {
 	font-weight: bold;
 	box-shadow: 2px 2px 2px #b0b0b0;
 }
+.article_btn_end{
+	position: absolute;
+	bottom: 30px;
+	right: 30px;
+	padding: 10px 25px;
+	background-color: #646569;
+	color: whitesmoke;
+	border: none;
+	font-size: 10pt;
+	font-weight: bold;
+	box-shadow: 2px 2px 2px #b0b0b0;
+}
+.article_btn_prepare{
+	position: absolute;
+	bottom: 30px;
+	right: 30px;
+	padding: 10px 25px;
+	background-color: #646569;
+	color: whitesmoke;
+	border: none;
+	font-size: 10pt;
+	font-weight: bold;
+	box-shadow: 2px 2px 2px #b0b0b0;
+}
 
 #bot_section{
 	position: absolute;

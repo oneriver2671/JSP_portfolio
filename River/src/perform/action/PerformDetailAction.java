@@ -1,5 +1,8 @@
 package perform.action;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -36,6 +39,13 @@ public class PerformDetailAction implements PerformAction {
 //		System.out.println("컨트롤러는 잘 찍힘: " + performDTO.getPerform_title());
 		
 		
+		// 현재 날짜 구하기
+		Calendar cal = Calendar.getInstance();	  // Calendar는 추상클래스라.
+		Date today_date = cal.getTime();
+		
+		
+		// view단으로 넘길 것들
+		request.setAttribute("today_date", today_date);
 		request.setAttribute("performDTO", performDTO);
 		request.setAttribute("isLike", isLike);   // 게시물 좋아요 정보 (boolean 반환)
 		

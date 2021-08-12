@@ -23,7 +23,7 @@
 
 <!-- 공연 List 출력 (관리자용) -->
 <select id="getPerformListManager" resultType="perform.PerformDTO">
-	select perform_num, perform_title, perform_date, location from perform_info order by perform_num desc
+	select perform_num, perform_title, perform_date, location from perform_info order by perform_date asc
 </select>
 
 <!-- 공연 상세페이지 출력 -->
