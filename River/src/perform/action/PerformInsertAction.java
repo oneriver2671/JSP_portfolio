@@ -33,8 +33,6 @@ public class PerformInsertAction implements PerformAction {
 		MultipartRequest multi = new MultipartRequest(request,realFolder,fileSize,"UTF-8",new DefaultFileRenamePolicy());
 		
 		
-//		String test = multi.getOriginalFileName((String)multi.getFileNames().nextElement());
-		
 		Enumeration test = multi.getFileNames();
 		ArrayList<String> attached = new ArrayList<String>();
 		
@@ -42,13 +40,6 @@ public class PerformInsertAction implements PerformAction {
 			attached.add(multi.getOriginalFileName((String)test.nextElement()));
 		}
 		
-		System.out.println(attached);
-		System.out.println(multi.getParameter("title"));
-		System.out.println(multi.getParameter("location"));
-		System.out.println(multi.getParameter("program_title"));
-		System.out.println(multi.getParameter("artist_main"));
-		System.out.println(multi.getParameter("running_time"));
-		System.out.println(multi.getParameter("intermission"));
 		
 	
 		// '공연 날짜+시간' 한 문자열로 처리
@@ -161,6 +152,7 @@ public class PerformInsertAction implements PerformAction {
 		int priceLow_R;
 		int priceLow_S;
 		int priceLow_A;
+		int price_All;
 		if(multi.getParameter("seat_price_R").equals("")) {
 			price_R = 0;
 		} else {
@@ -196,6 +188,11 @@ public class PerformInsertAction implements PerformAction {
 		} else {
 			priceLow_A = Integer.parseInt(multi.getParameter("seat_priceLow_A"));
 		}
+		if(multi.getParameter("seat_price_All").equals("")) {
+			price_All = 0;
+		} else {
+			price_All = Integer.parseInt(multi.getParameter("seat_price_All"));
+		}
 	
 		
 		/* 공연정보 dto에 담기 */
@@ -203,7 +200,6 @@ public class PerformInsertAction implements PerformAction {
 		performDTO.setPerform_title(multi.getParameter("title"));
 		performDTO.setPerform_date(perform_date);
 		performDTO.setLocation(multi.getParameter("location"));
-		performDTO.setProgram_title(multi.getParameter("program_title"));
 		performDTO.setArtist_main(multi.getParameter("artist_main"));
 		performDTO.setRunning_time(Integer.parseInt(multi.getParameter("running_time")));
 		performDTO.setIntermission(Integer.parseInt(multi.getParameter("intermission")));
@@ -224,6 +220,7 @@ public class PerformInsertAction implements PerformAction {
 		performDTO.setPriceLow_A(priceLow_A);
 		performDTO.setPerform_day(perform_dayOfWeek);
 		performDTO.setOpen_day(open_dayOfWeek);
+		performDTO.setPrice_All(price_All);
 
 		
 		// model 객체 호출
@@ -235,7 +232,7 @@ public class PerformInsertAction implements PerformAction {
 			System.out.println("입력 성공");
 			forward = new ActionForward();
 			forward.setRedirect(true);
-			forward.setPath("performList.pe");	// 매핑주소로 대체될 것.
+			forward.setPath("performList.pe");	
 		}
 		
 		return forward;

@@ -7,17 +7,18 @@
 <!-- 공연정보 입력 -->
 <insert id="performInsert" parameterType="perform.PerformDTO">
 	insert into perform_info values(
-	default, #{perform_title}, #{perform_date}, #{location}, #{program_title}, #{artist_main},
+	default, #{perform_title}, #{perform_date}, #{location}, #{artist_main},
 	#{running_time}, #{intermission}, #{main_img}, #{sub_img}, #{intro_text},	#{artist_introText},
   #{perform_host}, #{limit_age}, default, default, #{open_date},
 	#{price_R}, #{price_S}, #{price_A}, #{price_B}, #{priceLow_R}, #{priceLow_S}, #{priceLow_A},
-	#{perform_day}, #{open_day})
+	#{perform_day}, #{open_day}, #{price_All} )
 </insert>
 
 <!-- 공연 List 출력 -->
-<select id="getPerformList" resultType="perform.PerformDTO">
+<select id="getPerformList" resultType="perform.PerformDTO" parameterType="int">
 	select perform_num, perform_title, perform_date, perform_day, location, artist_main, main_img, possible_seat, open_date,
-	price_R, price_S, price_A, price_B from perform_info order by perform_num desc
+	price_R, price_S, price_A, price_B, price_All from perform_info order by perform_num desc
+
 </select>
 
 <!-- 공연 List 출력 (관리자용) -->
@@ -37,7 +38,19 @@
 
 <!-- 공연정보 수정 -->
 <update id="performUpdate" parameterType="perform.PerformDTO">
+	update perform_info set perform_title=#{perform_title}, perform_date=#{perform_date}, location=#{location},
+	artist_main=#{artist_main}, running_time=#{running_time}, intermission=#{intermission}, main_img=#{main_img},
+	sub_img=#{sub_img}, intro_text=#{intro_text}, artist_introText=#{artist_introText}, perform_host=#{perform_host},
+	limit_age=#{limit_age}, open_date=#{open_date}, price_R=#{price_R}, price_S=#{price_S}, price_A=#{price_A},
+	price_B=#{price_B}, priceLow_R=#{priceLow_R}, priceLow_S=#{priceLow_S}, priceLow_A=#{priceLow_A},
+	perform_day=#{perform_day}, open_day=#{open_day}, price_All=#{price_All}
+	where perform_num = #{perform_num}
 </update>
+
+<!-- 공연 갯수 파악 (paging처리용) -->
+<select id="performListCount" resultType="int">
+	select count(*) from perform_info
+</select>
 
 
 <!--  예시

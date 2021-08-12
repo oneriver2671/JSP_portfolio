@@ -33,7 +33,7 @@ public class PerformDetailAction implements PerformAction {
 //			isLike = likeNumService.getLikeNum(member_id, board_num);			
 //		}
 		
-		System.out.println("컨트롤러는 잘 찍힘: " + performDTO.getPerform_title());
+//		System.out.println("컨트롤러는 잘 찍힘: " + performDTO.getPerform_title());
 		
 		
 		request.setAttribute("performDTO", performDTO);

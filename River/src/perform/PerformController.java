@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import perform.action.PerformAction;
 import perform.action.PerformDeleteAction;
 import perform.action.PerformDetailAction;
+import perform.action.PerformDetailUpdateAction;
 import perform.action.PerformInsertAction;
 import perform.action.PerformListAction;
 import perform.action.PerformListManagerAction;
@@ -99,6 +100,19 @@ public class PerformController extends HttpServlet {
 		if(command.equals("/performDetail.pe")) {
 			
 			action = new PerformDetailAction();
+			try{
+				forward = action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
+		}
+		
+
+		/* 공연정보 수정을 위한 정보출력 */
+		if(command.equals("/performDetailUpdate.pe")) {
+			
+			action = new PerformDetailUpdateAction();
 			try{
 				forward = action.execute(request, response);
 			}catch(Exception e){

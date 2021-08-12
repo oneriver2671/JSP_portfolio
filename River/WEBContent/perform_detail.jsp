@@ -141,13 +141,29 @@ location.href="logout.jsp";
 		<img src="performUpload/<%=performDTO.getMain_img() %>" id="main_img">
 		<div id="article_title"><%=performDTO.getPerform_title() %></div>
 		<div class="article_outline">
-			<div><span>일자</span><span><%=performDTO.getPerform_date().substring(0, 10) %></span></div>
+			<div><span>일자</span><span><%=performDTO.getPerform_date().substring(0, 10) %>(<%=performDTO.getPerform_day() %>)</span></div>
 			<div><span>공연시간</span><span><%=performDTO.getPerform_date().substring(11, 16) %></span></div>
 			<div><span>공연장소</span><span><%=performDTO.getLocation() %></span></div>
-			<div><span>가격</span><span>R석 <%=performDTO.getPrice_R() %>, S석 <%=performDTO.getPrice_S() %>, A석 <%=performDTO.getPrice_A() %>, B석 <%=performDTO.getPrice_B() %></span></div>
+			<div><span>가격</span>
+			<%
+				String format_priceR = String.format("%,d", performDTO.getPrice_R()); 
+				String format_priceS = String.format("%,d", performDTO.getPrice_S()); 
+				String format_priceA = String.format("%,d", performDTO.getPrice_A()); 
+				String format_priceB = String.format("%,d", performDTO.getPrice_B()); 
+				String format_priceAll = String.format("%,d", performDTO.getPrice_All()); 
+			%>
+			<span>
+			<!-- 전석 가격이 존재할 경우, 전석 이외의 가격은 보이지 않음  -->
+			<% if(performDTO.getPrice_All()!=0){ %> 전석 <%=format_priceAll %> <%} else{ %>
+				<% if(performDTO.getPrice_R()!=0){ %> R석 <%=format_priceR %> | <%} %>
+				<% if(performDTO.getPrice_S()!=0){ %> S석 <%=format_priceS %> | <%} %>
+				<% if(performDTO.getPrice_A()!=0){ %> A석 <%=format_priceA %> | <%} %>
+				<% if(performDTO.getPrice_B()!=0){ %> B석 <%=format_priceB %> <%} %>
+			<%} %>
+			</span></div>
 			<div><span>러닝타임</span><span><%=performDTO.getRunning_time() %>분 (인터미션 <%=performDTO.getIntermission() %>분)</span></div>
 			<div><span>관람연령</span><span>만 <%=performDTO.getLimit_age() %>세 이상 입장(미취학아동 입장불가)</span></div>
-			<div class="article_outline_ticket"><span>티켓오픈일</span><span><%=performDTO.getOpen_date().substring(0, 10) %> (<%=performDTO.getOpen_date().substring(11, 16) %>)</span></div>
+			<div class="article_outline_ticket"><span>티켓오픈일</span><span><%=performDTO.getOpen_date().substring(0, 10) %>(<%=performDTO.getPerform_day() %>) <%=performDTO.getOpen_date().substring(11, 16) %></span></div>
 			<div><span>출연</span><span><%=performDTO.getArtist_main() %></span></div>
 			<div><span>주최</span><span><%=performDTO.getPerform_host() %></span></div>
 		</div>

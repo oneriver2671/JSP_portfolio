@@ -51,7 +51,7 @@ table tr:first-child td{
 	height: 30px;
 	border: none;
 }
-input[type=reset]{
+input[type=button]{
 	margin: 20px 10px 0 470px;
 	padding: 10px 40px;
 	background-color: #646277;
@@ -84,7 +84,6 @@ textarea{
 
 function addComplete(){
 		var title = $('#title').val();
-		var programTitle = $('#programTitle').val();
 		var mainArtist = $('#mainArtist').val();
 		var runningTime = $('#runningTime').val();
 		var intermission = $('#intermission').val();
@@ -103,9 +102,9 @@ function addComplete(){
 			
 		}
 
-	
-		
-
+function back(){
+	history.back();
+}
 
 </script>
 
@@ -207,12 +206,6 @@ function addComplete(){
 					<option>예술의전당 - 오페라하우스</option>
 					<option>인천아트센터</option>
 				</select>
-				</td>
-			</tr>
-			<tr>
-				<td>작품명</td>
-				<td>			
-					<input type="text" id="programTitle" class="inputText" name="program_title" placeholder="작품명은 슬래쉬(/)로 구분해주세요.">
 				</td>
 			</tr>
 			<tr>
@@ -339,6 +332,7 @@ function addComplete(){
 					S석: <input type="text" name="seat_price_S" class="priceInput" placeholder="숫자만"> 
 					A석: <input type="text" name="seat_price_A" class="priceInput" placeholder="숫자만"> 
 					B석: <input type="text" name="seat_price_B" class="priceInput" placeholder="숫자만"> 
+					전석: <input type="text" name="seat_price_All" class="priceInput" placeholder="전석 동일 시" >
 				</td>
 			</tr>
 			<tr>
@@ -350,7 +344,7 @@ function addComplete(){
 				</td>
 			</tr>
 		</table>
-			<input type="reset" value="취소">
+			<input type="button" value="돌아가기" onclick="back()">
 			<input type="submit" id="addBtn" value="작성 완료">
 		
 	</form>

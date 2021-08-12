@@ -2,10 +2,20 @@
     pageEncoding="UTF-8"%>
 <%@ page import = "java.util.List" %>
 <%@ page import = "perform.PerformDTO" %>
+<%@ page import = "vo.PageInfo" %>
 
 <%
 	request.setCharacterEncoding("utf-8");
 	String id = (String)session.getAttribute("id");			// 로그인 상태 회원 정보.		
+%>
+<%
+	/* PerformListAction에서 넘어온 paging처리 객체 */
+	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
+	int listCount = pageInfo.getListCount();
+	int nowPage = pageInfo.getPage();
+	int maxPage = pageInfo.getMaxPage();
+	int startPage = pageInfo.getStartPage();
+	int endPage = pageInfo.getEndPage();
 %>
     
 <!DOCTYPE html>
@@ -182,6 +192,7 @@ location.href="logout.jsp";
 		%>
 		
 		<article>
+				<!-- 제목 input type에 value형태로 써주면 <aa> 이런거 다 표시 됨. why?? 무슨 차이??  -->
 			<a href="performDetail.pe?perform_num=<%=performDTO.getPerform_num() %>"><img src="performUpload/<%=performDTO.getMain_img() %>" class="article_img"></a>
 			<a href="performDetail.pe?perform_num=<%=performDTO.getPerform_num() %>" class="article_title"><%=performDTO.getPerform_title() %></a>
 			<div class="article_outline">
@@ -196,12 +207,16 @@ location.href="logout.jsp";
 					String format_priceS = String.format("%,d", performDTO.getPrice_S()); 
 					String format_priceA = String.format("%,d", performDTO.getPrice_A()); 
 					String format_priceB = String.format("%,d", performDTO.getPrice_B()); 
+					String format_priceAll = String.format("%,d", performDTO.getPrice_All()); 
 				%>
 				<span>
-					<% if(performDTO.getPrice_R()!=0){ %> R석 <%=format_priceR %> | <%} %>
-					<% if(performDTO.getPrice_S()!=0){ %> S석 <%=format_priceS %> | <%} %>
-					<% if(performDTO.getPrice_A()!=0){ %> A석 <%=format_priceA %> | <%} %>
-					<% if(performDTO.getPrice_B()!=0){ %> B석 <%=format_priceB %> <%} %>
+				 <!-- 전석 가격이 존재할 경우, 전석 이외의 가격은 보이지 않음  -->
+					<% if(performDTO.getPrice_All()!=0){ %> 전석 <%=format_priceAll %> <%} else{ %> 
+						<% if(performDTO.getPrice_R()!=0){ %> R석 <%=format_priceR %> | <%} %>
+						<% if(performDTO.getPrice_S()!=0){ %> S석 <%=format_priceS %> | <%} %>
+						<% if(performDTO.getPrice_A()!=0){ %> A석 <%=format_priceA %> | <%} %>
+						<% if(performDTO.getPrice_B()!=0){ %> B석 <%=format_priceB %> <%} %>
+					<%} %>
 				</span></div>
 				
 				<div><span>출연</span><span><%=performDTO.getArtist_main() %></span></div>
@@ -211,6 +226,24 @@ location.href="logout.jsp";
 		</article>
 	<%} %>
 	
+</div>
+<div id="bot_section">
+	<div>
+		<%if(nowPage>1){ %>
+		<a href="boardList.bo?sort=<%=request.getParameter("sort")%>&page=<%=nowPage-1 %>" class="page_num_left">＜</a>
+	<%} %>
+
+	<%for(int a=startPage; a<=endPage; a++){
+			if(a==nowPage){%>
+				<span class="page_num_now"><%=a %></span>
+		<%} else{ %>
+			<a href="boardList.bo?sort=<%=request.getParameter("sort")%>&page=<%=a %>" class="page_num"><%=a %></a>
+			<%} %>
+	<%} %>
+	<%if(nowPage<maxPage){ %>
+			<a href="boardList.bo?sort=<%=request.getParameter("sort")%>&page=<%=nowPage+1 %>" class="page_num_right">＞</a>
+		<%} %> 
+	</div>
 </div>
 
 

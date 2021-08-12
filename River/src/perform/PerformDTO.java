@@ -6,7 +6,6 @@ public class PerformDTO {
 	String perform_title;	// 제목
 	String perform_date;    // 날짜 + 시간 (datetime)
 	String location;		// 공연 장소
-	String program_title;	// 프로그램명
 	String artist_main;		// 메인 아티스트
 	int running_time;		// 러닝타임
 	int intermission;		// 인터미션 시간
@@ -28,8 +27,9 @@ public class PerformDTO {
 	int priceLow_A;			// 시야방해 A석 가격
 	String perform_day;		// 공연 요일
 	String open_day;		// 티켓오픈 요일
+	int price_All;			// 전석 동일가격
 	
-	
+
 	
 	public int getPerform_num() {
 		return perform_num;
@@ -54,12 +54,6 @@ public class PerformDTO {
 	}
 	public void setPerform_date(String perform_date) {
 		this.perform_date = perform_date;
-	}
-	public String getProgram_title() {
-		return program_title;
-	}
-	public void setProgram_title(String program_title) {
-		this.program_title = program_title;
 	}
 	public String getArtist_main() {
 		return artist_main;
@@ -186,6 +180,12 @@ public class PerformDTO {
 	}
 	public void setOpen_day(String open_day) {
 		this.open_day = open_day;
+	}
+	public int getPrice_All() {
+		return price_All;
+	}
+	public void setPrice_All(int price_All) {
+		this.price_All = price_All;
 	}
 	
 	

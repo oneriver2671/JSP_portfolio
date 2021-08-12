@@ -99,7 +99,7 @@ function deleteClick(){
 			<td><%=performDTO.getPerform_title() %></td>
 			<td><%=performDTO.getLocation() %></td>
 			<td><%=performDTO.getPerform_date().substring(0, 10) %></td>
-			<td><a href="perform_updateForm.jsp?perform_num=<%=performDTO.getPerform_num() %>">수정</a> / <a href="performDelete.pe?perform_num=<%=performDTO.getPerform_num() %>" onclick="return deleteClick()">삭제</a></td>
+			<td><a href="performDetailUpdate.pe?perform_num=<%=performDTO.getPerform_num() %>">수정</a> / <a href="performDelete.pe?perform_num=<%=performDTO.getPerform_num() %>" onclick="return deleteClick()">삭제</a></td>
 		</tr>
 		<%} %>
 	</table>

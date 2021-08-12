@@ -11,17 +11,17 @@ public class PerformListService {
 	public int getPerformListCount() throws Exception{
 		int listCount = 0;
 		PerformDataModel performDataModel = PerformDataModel.instance();
-//		listCount = boardDAO.selectListCount(sort);	
+		listCount = performDataModel.getPerformListCount();
 		
 		return listCount;
 	}
 
 	/* 게시글 select 메소드 */
-	public List<PerformDTO> getPerformList(int page, int limit) throws Exception{
+	public List<PerformDTO> getPerformList(int page) throws Exception{
 		int listCount = 0;
 		List<PerformDTO> performList = null;
 		PerformDataModel performDataModel = PerformDataModel.instance();
-		performList = performDataModel.getPerformList();	// page, limit도 활용해야 함.
+		performList = performDataModel.getPerformList(page);	// page, limit도 활용해야 함.
 	
 		return performList;
 	}
