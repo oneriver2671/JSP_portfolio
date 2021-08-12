@@ -206,7 +206,6 @@ public class PerformUpdateAction implements PerformAction{
 		performDTO.setMain_img(attached.get(0));
 		performDTO.setSub_img(attached.get(1));
 		performDTO.setIntro_text(multi.getParameter("intro_perform"));
-		performDTO.setArtist_introText(multi.getParameter("intro_artist"));
 		performDTO.setPerform_host(multi.getParameter("perform_host"));
 		performDTO.setLimit_age(limit_age);
 		performDTO.setPossible_seat(possible_seat);

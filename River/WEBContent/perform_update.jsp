@@ -82,7 +82,7 @@ function deleteClick(){
 <jsp:include page="header.jsp"></jsp:include>		<!-- header 담겨있음 -->
 <div id="wrap">
 <section>
-	<h2 id="h2_list">공연정보 List (참고용)</h2>
+	<h2 id="h2_list">공연정보 List (공연날짜 오름차순)</h2>
 	<table>
 		<tr>
 			<td>공연 Id</td>

@@ -235,13 +235,10 @@ function back(){
 				<td><input type="file" name="sub_img" /></td>
 			</tr>
 			<tr>
-				<td>소개글</td>
-				<td><textarea name="intro_perform" placeholder="소개용 이미지가 있을 경우엔 미작성"><%=performDTO.getIntro_text() %></textarea> </td>
+				<td>공연 및 아티스트 소개글</td>
+				<td><textarea name="intro_perform" placeholder="소개용 이미지가 있을 경우, 미작성해도 무관."><%=performDTO.getIntro_text() %></textarea> </td>
 			</tr>						
-			<tr>
-				<td>공연자 소개글</td>
-				<td><textarea name="intro_artist" placeholder="소개용 이미지가 있을 경우엔 미작성"><%=performDTO.getArtist_introText() %></textarea></td>
-			</tr>
+
 			<tr>
 				<td>주최</td>
 				<td><input type="text" class="inputText" name="perform_host" value="<%=performDTO.getPerform_host() %>"></td>

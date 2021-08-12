@@ -12,7 +12,6 @@ public class PerformDTO {
 	String main_img;		// 포스터 사진
 	String sub_img;		    // 기타 이미지
 	String intro_text;		// 간략한 소개글
-	String artist_introText;	// 연주자 소개글
 	String perform_host;		// 주최
 	int limit_age;			// 관람연령제한
 	int like_num;		    // 좋아요 수
@@ -90,12 +89,6 @@ public class PerformDTO {
 	}
 	public void setIntro_text(String intro_text) {
 		this.intro_text = intro_text;
-	}
-	public String getArtist_introText() {
-		return artist_introText;
-	}
-	public void setArtist_introText(String artist_introText) {
-		this.artist_introText = artist_introText;
 	}
 	public String getPerform_host() {
 		return perform_host;

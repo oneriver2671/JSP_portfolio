@@ -318,7 +318,7 @@ section{
 	font-size: 10pt;
 	font-weight: bold;
 }
-#reservation_outline > div,input{
+#reservation_outline > div,input {
 	position: absolute;
 }
 .reser_out1{
@@ -368,6 +368,7 @@ section{
 }
 
 .reser_btn{
+	position: absolute;
 	bottom: 70px;
 	left: 20px;
 	background-color: #CC0000;
@@ -488,8 +489,8 @@ section{
 	border-bottom: solid 1px gray;
 }
 #section_middle_introImg{
-	margin-left: 190px;
-	margin-bottom: 40px;
+	text-align: center;
+	margin: 0 auto;
 }
 
 #section_middle_ticketGuide{
