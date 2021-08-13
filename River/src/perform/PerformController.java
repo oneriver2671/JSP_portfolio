@@ -15,6 +15,7 @@ import perform.action.PerformDetailAction;
 import perform.action.PerformDetailUpdateAction;
 import perform.action.PerformInsertAction;
 import perform.action.PerformListAction;
+import perform.action.PerformListByDateAction;
 import perform.action.PerformListManagerAction;
 import perform.action.PerformUpdateAction;
 import vo.ActionForward;
@@ -39,6 +40,18 @@ public class PerformController extends HttpServlet {
 		if(command.equals("/performList.pe")) {
 			
 			action = new PerformListAction();
+			try{
+				forward = action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
+		}
+		
+		/* 공연 목록 출력 (달 선택 시) */
+		if(command.equals("/performListByDate.pe")) {
+			
+			action = new PerformListByDateAction();
 			try{
 				forward = action.execute(request, response);
 			}catch(Exception e){

@@ -18,6 +18,12 @@
 <select id="getPerformList" resultType="perform.PerformDTO" parameterType="int">
 	select perform_num, perform_title, perform_date, perform_day, location, artist_main, main_img, possible_seat, open_date,
 	price_R, price_S, price_A, price_B, price_All from perform_info order by perform_date asc limit #{startrow}, 15
+</select>
+
+<!-- 공연 List 출력 (날짜 선택 시) -->
+<select id="getPerformListByDate" resultType="perform.PerformDTO" parameterType="vo.DateInfo">
+	select perform_num, perform_title, perform_date, perform_day, location, artist_main, main_img, possible_seat, open_date,
+	price_R, price_S, price_A, price_B, price_All from perform_info where date(perform_date) between #{startDate} and #{endDate} order by perform_date asc limit #{startrow}, 15
 
 </select>
 
@@ -52,13 +58,10 @@
 	select count(*) from perform_info
 </select>
 
+<!-- 공연 갯수 파악 (paging처리용 / 날짜 선택 시) -->
+<select id="performListCountByDate" resultType="int" parameterType="vo.DateInfo">
+	select count(*) from perform_info where date(perform_date) between #{startDate} and #{endDate}
+</select>
 
-<!--  예시
-	
-	<update id="custUpdate" parameterType="model.custDTO">
-		update custinfo set custname=#{custname}, phone=#{phone}, address=#{address}, city=#{city}
-			where custno = #{custno}
-	</update>
--->
-	
+
 </mapper>

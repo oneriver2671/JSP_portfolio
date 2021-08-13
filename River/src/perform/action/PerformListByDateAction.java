@@ -1,20 +1,18 @@
 package perform.action;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.crypto.Data;
 
 import perform.PerformDTO;
 import perform.svc.PerformListService;
 import vo.ActionForward;
 import vo.PageInfo;
 
-public class PerformListAction implements PerformAction {
+public class PerformListByDateAction implements PerformAction {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -22,16 +20,47 @@ public class PerformListAction implements PerformAction {
 		List<PerformDTO> performList = null;
 		int page = 1;	// 페이지 기본설정
 		int limit = 15;		// 한페이지 최대 글 수.
+		int startDate = 0;
+		int endDate = 0;
 		
+		
+		// 페이지 정보 
 		if(request.getParameter("page")!= null){		// perform_list.jsp에서 넘어올 예정.
 			page = Integer.parseInt(request.getParameter("page"));
 		}
 		
+		// 현재 날짜 구하기
+		Calendar cal = Calendar.getInstance();	  // Calendar는 추상클래스라 생성자 호출 불가.
+		Date today_date = cal.getTime();				// View단 넘어가서 비교할 때 쓸 예정
+		int today_year = cal.get(Calendar.YEAR);		// 현재 연도
+		int today_month = cal.get(Calendar.MONTH)+1;	// 현재 달
+		
+		// 날짜 세팅 
+		String selected_year_temp = Integer.toString(today_year);		// 초기값 설정 (현재)
+		String selected_month_temp = Integer.toString(today_month);		// 초기값 설정 (현재)
+		
+		if(request.getParameter("year")!=null) {
+			selected_year_temp = request.getParameter("year");			
+		}
+		if(request.getParameter("month")!=null) {
+			selected_month_temp = request.getParameter("month");			
+		}
+		
+		// 1~9월 앞에 0을 붙여주기 위한 작업. (20210801 같은 형태로 쓸 것이기 때문)
+		if(selected_month_temp.length()==1) {
+			selected_month_temp = "0" + selected_month_temp;	
+		}
+		String startDate_temp = selected_year_temp + selected_month_temp + "01";	// 1일
+		String endDate_temp = selected_year_temp + selected_month_temp + "31";		// 31일
+		startDate = Integer.parseInt(startDate_temp);
+		endDate = Integer.parseInt(endDate_temp);
+	
+		
 		// model 객체 호출
 		PerformListService performListService = new PerformListService();
-		int listCount = performListService.getPerformListCount();
-		performList = performListService.getPerformList(page);
-		
+		int listCount = performListService.getPerformListCountByDate(startDate, endDate);
+		performList = performListService.getPerformListByDate(page, startDate, endDate);
+	
 		
 		/*-------- paging 처리 --------- */
 		int maxPage = (int)((double)listCount/limit+0.95);	
@@ -49,13 +78,6 @@ public class PerformListAction implements PerformAction {
 		pageInfo.setStartPage(startPage);	
 		
 
-		// 현재 날짜 구하기
-		Calendar cal = Calendar.getInstance();	  // Calendar는 추상클래스라.
-		Date today_date = cal.getTime();
-		int today_year = cal.get(Calendar.YEAR);		// 현재 연도
-		int today_month = cal.get(Calendar.MONTH)+1;	// 현재 달
-
-		
 		// view단으로 넘길 것들
 		request.setAttribute("today_date", today_date);
 		request.setAttribute("today_year", today_year);

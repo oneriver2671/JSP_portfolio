@@ -1,11 +1,14 @@
 package perform;
 
+import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.binding.MapperProxy;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import mybatis.SqlMapConfig;
+import vo.DateInfo;
 
 public class PerformDataModel {
 	
@@ -36,6 +39,24 @@ public class PerformDataModel {
 		startrow = (page-1)*15;
 		SqlSession sqlSession = factory.openSession();
 		performList = sqlSession.selectList("getPerformList", startrow);
+		sqlSession.close();
+		
+		return performList;
+	}
+	
+	/* 공연 List 출력 (날짜 선택 시) */
+	public List<PerformDTO> getPerformListByDate(int page, int startDate, int endDate){
+		List<PerformDTO> performList = null;
+		DateInfo dateInfo = new DateInfo();
+		int startrow = 0;
+		startrow = (page-1)*15;
+		
+		dateInfo.setStartrow(startrow);
+		dateInfo.setStartDate(startDate);
+		dateInfo.setEndDate(endDate);
+
+		SqlSession sqlSession = factory.openSession();
+		performList = sqlSession.selectList("getPerformListByDate", dateInfo);
 		sqlSession.close();
 		
 		return performList;
@@ -97,6 +118,22 @@ public class PerformDataModel {
 		
 		return result;
 	}
+	
+	/* 전체 공연 갯수 파악 (for paging처리 / 날짜 선택 시)  */
+	public int getPerformListCountByDate(int startDate, int endDate){
+		int result = 0;
+		DateInfo dateInfo = new DateInfo();
+		dateInfo.setStartDate(startDate);
+		dateInfo.setEndDate(endDate);
+		
+		SqlSession sqlSession = factory.openSession();
+		result = sqlSession.selectOne("performListCountByDate", dateInfo);
+		sqlSession.close();
+		
+		return result;
+	}
+	
+	
 	
 	
 }

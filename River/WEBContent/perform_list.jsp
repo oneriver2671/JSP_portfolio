@@ -106,7 +106,7 @@ $(document).ready(function(){
   $('#calendar_choice_btn').click(function(){
 	  var selected_year = $('#selected_year').text();    	// 이렇게 쓰면 html 태그 안에 있는 text를 가져옴.
 	  var selected_month = $('#selected_month').text();
-		location.href = "performListByMonth.pe?year="+selected_year+"&month="+selected_month;
+		location.href = "performListByDate.pe?year="+selected_year+"&month="+selected_month;
   });
   
   
@@ -269,7 +269,7 @@ location.href="logout.jsp";
 				<div><span>일자</span><span><%=performDTO.getPerform_date().substring(0, 10) %> (<%=performDTO.getPerform_day() %>) </span></div>
 				<div><span>시간</span><span><%=performDTO.getPerform_date().substring(11, 16) %></span></div>
 				<div><span>장소</span><span><%=performDTO.getLocation() %></span></div>
-				<!-- 가격 처리 필요 (0이면 표시x, 무료도 처리 필요함 -> R석에 1을 입력하면 무료로 처리하자.) ★ -->
+				<!-- 가격 처리 필요 (0이면 표시x, 무료도 처리 필요함 ) ★ -->
 				<div><span>가격</span>
 				<%
 					String format_priceR = String.format("%,d", performDTO.getPrice_R()); 
