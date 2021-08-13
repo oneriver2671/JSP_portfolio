@@ -492,6 +492,9 @@ section{
 	text-align: center;
 	margin: 0 auto;
 }
+#section_middle_introText{
+	font-size: 10pt;
+}
 
 #section_middle_ticketGuide{
 	width: 1080px;

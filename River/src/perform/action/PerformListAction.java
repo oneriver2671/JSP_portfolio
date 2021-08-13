@@ -52,10 +52,15 @@ public class PerformListAction implements PerformAction {
 		// 현재 날짜 구하기
 		Calendar cal = Calendar.getInstance();	  // Calendar는 추상클래스라.
 		Date today_date = cal.getTime();
-		
+		int today_year = cal.get(Calendar.YEAR);		// 현재 연도
+		int today_month = cal.get(Calendar.MONTH)+1;	// 현재 달
+
 		
 		// view단으로 넘길 것들
+		
 		request.setAttribute("today_date", today_date);
+		request.setAttribute("today_year", today_year);
+		request.setAttribute("today_month", today_month);
 		request.setAttribute("pageInfo", pageInfo);	
 		request.setAttribute("performList", performList);
 		ActionForward forward = new ActionForward();

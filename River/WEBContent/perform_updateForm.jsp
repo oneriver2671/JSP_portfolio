@@ -207,9 +207,10 @@ function back(){
 				<td>공연 장소 *</td>
 				<td>
 					<select name="location">
-					<option>롯데 콘서트홀</option>
+					<option>롯데콘서트홀</option>
 					<option>예술의전당 - 콘서트홀</option>
 					<option>예술의전당 - 오페라하우스</option>
+					<option>예술의전당 - IBK챔버홀</option>
 					<option>인천아트센터</option>
 				</select>
 				</td>

@@ -201,7 +201,7 @@ function back(){
 				<td>공연 장소 *</td>
 				<td>
 					<select name="location">
-					<option>롯데 콘서트홀</option>
+					<option>롯데콘서트홀</option>
 					<option>예술의전당 - 콘서트홀</option>
 					<option>예술의전당 - 오페라하우스</option>
 					<option>예술의전당 - IBK챔버홀</option>
@@ -231,12 +231,8 @@ function back(){
 			</tr>
 			<tr>
 				<td>소개글</td>
-				<td><textarea name="intro_perform" placeholder="소개용 이미지가 있을 경우엔 미작성"></textarea> </td>
+				<td><textarea name="intro_perform" placeholder="소개용 이미지가 있을 경우, 미작성해도 무관." ></textarea> </td>
 			</tr>						
-			<tr>
-				<td>공연자 소개글</td>
-				<td><textarea name="intro_artist" placeholder="소개용 이미지가 있을 경우엔 미작성"></textarea></td>
-			</tr>
 			<tr>
 				<td>주최</td>
 				<td><input type="text" class="inputText" name="perform_host"></td>

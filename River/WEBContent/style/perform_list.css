@@ -270,7 +270,7 @@ section {
 	height: 50px;
 	margin-bottom: 15px;
 }
-#calendar_category div{
+#cal_month{
 	text-align: center;
 	font-weight: bold;
 	padding-top: 15px;
@@ -279,6 +279,22 @@ section {
 	border-left: solid 1px gray;
 	border-top: solid 1px gray;
 	border-bottom: solid 1px gray;
+	background-color: whitesmoke;
+	color: #CC0000;
+	cursor: pointer;
+}
+#cal_year{
+	text-align: center;
+	font-weight: bold;
+	padding-top: 15px;
+	width: 450px;
+	height: 35px;
+	border-left: solid 1px gray;
+	border-top: solid 1px gray;
+	border-bottom: solid 1px gray;
+	background-color: #eeeeee;
+	color: #3e3e3e;
+	cursor: pointer;
 }
 #calendar_category div:last-child {
 	border-right: solid 1px gray;
@@ -303,7 +319,7 @@ section {
 	left: 375px;
 	top: 80px;
 	text-align: center;
-	font-size: 12pt;
+	font-size: 14pt;
 	font-weight: bold;
 	width: 150px;
 	height: 30px;
@@ -311,13 +327,16 @@ section {
 }
 #calendar_choice_btn{
 	position: absolute;
-	left: 130px;
+	right: 30px;
 	top: 80px;
-	padding: 8px 15px;
+	padding: 8px 18px;
 	font-size: 10pt;
 	font-weight: bold;
-	background-color: whitesmoke;
-	border: solid 1px gray;
+	background-color: #CC0000;
+	color: whitesmoke;
+	border: none;
+	cursor: pointer;
+	box-shadow: 2px 2px 2px #b0b0b0;
 }
 .month_choice{
 	display: flex;
@@ -331,6 +350,10 @@ section {
 	height: 40px;
 	margin: 0 1px;
 	border: none;
+	color: #3e3e3e;
+	background-color: #eeeeee;
+	cursor: pointer;
+	font-weight: bold;
 }
 #section_main{
 	padding-bottom: 80px;

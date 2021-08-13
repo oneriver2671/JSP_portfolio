@@ -287,12 +287,14 @@ location.href="logout.jsp";
 				</div>
 			</div>
 		</div>
-		
-		<%if(performDTO.getSub_img()!=null || performDTO.getIntro_text()!=null  ){ %>
+		<%if(performDTO.getSub_img()!=null || !performDTO.getIntro_text().equals("")){ %>
 			<div id="section_middle_intro">
 				<div class="section_middle_title"><img src="images/article/bu_concert_info01.gif"> 작품 설명 및 아티스트 소개</div>
-				<div id="section_middle_introImg"><img src="performUpload/<%=performDTO.getSub_img() %>" ></div>
-				
+				<%if(performDTO.getSub_img()!=null){ %>
+					<div id="section_middle_introImg"><img src="performUpload/<%=performDTO.getSub_img() %>" ></div>
+				<%} if(!performDTO.getIntro_text().equals("")){ %>
+					<pre id="section_middle_introText"><%=performDTO.getIntro_text() %></pre>
+				<%} %>
 			</div>
 		<%} %>
 		

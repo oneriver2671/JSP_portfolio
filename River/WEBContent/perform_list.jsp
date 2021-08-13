@@ -22,6 +22,9 @@
 	/* 날짜 비교를 위한 Java코드 */
 	 SimpleDateFormat dataFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 	 Date today_date = (Date)request.getAttribute("today_date");		// Controller에서 넘어온 '오늘 날짜'
+	 // '올해 연도, 이번달'도 넘어와야함. int로 넘어와서 여기서 비교.
+	 int today_year = (int)request.getAttribute("today_year");
+	 int today_month = (int)request.getAttribute("today_month");
 %>
     
 <!DOCTYPE html>
@@ -40,8 +43,8 @@
 </head>
 
 <script>
-/* header 부분 */
 $(document).ready(function(){
+	/* header 부분 */
   $('.header_level2, #header_box').hide();
 
   $('#navbar').mouseover(function(){
@@ -50,6 +53,63 @@ $(document).ready(function(){
   $('#navbar, #header_box').mouseleave(function(){
     $('.header_level2, #header_box').fadeOut(500);
   });
+  
+  /*----- 일정 분류 부분 ------*/
+  // 월간, 연간 일정
+  $('#cal_year').click(function(){
+	  $(this).css({'color':'#CC0000', 'background-color':'whitesmoke'});
+	  $('#cal_month').css({'color':'#3e3e3e', 'background-color':'#eeeeee'});
+	  $('.month_choice').hide();
+	  $('#calendar_choice').css({'height':'70px'});
+	  $('#section_top').css({'height':'170px'});
+  });
+  $('#cal_month').click(function(){
+	  $(this).css({'color':'#CC0000', 'background-color':'whitesmoke'});
+	  $('#cal_year').css({'color':'#3e3e3e', 'background-color':'#eeeeee'});
+	  $('.month_choice').show();
+	  $('#calendar_choice').css({'height':'150px'});
+	  $('#section_top').css({'height':'250px'});
+	  
+  });
+  
+  // 연도 최초 세팅 (현재 날짜 기준 연도 가져오기)
+  var year_now = $('#selected_year').text();		// Controller에서 넘어온 현재 연도.
+  $('#year_choice').val(year_now);
+  
+  var month_now = $('#selected_month').text();	// Controller에서 넘어온 현재 월.
+ 
+  $('.month_choice_list').each(function(){		// 반복문. 1~12월의 값을 가져오며 '현재 월'과 비교.
+	  if($(this).val() == month_now){
+		  $(this).css({'color':'whitesmoke', 'background-color':'#CC0000'});
+	  }
+  });
+  
+  
+  // 연도 선택 시.
+  $('#year_choice').change(function(){
+	  var year_selected = $('#year_choice option:selected').val();
+  	$('#selected_year').text(year_selected);
+	  
+  });
+  
+  // 월 선택 시.
+  $('.month_choice_list').click(function(){
+	  $('.month_choice_list').css({'color':'#3e3e3e', 'background-color':'#eeeeee'});
+	  $(this).css({'color':'whitesmoke', 'background-color':'#CC0000'});
+	  
+	  var selected_month = $(this).val();
+	  $('#selected_month').text(selected_month);			// html 태그 안의 text 값을 change.
+  
+  });
+  
+  // 날짜 '검색하기' 버튼 클릭 시. (Controller로 이동)
+  $('#calendar_choice_btn').click(function(){
+	  var selected_year = $('#selected_year').text();    	// 이렇게 쓰면 html 태그 안에 있는 text를 가져옴.
+	  var selected_month = $('#selected_month').text();
+		location.href = "performListByMonth.pe?year="+selected_year+"&month="+selected_month;
+  });
+  
+  
 });
 
 function logout(){
@@ -163,30 +223,30 @@ location.href="logout.jsp";
 <%} %>
 <div id="section_top">
 	<div id="calendar_category">
-		<div id="cal_month">월간 일정</div>
-		<div id="cal_year">연간 일정</div>
+		<div id="cal_month" class="cal_basic">월간 일정</div>
+		<div id="cal_year" class="cal_basic">연간 일정</div>
 	</div>
 	<div id="calendar_choice">
 		<select name="year_choice" id="year_choice">
 			<option value="2020">2020년</option>
-			<option value="2021" selected>2021년</option>	
+			<option value="2021">2021년</option>	
 			<option value="2022">2022년</option>
 		</select>
-		<div id="select_date">2021.8</div>
-		<input type="submit" name="calendar_choice" id="calendar_choice_btn" value="선택">
+		<div id="select_date"><span id="selected_year"><%=today_year %></span>.<span id="selected_month"><%=today_month %></span></div>
+		<div id="calendar_choice_btn">검색하기</div>
 		<div class="month_choice">
-			<input type="button" class="month_choice_list" name="january" value="1월">
-			<input type="button" class="month_choice_list" name="february" value="2월">
-			<input type="button" class="month_choice_list" name="march" value="3월">
-			<input type="button" class="month_choice_list" name="april" value="4월">
-			<input type="button" class="month_choice_list" name="may" value="5월">
-			<input type="button" class="month_choice_list" name="june" value="6월">
-			<input type="button" class="month_choice_list" name="july" value="7월">
-			<input type="button" class="month_choice_list" name="agust" value="8월">
-			<input type="button" class="month_choice_list" name="september" value="9월">
-			<input type="button" class="month_choice_list" name="october" value="10월">
-			<input type="button" class="month_choice_list" name="november" value="11월">
-			<input type="button" class="month_choice_list" name="december" value="12월">
+			<button class="month_choice_list" value="1">1월</button>
+			<button class="month_choice_list" value="2">2월</button>
+			<button class="month_choice_list" value="3">3월</button>
+			<button class="month_choice_list" value="4">4월</button>
+			<button class="month_choice_list" value="5">5월</button>
+			<button class="month_choice_list" value="6">6월</button>
+			<button class="month_choice_list" value="7">7월</button>
+			<button class="month_choice_list" value="8">8월</button>
+			<button class="month_choice_list" value="9">9월</button>
+			<button class="month_choice_list" value="10">10월</button>
+			<button class="month_choice_list" value="11">11월</button>
+			<button class="month_choice_list" value="12">12월</button>
 		</div>
 	</div>
 </div>
