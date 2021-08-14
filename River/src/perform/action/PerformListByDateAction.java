@@ -22,7 +22,8 @@ public class PerformListByDateAction implements PerformAction {
 		int limit = 15;		// 한페이지 최대 글 수.
 		int startDate = 0;
 		int endDate = 0;
-		
+		String startDate_temp = null;
+		String endDate_temp = null;
 		
 		// 페이지 정보 
 		if(request.getParameter("page")!= null){		// perform_list.jsp에서 넘어올 예정.
@@ -38,20 +39,32 @@ public class PerformListByDateAction implements PerformAction {
 		// 날짜 세팅 
 		String selected_year_temp = Integer.toString(today_year);		// 초기값 설정 (현재)
 		String selected_month_temp = Integer.toString(today_month);		// 초기값 설정 (현재)
+
 		
 		if(request.getParameter("year")!=null) {
-			selected_year_temp = request.getParameter("year");			
+			selected_year_temp = request.getParameter("year");	
 		}
 		if(request.getParameter("month")!=null) {
-			selected_month_temp = request.getParameter("month");			
+			selected_month_temp = request.getParameter("month");	
 		}
 		
-		// 1~9월 앞에 0을 붙여주기 위한 작업. (20210801 같은 형태로 쓸 것이기 때문)
-		if(selected_month_temp.length()==1) {
-			selected_month_temp = "0" + selected_month_temp;	
+		
+		// if문: 연간일정 검색 / else문: 월간일정 검색
+		if(selected_month_temp.equals("null")) {	// 월을 01~12월로 설정해줄 것임.
+			startDate_temp = selected_year_temp + "0101";	// 연초
+			endDate_temp = selected_year_temp + "1231";		// 연말
+			
+		} else {
+			// 1~9월 앞엔 0을 붙여주기 위한 작업.
+			if(selected_month_temp.length()==1) {
+				selected_month_temp = "0" + selected_month_temp;	
+			}
+			startDate_temp = selected_year_temp + selected_month_temp + "01";	// 1일
+			endDate_temp = selected_year_temp + selected_month_temp + "31";		// 31일
+			
 		}
-		String startDate_temp = selected_year_temp + selected_month_temp + "01";	// 1일
-		String endDate_temp = selected_year_temp + selected_month_temp + "31";		// 31일
+		
+		
 		startDate = Integer.parseInt(startDate_temp);
 		endDate = Integer.parseInt(endDate_temp);
 	
@@ -84,6 +97,13 @@ public class PerformListByDateAction implements PerformAction {
 		request.setAttribute("today_month", today_month);
 		request.setAttribute("pageInfo", pageInfo);	
 		request.setAttribute("performList", performList);
+		if(request.getParameter("year")!=null) {
+			request.setAttribute("selected_year", selected_year_temp);	// View에서 받은 것 다시 돌려줘야 함.
+		}
+		if(request.getParameter("month")!=null) {
+			request.setAttribute("selected_month", selected_month_temp);  // View에서 받은 것 다시 돌려줘야 함.
+		}
+		
 		ActionForward forward = new ActionForward();
    		forward.setPath("perform_list.jsp");
    		return forward;

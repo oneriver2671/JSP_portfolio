@@ -325,7 +325,20 @@ section {
 	height: 30px;
 	padding-top: 10px;
 }
-#calendar_choice_btn{
+#calendar_choice_btn_month{
+	position: absolute;
+	right: 30px;
+	top: 80px;
+	padding: 8px 18px;
+	font-size: 10pt;
+	font-weight: bold;
+	background-color: #CC0000;
+	color: whitesmoke;
+	border: none;
+	cursor: pointer;
+	box-shadow: 2px 2px 2px #b0b0b0;
+}
+#calendar_choice_btn_year{
 	position: absolute;
 	right: 30px;
 	top: 80px;
@@ -357,6 +370,12 @@ section {
 }
 #section_main{
 	padding-bottom: 80px;
+}
+#section_main_null{
+	margin: 30px auto;
+	text-align: center;
+	font-size: 13pt;
+	font-weight: bold;
 }
 #section_main article{
 	position: relative;

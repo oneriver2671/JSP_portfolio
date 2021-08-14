@@ -11,7 +11,7 @@
 	String id = (String)session.getAttribute("id");			// 로그인 상태 회원 정보.		
 %>
 <%
-	/* PerformListAction에서 넘어온 paging처리 객체 */
+	/* PerformListByDateAction에서 넘어온 paging처리 객체 */
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 	int listCount = pageInfo.getListCount();
 	int nowPage = pageInfo.getPage();
@@ -22,10 +22,25 @@
 	/* 날짜 비교를 위한 Java코드 */
 	 SimpleDateFormat dataFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 	 Date today_date = (Date)request.getAttribute("today_date");		// Controller에서 넘어온 '오늘 날짜'
-	 // '올해 연도, 이번달'도 넘어와야함. int로 넘어와서 여기서 비교.
+	 // '현재 연도, 현재 월'
 	 int today_year = (int)request.getAttribute("today_year");
 	 int today_month = (int)request.getAttribute("today_month");
+	 // 선택했던 연도, 월 (초기값은 null)
+	 int selected_year = 0;
+	 int selected_month = 0;
+	 
+
+	String selected_year_temp = (String)request.getAttribute("selected_year");
+	if( selected_year_temp != null ){
+		selected_year = Integer.parseInt(selected_year_temp);
+	}
+	String selected_month_temp = (String)request.getAttribute("selected_month");
+	if( selected_month_temp != null && !selected_month_temp.equals("null") ){		// "null" 문자열은 '연간일정' 검색 시 넘어옴.
+		selected_month = Integer.parseInt(selected_month_temp);
+	}
+	  
 %>
+
     
 <!DOCTYPE html>
 <html>
@@ -40,85 +55,8 @@
 	 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
   <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="js/perform_list.js"></script>
 </head>
-
-<script>
-$(document).ready(function(){
-	/* header 부분 */
-  $('.header_level2, #header_box').hide();
-
-  $('#navbar').mouseover(function(){
-    $('.header_level2, #header_box').fadeIn(500);
-  });
-  $('#navbar, #header_box').mouseleave(function(){
-    $('.header_level2, #header_box').fadeOut(500);
-  });
-  
-  /*----- 일정 분류 부분 ------*/
-  // 월간, 연간 일정
-  $('#cal_year').click(function(){
-	  $(this).css({'color':'#CC0000', 'background-color':'whitesmoke'});
-	  $('#cal_month').css({'color':'#3e3e3e', 'background-color':'#eeeeee'});
-	  $('.month_choice').hide();
-	  $('#calendar_choice').css({'height':'70px'});
-	  $('#section_top').css({'height':'170px'});
-  });
-  $('#cal_month').click(function(){
-	  $(this).css({'color':'#CC0000', 'background-color':'whitesmoke'});
-	  $('#cal_year').css({'color':'#3e3e3e', 'background-color':'#eeeeee'});
-	  $('.month_choice').show();
-	  $('#calendar_choice').css({'height':'150px'});
-	  $('#section_top').css({'height':'250px'});
-	  
-  });
-  
-  // 연도 최초 세팅 (현재 날짜 기준 연도 가져오기)
-  var year_now = $('#selected_year').text();		// Controller에서 넘어온 현재 연도.
-  $('#year_choice').val(year_now);
-  
-  var month_now = $('#selected_month').text();	// Controller에서 넘어온 현재 월.
- 
-  $('.month_choice_list').each(function(){		// 반복문. 1~12월의 값을 가져오며 '현재 월'과 비교.
-	  if($(this).val() == month_now){
-		  $(this).css({'color':'whitesmoke', 'background-color':'#CC0000'});
-	  }
-  });
-  
-  
-  // 연도 선택 시.
-  $('#year_choice').change(function(){
-	  var year_selected = $('#year_choice option:selected').val();
-  	$('#selected_year').text(year_selected);
-	  
-  });
-  
-  // 월 선택 시.
-  $('.month_choice_list').click(function(){
-	  $('.month_choice_list').css({'color':'#3e3e3e', 'background-color':'#eeeeee'});
-	  $(this).css({'color':'whitesmoke', 'background-color':'#CC0000'});
-	  
-	  var selected_month = $(this).val();
-	  $('#selected_month').text(selected_month);			// html 태그 안의 text 값을 change.
-  
-  });
-  
-  // 날짜 '검색하기' 버튼 클릭 시. (Controller로 이동)
-  $('#calendar_choice_btn').click(function(){
-	  var selected_year = $('#selected_year').text();    	// 이렇게 쓰면 html 태그 안에 있는 text를 가져옴.
-	  var selected_month = $('#selected_month').text();
-		location.href = "performListByDate.pe?year="+selected_year+"&month="+selected_month;
-  });
-  
-  
-});
-
-function logout(){
-	  alert('로그아웃 되었습니다.');
-location.href="logout.jsp";
-}
-
-</script>
-
 
 <body>
 <jsp:include page="searchBar.jsp"></jsp:include>		<!-- 검색창 담겨있음 -->
@@ -232,8 +170,26 @@ location.href="logout.jsp";
 			<option value="2021">2021년</option>	
 			<option value="2022">2022년</option>
 		</select>
-		<div id="select_date"><span id="selected_year"><%=today_year %></span>.<span id="selected_month"><%=today_month %></span></div>
-		<div id="calendar_choice_btn">검색하기</div>
+		<div id="select_date">
+		<%if(selected_year!=0){ %>
+			<span id="selected_year"><%=selected_year %></span>.
+		<%} else{ %>
+			<span id="selected_year"><%=today_year %></span>.
+		<%} %>
+
+		<%
+		if(selected_month_temp == null || !selected_month_temp.equals("null")){			// '연간일정' 검색 시, month부분은 안보여주기 위함.
+			if(selected_month!=0){ %>
+				<span id="selected_month"><%=selected_month %></span>
+			<%} else{ %>
+				<span id="selected_month"><%=today_month %></span>
+			<%}
+		} else{%>
+				<span id="selected_month"></span>
+		 <%} %>
+		</div>
+		<div id="calendar_choice_btn_month">검색하기</div>		<!-- '월간일정'용 버튼 -->
+		<div id="calendar_choice_btn_year">검색하기</div>			<!-- '연간일정'용 버튼 -->
 		<div class="month_choice">
 			<button class="month_choice_list" value="1">1월</button>
 			<button class="month_choice_list" value="2">2월</button>
@@ -256,11 +212,14 @@ location.href="logout.jsp";
 <!-- 15개씩 paging 처리 -->
 <%
 	List<PerformDTO> performList = (List)request.getAttribute("performList");
-	for(int i=0; i<performList.size(); i++){
-		PerformDTO performDTO = performList.get(i); 
-		Date open_date = dataFormat.parse(performDTO.getOpen_date());
-		Date perform_date = dataFormat.parse(performDTO.getPerform_date()); 
-%>	
+	if(performList.size()==0){ %>
+		<div id="section_main_null">공연 정보가 존재하지 않습니다.</div>		<!-- 공연이 존재하지 않는 경우 -->
+	<%} else{
+		for(int i=0; i<performList.size(); i++){
+			PerformDTO performDTO = performList.get(i); 
+			Date open_date = dataFormat.parse(performDTO.getOpen_date());
+			Date perform_date = dataFormat.parse(performDTO.getPerform_date()); 
+	%>	
 		<article>
 				<!-- 제목 input type에 value형태로 써주면 <aa> 이런거 다 표시 됨. why?? 무슨 차이로 인해??  -->
 			<a href="performDetail.pe?perform_num=<%=performDTO.getPerform_num() %>"><img src="performUpload/<%=performDTO.getMain_img() %>" class="article_img"></a>
@@ -300,7 +259,8 @@ location.href="logout.jsp";
 			    <div class="article_btn_end">공연 종료</div>
 				<%} %>
 		</article>
-	<%} %> <!-- for문 종료 -->
+		<%} %> <!-- for문 종료 -->
+	<%} %> <!-- else문 종료 -->
 	
 </div>
 <div id="bot_section">
