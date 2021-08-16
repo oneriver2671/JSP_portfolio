@@ -8,7 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import mybatis.SqlMapConfig;
-import vo.DateInfo;
+import vo.PerformSearchInfo;
 
 public class PerformDataModel {
 	
@@ -47,20 +47,43 @@ public class PerformDataModel {
 	/* 공연 List 출력 (날짜 선택 시) */
 	public List<PerformDTO> getPerformListByDate(int page, int startDate, int endDate){
 		List<PerformDTO> performList = null;
-		DateInfo dateInfo = new DateInfo();
+		PerformSearchInfo performSearchInfo = new PerformSearchInfo();
 		int startrow = 0;
 		startrow = (page-1)*15;
 		
-		dateInfo.setStartrow(startrow);
-		dateInfo.setStartDate(startDate);
-		dateInfo.setEndDate(endDate);
+		performSearchInfo.setStartrow(startrow);
+		performSearchInfo.setStartDate(startDate);
+		performSearchInfo.setEndDate(endDate);
 
 		SqlSession sqlSession = factory.openSession();
-		performList = sqlSession.selectList("getPerformListByDate", dateInfo);
+		performList = sqlSession.selectList("getPerformListByDate", performSearchInfo);
 		sqlSession.close();
 		
 		return performList;
 	}
+	
+	/* 공연 List 출력 (날짜+장소 선택 시) */
+	public List<PerformDTO> getPerformListByLocation(int page, int startDate, int endDate, String location){
+		List<PerformDTO> performList = null;
+		PerformSearchInfo performSearchInfo = new PerformSearchInfo();
+		int startrow = 0;
+		startrow = (page-1)*15;
+		
+		performSearchInfo.setStartrow(startrow);
+		performSearchInfo.setStartDate(startDate);
+		performSearchInfo.setEndDate(endDate);
+		performSearchInfo.setLocation(location);
+		
+
+		SqlSession sqlSession = factory.openSession();
+		performList = sqlSession.selectList("getPerformListByLocation", performSearchInfo);
+		sqlSession.close();
+		
+		return performList;
+	}
+	
+	
+	
 	
 	/* 공연 List 출력 (관리자용) */
 	public List<PerformDTO> getPerformListManager(){
@@ -122,12 +145,27 @@ public class PerformDataModel {
 	/* 전체 공연 갯수 파악 (for paging처리 / 날짜 선택 시)  */
 	public int getPerformListCountByDate(int startDate, int endDate){
 		int result = 0;
-		DateInfo dateInfo = new DateInfo();
-		dateInfo.setStartDate(startDate);
-		dateInfo.setEndDate(endDate);
+		PerformSearchInfo performSearchInfo = new PerformSearchInfo();
+		performSearchInfo.setStartDate(startDate);
+		performSearchInfo.setEndDate(endDate);
 		
 		SqlSession sqlSession = factory.openSession();
-		result = sqlSession.selectOne("performListCountByDate", dateInfo);
+		result = sqlSession.selectOne("performListCountByDate", performSearchInfo);
+		sqlSession.close();
+		
+		return result;
+	}
+	
+	/* 전체 공연 갯수 파악 (for paging처리 / 날짜 + 장소 선택 시)  */
+	public int getPerformListCountByLocation(int startDate, int endDate, String location){
+		int result = 0;
+		PerformSearchInfo performSearchInfo = new PerformSearchInfo();
+		performSearchInfo.setStartDate(startDate);
+		performSearchInfo.setEndDate(endDate);
+		performSearchInfo.setLocation(location);
+		
+		SqlSession sqlSession = factory.openSession();
+		result = sqlSession.selectOne("performListCountByLocation", performSearchInfo);
 		sqlSession.close();
 		
 		return result;

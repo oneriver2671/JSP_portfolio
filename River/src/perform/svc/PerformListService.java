@@ -25,6 +25,15 @@ public class PerformListService {
 		return listCount;
 	}
 	
+	/* 게시글 갯수 세는 메소드 (날짜 + 장소 구분) */
+	public int getPerformListCountByLocation(int startDate, int endDate, String location) throws Exception{
+		int listCount = 0;
+		PerformDataModel performDataModel = PerformDataModel.instance();
+		listCount = performDataModel.getPerformListCountByLocation(startDate, endDate, location);
+		
+		return listCount;
+	}
+	
 	
 
 	/* 게시글 select 메소드 */
@@ -41,6 +50,15 @@ public class PerformListService {
 		List<PerformDTO> performList = null;
 		PerformDataModel performDataModel = PerformDataModel.instance();
 		performList = performDataModel.getPerformListByDate(page, startDate, endDate);
+	
+		return performList;
+	}
+	
+	/* 게시글 select 메소드 (날짜+장소 구분) */
+	public List<PerformDTO> getPerformListByLocation(int page, int startDate, int endDate, String location) throws Exception{
+		List<PerformDTO> performList = null;
+		PerformDataModel performDataModel = PerformDataModel.instance();
+		performList = performDataModel.getPerformListByLocation(page, startDate, endDate, location);
 	
 		return performList;
 	}

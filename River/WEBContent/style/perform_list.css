@@ -314,6 +314,16 @@ section {
 	background-color: whitesmoke;
 	border: solid 1px gray;
 }
+#location_choice{
+	width: 100px;
+	height: 33px;
+	position: absolute;
+	top: 80px;
+	left: 130px;
+	background-color: whitesmoke;
+	border: solid 1px gray;
+	
+}
 #select_date{
 	position: absolute;
 	left: 375px;

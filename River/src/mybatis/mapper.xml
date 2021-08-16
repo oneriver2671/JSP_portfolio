@@ -21,11 +21,17 @@
 </select>
 
 <!-- 공연 List 출력 (날짜 선택 시) -->
-<select id="getPerformListByDate" resultType="perform.PerformDTO" parameterType="vo.DateInfo">
+<select id="getPerformListByDate" resultType="perform.PerformDTO" parameterType="vo.PerformSearchInfo">
 	select perform_num, perform_title, perform_date, perform_day, location, artist_main, main_img, possible_seat, open_date,
 	price_R, price_S, price_A, price_B, price_All from perform_info where date(perform_date) between #{startDate} and #{endDate} order by perform_date asc limit #{startrow}, 15
-
 </select>
+
+<!-- 공연 List 출력 (날짜 + 장소 선택 시) -->
+<select id="getPerformListByLocation" resultType="perform.PerformDTO" parameterType="vo.PerformSearchInfo">
+	select perform_num, perform_title, perform_date, perform_day, location, artist_main, main_img, possible_seat, open_date,
+	price_R, price_S, price_A, price_B, price_All from perform_info where location like '%${location}%' and date(perform_date) between #{startDate} and #{endDate} order by perform_date asc limit #{startrow}, 15
+</select>
+
 
 <!-- 공연 List 출력 (관리자용) -->
 <select id="getPerformListManager" resultType="perform.PerformDTO">
@@ -59,8 +65,13 @@
 </select>
 
 <!-- 공연 갯수 파악 (paging처리용 / 날짜 선택 시) -->
-<select id="performListCountByDate" resultType="int" parameterType="vo.DateInfo">
+<select id="performListCountByDate" resultType="int" parameterType="vo.PerformSearchInfo">
 	select count(*) from perform_info where date(perform_date) between #{startDate} and #{endDate}
+</select>
+
+<!-- 공연 갯수 파악 (paging처리용 / 날짜 + 장소 선택 시) -->
+<select id="performListCountByLocation" resultType="int" parameterType="vo.PerformSearchInfo">
+	select count(*) from perform_info where location like '%${location}%' and date(perform_date) between #{startDate} and #{endDate}
 </select>
 
 

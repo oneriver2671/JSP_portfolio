@@ -87,13 +87,15 @@ $(document).ready(function(){
   $('#calendar_choice_btn_month').click(function(){
 	  var selected_year = $('#selected_year').text();    	// 이렇게 쓰면 html 태그 안에 있는 text를 가져옴.
 	  var selected_month = $('#selected_month').text();
-		location.href = "performListByDate.pe?year="+selected_year+"&month="+selected_month;
+		var selected_location = $('#location_choice').val();
+		location.href = "performListByDate.pe?year="+selected_year+"&month="+selected_month+"&location="+selected_location;
   });
   // 연간일정 '검색하기' 버튼 클릭 시. (Controller로 이동)
   $('#calendar_choice_btn_year').click(function(){
-	  var selected_year = $('#selected_year').text();    
+	  var selected_year = $('#selected_year').text();
+		var selected_location = $('#location_choice').val();    
 	  // var selected_month = $('#selected_month').text();
-		location.href = "performListByDate.pe?year="+selected_year+"&month=null";			// month: Controller에서 기본값이 '현재 달'이라, 넘겨주긴 해야함.
+		location.href = "performListByDate.pe?year="+selected_year+"&month=null&location="+selected_location;			// month: Controller에서 기본값이 '현재 달'이라, 넘겨주긴 해야함.
   });
   
 });

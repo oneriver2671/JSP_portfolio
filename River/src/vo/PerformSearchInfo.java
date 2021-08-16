@@ -1,12 +1,12 @@
 package vo;
 
 // DB 연결 시, 날짜 구별을 위한 VO
-public class DateInfo {
+public class PerformSearchInfo {
 	
 	private int startrow;
-	private int startDate;
-	private int endDate;
-	
+	private int startDate;		// 검색조건: 시작날짜
+	private int endDate;		// 검색조건: 끝날짜
+	private String location;	// 검색조건: 공연장 종류
 	
 
 	public int getStartrow() {
@@ -26,6 +26,12 @@ public class DateInfo {
 	}
 	public void setEndDate(int endDate) {
 		this.endDate = endDate;
+	}
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
 	}
 	
 

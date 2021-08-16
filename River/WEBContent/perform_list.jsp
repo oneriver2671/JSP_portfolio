@@ -92,7 +92,7 @@
         <ul>
           <li class="header_level1_1">공연안내/예매
             <ul class="header_level2">
-              <li><a href="performList.pe">공연 예매</a></li>
+              <li><a href="performListByDate.pe">공연 예매</a></li>
               <li>예매 안내</li>
               <li>패키지 예매</li>
               <li>예매 확인/취소</li>
@@ -169,6 +169,13 @@
 			<option value="2020">2020년</option>
 			<option value="2021">2021년</option>	
 			<option value="2022">2022년</option>
+		</select>
+		<select name="location_choice" id="location_choice">
+			<option value="공연장 선택">공연장 선택</option>
+			<option value="전체">전체</option>
+			<option value="예술의전당">예술의전당</option>
+			<option value="롯데콘서트홀">롯데콘서트홀</option>
+			<option value="인천아트센터">인천아트센터</option>
 		</select>
 		<div id="select_date">
 		<%if(selected_year!=0){ %>

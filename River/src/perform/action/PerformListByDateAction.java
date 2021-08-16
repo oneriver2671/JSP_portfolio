@@ -18,12 +18,14 @@ public class PerformListByDateAction implements PerformAction {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		List<PerformDTO> performList = null;
-		int page = 1;	// 페이지 기본설정
-		int limit = 15;		// 한페이지 최대 글 수.
+		int page = 1;			// 페이지 기본설정
+		int limit = 15;			// 한 페이지 최대 게시물 수.
 		int startDate = 0;
 		int endDate = 0;
+		int listCount = 0;		// select결과, 게시물 갯수.
 		String startDate_temp = null;
 		String endDate_temp = null;
+		String selected_location = null;	// 장소선택 값.
 		
 		// 페이지 정보 
 		if(request.getParameter("page")!= null){		// perform_list.jsp에서 넘어올 예정.
@@ -41,13 +43,16 @@ public class PerformListByDateAction implements PerformAction {
 		String selected_month_temp = Integer.toString(today_month);		// 초기값 설정 (현재)
 
 		
-		if(request.getParameter("year")!=null) {
+		if(request.getParameter("year")!=null) {		// null일 땐 위에 세팅해둔 '현재날짜'가 유지되어야 하기 때문.
 			selected_year_temp = request.getParameter("year");	
 		}
 		if(request.getParameter("month")!=null) {
 			selected_month_temp = request.getParameter("month");	
 		}
 		
+		selected_location = request.getParameter("location");			
+		
+
 		
 		// if문: 연간일정 검색 / else문: 월간일정 검색
 		if(selected_month_temp.equals("null")) {	// 월을 01~12월로 설정해줄 것임.
@@ -69,11 +74,18 @@ public class PerformListByDateAction implements PerformAction {
 		endDate = Integer.parseInt(endDate_temp);
 	
 		
-		// model 객체 호출
+		/*---- model 객체 호출 ----*/
 		PerformListService performListService = new PerformListService();
-		int listCount = performListService.getPerformListCountByDate(startDate, endDate);
-		performList = performListService.getPerformListByDate(page, startDate, endDate);
-	
+		// only 날짜 검색 case
+		if(selected_location==null || selected_location.equals("공연장 선택") || selected_location.equals("전체")) {
+			listCount = performListService.getPerformListCountByDate(startDate, endDate);
+			performList = performListService.getPerformListByDate(page, startDate, endDate);
+		} else {
+		// 날짜 + 장소 검색 case
+			listCount = performListService.getPerformListCountByLocation(startDate, endDate, selected_location);
+			performList = performListService.getPerformListByLocation(page, startDate, endDate, selected_location);
+		}
+		
 		
 		/*-------- paging 처리 --------- */
 		int maxPage = (int)((double)listCount/limit+0.95);	
