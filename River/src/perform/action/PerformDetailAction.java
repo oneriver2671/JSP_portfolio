@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import board.svc.LikeNumService;
 import perform.PerformDTO;
 import perform.svc.PerformDetailService;
+import perform.svc.PerformLikeAddService;
 import vo.ActionForward;
 
 public class PerformDetailAction implements PerformAction {
@@ -31,13 +32,11 @@ public class PerformDetailAction implements PerformAction {
 		
 		
 		// 회원이 누른 좋아요 확인용 model 객체 생성
-//		if(!member_id.equals("")) {		    // board_list.jsp에서 id가 null일 시 "" 처리함.
-//			LikeNumService likeNumService = new LikeNumService();
-//			isLike = likeNumService.getLikeNum(member_id, board_num);			
-//		}
-		
-//		System.out.println("컨트롤러는 잘 찍힘: " + performDTO.getPerform_title());
-		
+		if(member_id != null) {		    // 로그인 안한 상태. (무조건 isLike == false)
+			PerformLikeAddService performLikeAddService = new PerformLikeAddService();
+			isLike = performLikeAddService.getPerformLikeNum(member_id, perform_num);
+		} 
+
 		
 		// 현재 날짜 구하기
 		Calendar cal = Calendar.getInstance();	  // Calendar는 추상클래스라.

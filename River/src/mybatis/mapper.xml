@@ -9,7 +9,7 @@
 	insert into perform_info values(
 	default, #{perform_title}, #{perform_date}, #{location}, #{artist_main},
 	#{running_time}, #{intermission}, #{main_img}, #{sub_img}, #{intro_text},
-  #{perform_host}, #{limit_age}, default, default, #{open_date},
+  #{perform_host}, #{limit_age}, 0, default, #{open_date},
 	#{price_R}, #{price_S}, #{price_A}, #{price_B}, #{priceLow_R}, #{priceLow_S}, #{priceLow_A},
 	#{perform_day}, #{open_day}, #{price_All} )
 </insert>
@@ -72,6 +72,31 @@
 <!-- 공연 갯수 파악 (paging처리용 / 날짜 + 장소 선택 시) -->
 <select id="performListCountByLocation" resultType="int" parameterType="vo.PerformSearchInfo">
 	select count(*) from perform_info where location like '%${location}%' and date(perform_date) between #{startDate} and #{endDate}
+</select>
+
+<!-- 멤버-공연 좋아요 정보 추가 -->
+<insert id="performLikeInsert" parameterType="vo.MemberLikeInfo">
+	insert into member_perform_like values(#{member_id}, #{perform_num})
+</insert>
+
+<!-- 공연정보 좋아요 갯수 증가 -->
+<update id="performLikeAdd" parameterType="int">
+	update perform_info set like_num = like_num+1 where perform_num = #{perform_num}
+</update>
+
+<!-- 멤버-공연 좋아요 정보 제거 -->
+<delete id="performLikeDelete" parameterType="vo.MemberLikeInfo">
+	delete from member_perform_like where member_id = #{member_id} and perform_num = #{perform_num}
+</delete>
+
+<!-- 공연정보 좋아요 갯수 감소 -->
+<update id="performLikeReduce" parameterType="int">
+	update perform_info set like_num = like_num-1 where perform_num = #{perform_num}
+</update>
+
+<!-- (공연 Detail페이지) 회원이 누른 좋아요 정보 확인용 -->
+<select id="performLikeInfo" parameterType="vo.MemberLikeInfo" resultType="int">
+	select perform_num from member_perform_like where member_id = #{member_id} and perform_num = #{perform_num}
 </select>
 
 

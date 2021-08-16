@@ -229,8 +229,8 @@
 	%>	
 		<article>
 				<!-- 제목 input type에 value형태로 써주면 <aa> 이런거 다 표시 됨. why?? 무슨 차이로 인해??  -->
-			<a href="performDetail.pe?perform_num=<%=performDTO.getPerform_num() %>"><img src="performUpload/<%=performDTO.getMain_img() %>" class="article_img"></a>
-			<a href="performDetail.pe?perform_num=<%=performDTO.getPerform_num() %>" class="article_title"><%=performDTO.getPerform_title() %></a>
+			<a href="performDetail.pe?perform_num=<%=performDTO.getPerform_num() %>&id=<%=id %>"><img src="performUpload/<%=performDTO.getMain_img() %>" class="article_img"></a>
+			<a href="performDetail.pe?perform_num=<%=performDTO.getPerform_num() %>&id=<%=id %>" class="article_title"><%=performDTO.getPerform_title() %></a>
 			<div class="article_outline">
 				<div><span>일자</span><span><%=performDTO.getPerform_date().substring(0, 10) %> (<%=performDTO.getPerform_day() %>) </span></div>
 				<div><span>시간</span><span><%=performDTO.getPerform_date().substring(11, 16) %></span></div>

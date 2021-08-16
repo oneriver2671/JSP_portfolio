@@ -13,6 +13,7 @@
   /* 날짜 비교를 위한 Java코드 */
 	 SimpleDateFormat dataFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 	 Date today_date = (Date)request.getAttribute("today_date");		// Controller에서 넘어온 '오늘 날짜'
+	 boolean isLike = (Boolean)request.getAttribute("isLike");		// 게시글 좋아요 누른 회원인지 확인용
 %>
 
 <!DOCTYPE html>
@@ -40,12 +41,65 @@ $(document).ready(function(){
   $('#navbar, #header_box').mouseleave(function(){
     $('.header_level2, #header_box').fadeOut(500);
   });
+  
+  
+
+	/*---- 좋아요 기능 (비동기식 구현) ----*/
+	// 좋아요 클릭 시, 좋아요버튼 색깔 바뀜
+	$('.like_btn').click(function(){		  
+		var _perform_num = $('#perform_num').val();			// hidden으로 가져옴.
+		var _member_id = $('#member_id').val();		// hidden으로 가져옴.
+		
+		// 로그인한 회원만 누를 수 있게.	
+		if(_member_id == 'null'){
+			alert('로그인 후 누르실 수 있습니다.');
+		} 
+		else{
+			// 안눌린 상태 -> 눌린 상태
+			if($('.like_btn i').attr('class')=='far fa-thumbs-up'){		
+					$('.like_btn i').attr('class', 'fas fa-thumbs-up');
+					
+					$.ajax({
+						type: "post",
+						async: true,
+						url: "performLikeAdd.pe",				// 좋아요 증가 기능
+						data: {perform_num: _perform_num, member_id: _member_id},
+						dataType: "text",
+						error : function(request, error){
+							alert("ajax 연결 실패"); 
+							alert("code:"+ request.status + "\n" + "message:"+request.responseText+"\n"+"error:"+error);
+						}
+					})
+					
+			} 
+			// 눌린 상태 -> 좋아요 해제
+			else{		
+				$('.like_btn i').attr('class', 'far fa-thumbs-up');
+				
+				$.ajax({
+					type: "post",
+					async: true,
+					url: "performLikeReduce.pe",			// 좋아요 감소 기능
+					data: {perform_num: _perform_num, member_id: _member_id},
+					dataType: "text",
+					error : function(request, error){
+						alert("ajax 연결 실패"); 
+						alert("code:"+ request.status + "\n" + "message:"+request.responseText+"\n"+"error:"+error);
+					}
+				})
+			}
+		}
+	});
+  
+
 });
 
 function logout(){
 	  alert('로그아웃 되었습니다.');
 location.href="logout.jsp";
 }
+
+
 
 </script>
 <body>
@@ -82,7 +136,7 @@ location.href="logout.jsp";
         <ul>
           <li class="header_level1_1">공연안내/예매
             <ul class="header_level2">
-              <li><a href="performList.pe">공연 예매</a></li>
+              <li><a href="performListByDate.pe">공연 예매</a></li>
               <li>예매 안내</li>
               <li>패키지 예매</li>
               <li>예매 확인/취소</li>
@@ -147,6 +201,10 @@ location.href="logout.jsp";
 
 <section>
 	<div id="section_top">
+		<!-- 좋아요 ajax처리 등에 활용하기 위한 hidden값 -->
+		<input type="hidden" id="perform_num" value=<%=performDTO.getPerform_num() %>>
+		<input type="hidden" id="member_id" value=<%=id %>>
+		
 		<img src="performUpload/<%=performDTO.getMain_img() %>" id="main_img">
 		<div id="article_title"><%=performDTO.getPerform_title() %></div>
 		<div class="article_outline">
@@ -218,9 +276,13 @@ location.href="logout.jsp";
 			<%} else{ %>
 	   	 <div class="reser_btn_end">공연 종료</div>
 			<%} %>
-			
-			<div class="like_btn"><i class="far fa-thumbs-up"></i>	
-	 						<!-- <i class="fas fa-thumbs-up"></i> -->	관심공연</div>
+
+			<div class="like_btn">
+			<%if(isLike == false){ %>
+					<i class="far fa-thumbs-up"></i>		<!-- 색깔 없는 좋아요 -->
+			<%} else{ %>
+					<i class="fas fa-thumbs-up"></i>		<!-- 색깔 있는 좋아요 -->
+			<%} %> 관심공연</div>
 			<div class="like_list"><i class="fas fa-list"></i></div>
 		</div>
 	</div>

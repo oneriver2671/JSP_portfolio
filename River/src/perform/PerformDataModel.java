@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import mybatis.SqlMapConfig;
+import vo.MemberLikeInfo;
 import vo.PerformSearchInfo;
 
 public class PerformDataModel {
@@ -172,6 +173,76 @@ public class PerformDataModel {
 	}
 	
 	
+	/* 멤버-공연 좋아요 정보 추가 */
+	public int insertPerformLikeInfo (String member_id, int perform_num){
+		int result = 0;
+		MemberLikeInfo memberLikeInfo = new MemberLikeInfo();
+		memberLikeInfo.setMember_id(member_id);
+		memberLikeInfo.setPerform_num(perform_num);
+		
+		SqlSession sqlSession = factory.openSession();
+		result = sqlSession.insert("performLikeInsert", memberLikeInfo);
+		sqlSession.commit();	
+		sqlSession.close();
+		
+		return result;
+	}
 	
+	/* 공연정보 좋아요 갯수 증가 */
+	public int addPerformLike(int perform_num){
+		int result = 0;
+		
+		SqlSession sqlSession = factory.openSession();
+		result = sqlSession.update("performLikeAdd", perform_num);
+		sqlSession.commit();	
+		sqlSession.close();
+		
+		return result;
+	}
+	
+	/* 멤버-공연 좋아요 정보 제거 */
+	public int deletePerformLikeInfo (String member_id, int perform_num){
+		int result = 0;
+		MemberLikeInfo memberLikeInfo = new MemberLikeInfo();
+		memberLikeInfo.setMember_id(member_id);
+		memberLikeInfo.setPerform_num(perform_num);
+		
+		SqlSession sqlSession = factory.openSession();
+		result = sqlSession.delete("performLikeDelete", memberLikeInfo);
+		sqlSession.commit();	
+		sqlSession.close();
+		
+		return result;
+	}
+	
+	/* 공연정보 좋아요 갯수 감소 */
+	public int reducePerformLike(int perform_num){
+		int result = 0;
+		
+		SqlSession sqlSession = factory.openSession();
+		result = sqlSession.update("performLikeReduce", perform_num);
+		sqlSession.commit();	
+		sqlSession.close();
+		
+		return result;
+	}
+	
+	/* 회원이 누른 좋아요 공연정보 확인용 */
+	public boolean getPerformLikeNum(String member_id, int perform_num){
+		
+		boolean result = false;
+		MemberLikeInfo memberLikeInfo = new MemberLikeInfo();
+		memberLikeInfo.setMember_id(member_id);
+		memberLikeInfo.setPerform_num(perform_num);
+		
+		SqlSession sqlSession = factory.openSession();
+		if(sqlSession.selectOne("performLikeInfo", memberLikeInfo) != null) {	
+			result =true;
+		}
+		sqlSession.close();
+		
+		return result;
+	}
+
 	
 }
