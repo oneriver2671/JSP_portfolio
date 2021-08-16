@@ -226,15 +226,45 @@ location.href="logout.jsp";
 	</div>
 	
 	<div id="section_middle">
-		<div id="section_middle_list"><div>공연정보</div><div>작품/아티스트 소개</div><div>예매유의사항</div></div>
+		<div id="section_middle_list"><a href="#perform_info">공연정보</a><a href="#perform_intro">작품/아티스트 소개</a><a href="#reser_notice">예매유의사항</a></div>
 		<div id="section_middle_notice">
+			<a name="perform_info"></a>
 			<div class="section_middle_title"><img src="images/article/bu_concert_info01.gif"> 알립니다</div>
 			<img src="images/article/corona_700px_30.jpg" class="section_middle_notice_corona"> <br>
 			<div class="section_middle_notice_corona">
 			※ 매표원과의 대화를 최소화하기 위해 티켓수령 전 예매내역(문자/카카오톡 등) 및 할인증빙서류를 미리 준비해주시기 바랍니다. <br><br>
 			※ 공연장 입장 전 모바일 관객 질문서 작성을 부탁드립니다. <a href="">작성 바로가기 ▶▶</a>
 			</div>
-			<img src="images/article/lotte_seatAll.jpg" class="section_middle_notice_seat">
+			<!-- 좌석배치도(공연장별 구분) -->
+			<%if(performDTO.getLocation().equals("롯데콘서트홀")){ %>
+				<img src="images/article/lotte_seatAll.jpg" class="section_middle_notice_seat">
+			<%} else if(performDTO.getLocation().equals("예술의전당 - 콘서트홀")){ %>
+				<img src="images/article/performSeat_artCenter_main1.gif" class="section_middle_notice_seat">
+				<img src="images/article/performSeat_artCenter_main2.gif" class="section_middle_notice_seat">
+			<%}  
+			 else if(performDTO.getLocation().equals("예술의전당 - IBK챔버홀")){ %>
+				<img src="images/article/performSeat_artCenter_IBK.gif" class="section_middle_notice_seat">
+			<%}  
+			 else if(performDTO.getLocation().equals("예술의전당 - 리사이틀홀")){ %>
+				<img src="images/article/performSeat_artCenter_recital.gif" class="section_middle_notice_seat">
+			<%}  
+			 else if(performDTO.getLocation().equals("예술의전당 - 자유소극장")){ %>
+				<img src="images/article/performSeat_artCenter_smallTheater.gif" class="section_middle_notice_seat">
+			<%}  
+			 else if(performDTO.getLocation().equals("예술의전당 - 오페라극장")){ %>
+				<img src="images/article/performSeat_artCenter_opera1.gif" class="section_middle_notice_seat">
+				<img src="images/article/performSeat_artCenter_opera2.gif" class="section_middle_notice_seat">
+			<%}  
+			 else if(performDTO.getLocation().equals("예술의전당 - CJ토월극장")){ %>
+				<img src="images/article/performSeat_artCenter_cj1.gif" class="section_middle_notice_seat">
+				<img src="images/article/performSeat_artCenter_cj2.gif" class="section_middle_notice_seat">
+			<%}  
+			 else if(performDTO.getLocation().equals("인천아트센터")){ %>
+				<img src="images/article/performSeat_incheon1.jpg" class="section_middle_notice_seat">
+				<img src="images/article/performSeat_incheon2.jpg" class="section_middle_notice_seat">
+				<img src="images/article/performSeat_incheon3.jpg" class="section_middle_notice_seat">
+			<%}  %>
+			
 			======================================================================================================= 
 			<div id="section_middle_notice_ticket">
 				<br><h2>티켓오픈일정</h2> <br>
@@ -287,6 +317,7 @@ location.href="logout.jsp";
 				</div>
 			</div>
 		</div>
+				<a name="perform_intro"></a>
 		<%if(performDTO.getSub_img()!=null || !performDTO.getIntro_text().equals("")){ %>
 			<div id="section_middle_intro">
 				<div class="section_middle_title"><img src="images/article/bu_concert_info01.gif"> 작품 설명 및 아티스트 소개</div>
@@ -298,6 +329,7 @@ location.href="logout.jsp";
 			</div>
 		<%} %>
 		
+		<a name="reser_notice"></a>
 		<div id="section_middle_ticketGuide">
 			<div class="section_middle_title"><img src="images/article/bu_concert_info01.gif"> 티켓 수령안내</div>
 			<h4>현장수령</h4>

@@ -430,7 +430,7 @@ section{
   background-color: #efefef;
   display: flex;
 }
-#section_middle_list > div{
+#section_middle_list > a{
 	width: 373.33px;
 	height: 60px;
 	border-top: solid 1px gray;
@@ -440,9 +440,13 @@ section{
 	justify-content: center;
 	align-items: center;
 	font-weight: bold;
+	color: black;
 }
-#section_middle_list > div:last-child{
+#section_middle_list > a:last-child{
 	border-right: solid 1px gray;
+}
+#section_middle_list > a:visited{
+	color: black;
 }
 
 .section_middle_title{

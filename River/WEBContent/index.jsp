@@ -55,8 +55,6 @@ $(document).ready(function(){
   });
 </script>
 
-
-
 <div id="wrap">
 <jsp:include page="header.jsp"></jsp:include>		<!-- header 담겨있음 -->
 <jsp:include page="searchBar.jsp"></jsp:include>		<!-- 검색창 담겨있음 -->
