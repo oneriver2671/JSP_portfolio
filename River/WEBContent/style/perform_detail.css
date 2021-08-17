@@ -406,6 +406,7 @@ section{
 	border: solid 1px gray;
 	padding: 12px 50px;
 	background-color: #FAF9F5;
+	cursor: pointer;
 }
 .like_list{
 	bottom: 22px;
