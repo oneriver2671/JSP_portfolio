@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>티켓예매</title>
+<title>공연예매 - 티켓예매</title>
 <link rel="stylesheet" type="text/css" href="style/book_main.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
@@ -22,6 +22,12 @@
 	$(function() {
 	  $( "#datepicker" ).datepicker();
 	});
+	
+	function moveNext(){
+		location.href = 'book_step2.jsp';
+	}
+	
+	
 </script>
 
 <body>
@@ -116,7 +122,7 @@
 			<td><span class="total_amount">0</span><span class="total_text">원</span></td>
 		</tr>
 	</table>
-	<img src="images/ticketing/btn_next_on.gif" id="next_btn">
+	<img src="images/ticketing/btn_next_on.gif" id="next_btn" onclick="moveNext()">		<!-- 다음단계 버튼 -->
 </div> <!-- 공연정보, 예매정보 // -->
 
 </div>  <!-- wrap // -->

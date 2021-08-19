@@ -88,33 +88,71 @@ header img{
 	left: 5px;
 	height: 11pt;
 }
-#section_right_img4{
+#section_right_confirm{
 	position: absolute;
 	top: 550px;
 	left: 5px;
 	width: 240px;
+	cursor: pointer;
+	z-index: 1;
 }
-#section_right_img5{
+#section_right_prev{
 	position: absolute;
 	top: 600px;
 	left: 5px;
 	width: 117px;
+	cursor: pointer;
+	z-index: 1;
 }
-#section_right_img6{
+#section_right_again{
 	position: absolute;
 	top: 600px;
 	right: 5px;
 	width: 117px;
+	cursor: pointer;
+	z-index: 1;
 }
+
 #section_right_remainSeat{
 	position: absolute;
+	padding: 10px;
 	top: 250px;
 	left: 5px;
 	background-color: white;
-	width: 240px;
-	height: 130px;
+	width: 220px;
+	height: 110px;
 	border: solid 1px lightgray;
+	font-size: 11pt;
 }
+
+#section_right_remainSeat div{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+#seat_R_remain{
+	width: 10px;
+	height: 10px;
+	background-color: #8557ff;
+	padding: 0;
+	border: none;
+	margin-right: 5px;
+}
+#seat_S_remain{
+	width: 10px;
+	height: 10px;
+	background-color: #00b000;
+	padding: 0;
+	border: none;
+	margin-right: 5px;
+}
+#section_right_remainSeat span{
+	margin: 0 5px;
+	color: #C5261F;
+}
+
+
+
 #section_right_choiceSeat{
 	position: absolute;
 	top: 420px;
@@ -139,14 +177,60 @@ header img{
 	background-color: white;
 	width: 145px;
 }
+#seatChoice_show button{
+	font-size: 10pt;
+	border: none;
+	background-color: #EBEBEB;
+	width: 50px;
+	height: 16px;
+	
+}
+#seatChoice_show input{
+	font-size: 10pt;
+	width: 130px;
+	height: 16px;
+	border: none;
+}
+#seatChoice_show_grade{
+	width: 72px;
+	height: 80px;
+	overflow-y: auto;
+}
+#seatChoice_show_num{
+	width: 145px;
+	height: 80px;
+	overflow-y: auto;
+}
+
+
 .seat_R{
 	position: absolute;
 	width: 10px;
 	height: 10px;
-	background-color: purple;
+	background-color: #8557ff;
 	padding: 0;
 	border: none;
 }
+.seat_S{
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	background-color: #00b000;
+	padding: 0;
+	border: none;
+}
+
+.seat_choice_imgBtn{
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	padding: 0;
+	border: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 
 
 

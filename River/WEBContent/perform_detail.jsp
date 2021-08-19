@@ -270,7 +270,7 @@ location.href="logout.jsp";
 			if(open_date.after(today_date)){ %>
 				<div class="reser_btn_prepare">티켓 오픈 준비중</div>	
 			<%} else if(perform_date.after(today_date)) { %>	
-				<a href="book_main.jsp?performInfo=<%=performDTO %>" class="reser_btn">예매하기</a>	
+				<a href="book_main.jsp?performInfo=<%=performDTO %>" class="reser_btn" target="_blank">예매하기</a>	
 			<%} else{ %>
 	   	 <div class="reser_btn_end">공연 종료</div>
 			<%} %>
