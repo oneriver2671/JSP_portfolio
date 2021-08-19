@@ -92,9 +92,11 @@ header img{
 	position: absolute;
 	top: 550px;
 	left: 5px;
-	width: 240px;
 	cursor: pointer;
 	z-index: 1;
+}
+#section_right_confirm img{
+	width: 240px;
 }
 #section_right_prev{
 	position: absolute;
@@ -141,7 +143,7 @@ header img{
 #seat_S_remain{
 	width: 10px;
 	height: 10px;
-	background-color: #00b000;
+	background-color: #8557ff;
 	padding: 0;
 	border: none;
 	margin-right: 5px;

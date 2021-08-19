@@ -83,7 +83,7 @@ $(document).ready(function(){
 			<td><div id="seatChoice_show_num"></div></td>		<!-- overflow 추가를 위해 div태그 추가 -->
 		</tr>
 	</table>
-	<img src="images/ticketing/btn_seat_confirm_on.gif" id="section_right_confirm">		<!-- '좌석선택완료' 버튼 -->
+	<a href="book_step3.jsp" id="section_right_confirm"><img src="images/ticketing/btn_seat_confirm_on.gif" onclick="goNext()"></a>	<!-- '좌석선택완료' 버튼 -->
 	<img src="images/ticketing/btn_seat_prev.gif" id="section_right_prev" onclick="history.back()">			<!-- '이전 단계' 버튼 -->
 	<img src="images/ticketing/btn_seat_again.gif" id="section_right_again">		<!-- '좌석 다시 선택' 버튼 -->
 	<!-- 왜 여기 img들 cursor, script이벤트 다 안먹히냐... -->
