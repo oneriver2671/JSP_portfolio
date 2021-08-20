@@ -42,6 +42,8 @@ header img{
 }
 #section_main{
 	position: relative;
+	width: 900px;
+	height: 850px;
 }
 #section_main img{
 	width: 900px;

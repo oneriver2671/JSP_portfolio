@@ -87,6 +87,7 @@ $(document).ready(function(){
 	<img src="images/ticketing/btn_seat_prev.gif" id="section_right_prev" onclick="history.back()">			<!-- '이전 단계' 버튼 -->
 	<img src="images/ticketing/btn_seat_again.gif" id="section_right_again">		<!-- '좌석 다시 선택' 버튼 -->
 	<!-- 왜 여기 img들 cursor, script이벤트 다 안먹히냐... -->
+	<!-- => 원인 발견! section_main에 width, height 설정이 안되어있어 전체를 덮고 있었기 때문. 해결ok. -->
 </div>
 
 <div id="section_main">

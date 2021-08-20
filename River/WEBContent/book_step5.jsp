@@ -19,6 +19,7 @@
 
 <script>
 	$(document).ready(function(){
+		
 		$('#selectPay_phone').hide();		// 초깃값 설정
 		$('#selectPay_noBank').hide();	// 초깃값 설정
 		
