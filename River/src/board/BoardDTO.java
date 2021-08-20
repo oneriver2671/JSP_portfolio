@@ -1,15 +1,15 @@
 package board;
 
 public class BoardDTO {
-	int orders;				// 번호 (자동증가)
-	String sort;			// 게시판 종류
-	String writer_id;		// 작성자 id
-	String title;			// 제목
-	String content;			// 내용
-	String writed_date; 	// 작성된 날짜+시간. (int로 할까 고민중)
-	int check_num;			// 조회수
-	int like_num;			// 좋아요 수
-	String attached;		// 첨부파일 이름
+	private int orders;				// 번호 (자동증가)
+	private String sort;			// 게시판 종류
+	private String writer_id;		// 작성자 id
+	private String title;			// 제목
+	private String content;			// 내용
+	private String writed_date; 	// 작성된 날짜+시간. (int로 할까 고민중)
+	private int check_num;			// 조회수
+	private int like_num;			// 좋아요 수
+	private String attached;		// 첨부파일 이름
 	
 	 
 	public int getOrders() {

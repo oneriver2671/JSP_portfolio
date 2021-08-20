@@ -2,31 +2,31 @@ package perform;
 
 public class PerformDTO {
 	
-	int perform_num;		// PK. 
-	String perform_title;	// 제목
-	String perform_date;    // 날짜 + 시간 (datetime)
-	String location;		// 공연 장소
-	String artist_main;		// 메인 아티스트
-	int running_time;		// 러닝타임
-	int intermission;		// 인터미션 시간
-	String main_img;		// 포스터 사진
-	String sub_img;		    // 기타 이미지
-	String intro_text;		// 간략한 소개글
-	String perform_host;		// 주최
-	int limit_age;			// 관람연령제한
-	int like_num;		    // 좋아요 수
-	int possible_seat;		// 남은 자리수
-	String open_date;		// 티켓예매 날짜
-	int price_R;			// R석 가격
-	int price_S;			// S석 가격
-	int price_A;			// A석 가격
-	int price_B;			// B석 가격
-	int priceLow_R;			// 시야방해 R석 가격
-	int priceLow_S;			// 시야방해 S석 가격
-	int priceLow_A;			// 시야방해 A석 가격
-	String perform_day;		// 공연 요일
-	String open_day;		// 티켓오픈 요일
-	int price_All;			// 전석 동일가격
+	private int perform_num;		// PK. 
+	private String perform_title;	// 제목
+	private String perform_date;    // 날짜 + 시간 (datetime)
+	private String location;		// 공연 장소
+	private String artist_main;		// 메인 아티스트
+	private int running_time;		// 러닝타임
+	private int intermission;		// 인터미션 시간
+	private String main_img;		// 포스터 사진
+	private String sub_img;		    // 기타 이미지
+	private String intro_text;		// 간략한 소개글
+	private String perform_host;		// 주최
+	private int limit_age;			// 관람연령제한
+	private int like_num;		    // 좋아요 수
+	private int possible_seat;		// 남은 자리수
+	private String open_date;		// 티켓예매 날짜
+	private int price_R;			// R석 가격
+	private int price_S;			// S석 가격
+	private int price_A;			// A석 가격
+	private int price_B;			// B석 가격
+	private int priceLow_R;			// 시야방해 R석 가격
+	private int priceLow_S;			// 시야방해 S석 가격
+	private int priceLow_A;			// 시야방해 A석 가격
+	private String perform_day;		// 공연 요일
+	private String open_day;		// 티켓오픈 요일
+	private int price_All;			// 전석 동일가격
 	
 
 	
