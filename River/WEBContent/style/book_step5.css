@@ -89,13 +89,37 @@ nav{
 	border-bottom: solid 1px gray;
 	padding: 5px;
 }
+#selectPay_noBank{
+	margin-left: 10px;
+}
 #selectPay_phone{
 	width: 320px;
 	margin-left: 10px;
 }
+#selectPay_noBank table{
+	font-size: 10pt;
+	border-spacing: 0;
+	width: 330px;
+}
+#selectPay_noBank table td{
+	padding: 5px;
+}
+.table_td1{
+	background-color: #f1f0ed;
+	width: 90px;
+}
+.table_tr td{
+	border-bottom: solid 1px lightgray;
+}
+#table_firstTr td{
+	border-top: solid 2px lightgray;
+}
+#table_lastTr td{
+	border-bottom: solid 2px lightgray;
+}
 
 .section_main_insertTop{
-	background-color: #d4d4d4;
+	background-color: #e6e6e6;
 	font-weight: bold;
 	font-size: 10pt;
 	padding: 5px;

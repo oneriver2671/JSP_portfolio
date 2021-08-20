@@ -20,8 +20,28 @@
 <script>
 	$(document).ready(function(){
 		$('#selectPay_phone').hide();		// 초깃값 설정
+		$('#selectPay_noBank').hide();	// 초깃값 설정
 		
-		
+		$("input[name='payment']").change(function(){
+			// 휴대폰 결제 선택 시.
+			if($("input[name='payment']:checked").val() == '휴대폰결제'){
+				$('#selectPay_card').hide();
+				$('#selectPay_noBank').hide();
+				$('#selectPay_phone').show();
+			}	
+			// 무통장입금 결제 선택 시.
+			else if($("input[name='payment']:checked").val() == '무통장입금'){
+				$('#selectPay_card').hide();
+				$('#selectPay_phone').hide();
+				$('#selectPay_noBank').show();
+			}
+			// 신용카드 결제 선택 시.
+			else if($("input[name='payment']:checked").val() == '신용카드'){
+				$('#selectPay_phone').hide();
+				$('#selectPay_noBank').hide();
+				$('#selectPay_card').show();
+			}
+		});
 		
 	});
 </script>
@@ -48,7 +68,7 @@
 	</div>
 	<div id="section_main_insert">
 		<h4>결제수단입력</h4>
-		<!-- //신용카드 선택 -->
+		<!-- //신용카드 -->
 		<div id="selectPay_card">
 			<div class="section_main_insertTop">신용카드정보</div>
 			<div>
@@ -81,9 +101,42 @@
 					<option>12개월</option>
 				</select>
 			</div> 
-		</div> <!-- 신용카드 선택 // -->
+		</div> <!-- 신용카드 // -->
 		
-		<!-- //휴대폰결제 선택 -->
+		<!-- //무통장입금 -->
+		<div id="selectPay_noBank">
+			<div class="section_main_insertTop">무통장입금</div>
+			<table>
+				<tr id="table_firstTr" class="table_tr">
+					<td class="table_td1">입금액</td>
+					<td>70,000원</td>
+				</tr>
+				<tr class="table_tr">
+					<td class="table_td1">입금하실은행</td>
+					<td>
+						<select>
+							<option>입금하실 은행을 선택하세요.</option>
+							<option>농협(중앙)</option>
+							<option>국민은행</option>
+							<option>우리은행</option>
+							<option>기업은행</option>
+							<option>신한은행</option>
+							<option>우체국</option>
+						</select>	
+					</td>
+				</tr>
+				<tr class="table_tr">
+					<td class="table_td1">입금마감시간</td>
+					<td>2021년 08월 21일 23:59</td>
+				</tr>
+				<tr id="table_lastTr">
+					<td class="table_td1">예금주명</td>
+					<td>(주)인터파크</td>
+				</tr>
+			</table>
+		</div> <!-- 무통장입금 // -->
+		
+		<!-- //휴대폰결제 -->
 		<div id="selectPay_phone">
 			<div class="section_main_insertTop">휴대폰 결제 시 유의사항을 확인 하신 후 <br>[다음단계] 버튼으로 이동해주세요.</div>
 			<h5 id="phonePay_notice_title">※ 휴대폰 결제 시 유의사항</h5>
