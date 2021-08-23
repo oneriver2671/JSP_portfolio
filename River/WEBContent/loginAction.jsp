@@ -5,8 +5,9 @@
 <%
 	String id_input = request.getParameter("id_input");					// id
 	String pwd_input = request.getParameter("pwd_input");				// pwd
-	String id = "test";
-	String pwd = "test";
+	String id = null;
+	String pwd = null;
+	String name = null;
 	int temp = 0;
 	
 	Connection conn = null;
@@ -21,11 +22,12 @@
 		st = conn.createStatement();
 	
 		
-		ResultSet rs = st.executeQuery("select id, pwd from member_info where id='"+id_input+"';");        
+		ResultSet rs = st.executeQuery("select id, pwd, name from member_info where id='"+id_input+"';");        
 		
 		if(rs.next()){		// id가 있는 경우.
 			id = rs.getString("id");
 			pwd = rs.getString("pwd");
+			name = rs.getString("name");
 			
 			if(!pwd_input.equals(pwd)){		
 				out.println("<script>alert('비밀번호가 일치하지 않습니다.');");
@@ -33,6 +35,7 @@
 				out.println("</script>");
 			} else{      // 로그인 성공.
 				session.setAttribute("id", id);		// id를 세션에 등록 ★★★	
+				session.setAttribute("memberName", name);
 				out.println("<script>location.href = 'index.jsp';</script>");    // 근데 이거 여기있으면... 밑에 finally 실행 안되는거 아님??
 			}
 			
