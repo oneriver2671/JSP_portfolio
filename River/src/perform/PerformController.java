@@ -159,13 +159,7 @@ public class PerformController extends HttpServlet {
 			}
 			
 		}
-		
-		
-		
-		
-		
-		
-		
+
 		if(forward != null){	
 			if(forward.isRedirect()){
 				response.sendRedirect(forward.getPath());

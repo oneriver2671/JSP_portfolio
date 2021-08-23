@@ -10,6 +10,9 @@
 <%
   PerformDTO performDTO = (PerformDTO)request.getAttribute("performDTO");		// 공연정보 불러오기
   
+  // 티켓 예매 시 계속 필요해서, 일단 session에 넣어보기로.
+  session.setAttribute("performDTO", performDTO);
+
   /* 날짜 비교를 위한 Java코드 */
 	 SimpleDateFormat dataFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 	 Date today_date = (Date)request.getAttribute("today_date");		// Controller에서 넘어온 '오늘 날짜'

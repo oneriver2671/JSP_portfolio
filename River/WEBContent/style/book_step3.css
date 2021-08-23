@@ -60,19 +60,26 @@ nav{
 	height: 460px;
 	width: 655px;
 }
+#section_main_R{
+	margin-bottom: 15px;
+}
+#section_main_S{
+	margin-bottom: 15px;
+}
+
 #section_main h4{
 	margin-left: 10px;
 }
-#section_main_seatInfo{
+.section_main_seatInfo{
 	background-color: #DCDAD3;
 	font-size: 10pt;
 	padding: 5pt;
 }
-#section_main_seatInfo span:first-child{
+.section_main_seatInfo span:first-child{
 	color: #454545;
 	font-weight: bold;
 }
-#section_main_seatInfo span:last-child{
+.section_main_seatInfo span:last-child{
 	color: #cb050b; 
 }
 #section_main table{
@@ -204,7 +211,7 @@ nav{
 	font-size: 10pt;
 	font-weight: bold;
 }
-.total_amount{
+#total_amount{
 	position: absolute;
 	right: 35px;
 	bottom: 5px;
@@ -217,7 +224,14 @@ nav{
 	height: 80px;
 	overflow-y: scroll;
 }
-
+#selected_seatBox_grade{
+	float: left;
+	margin-right: 5px;
+	
+}
+#selected_seatBox_val{
+	float: left;
+}
 #prev_btn{
 	position: absolute;
 	bottom: 10px;

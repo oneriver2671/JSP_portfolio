@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+  request.setCharacterEncoding("utf-8");
+  String id = (String)session.getAttribute("id");			// 로그인 상태 회원 정보.		
+%>  
+<!-- 필요한 것: 공연별 좌석예약 현황 (DB에선 R석,S석 등도 구분되어야) -->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,14 +18,12 @@
 
 <script>
 $(document).ready(function(){
-	
 	/*---- 좌석 클릭 이벤트 ----*/
-	
+
 	// 좌석 클릭 시.
 	$('#section_main button').click(function(){
 		var seatVal = $(this).val();		// 클릭한 좌석 번호 가져오기.
 		var position = $(this).attr('style');		// 클릭한 좌석 위치 가져오기.
-		
 		var seatGrade = $(this).attr('class');
 		
 		if(seatGrade == "seat_R"){
@@ -39,8 +43,7 @@ $(document).ready(function(){
 		$('#seatChoice_show_grade button[value="'+seatVal+'"]').remove();		// 좌석등급 제거
 		$('#seatChoice_show_num input[value="'+seatVal+'"]').remove();			// 좌석번호 제거
 	});
-	
-	
+
 
 	// '좌석 다시 선택' 버튼 클릭 시.
 	$('#section_right_again').click(function(){
@@ -48,9 +51,24 @@ $(document).ready(function(){
 		$('#seatChoice_show_num input').remove();
 		$('.seat_choice_imgBtn').remove();
 	});
-	
-
 });
+
+// '좌석선택완료' 클릭 시.
+function goNext(){
+	// '배열'을 만들어 담기 ★
+	var selectedSize = $('#seatChoice_show_grade button').length;			// button의 갯수를 가져올 수 있음!!
+	var selectedSeatGrade = new Array(selectedSize);	// js의 배열 생성 (좌석등급)
+	var selectedSeatVal = new Array(selectedSize);		// (좌석정보)
+	
+	for(var i=0; i<selectedSize; i++){
+		selectedSeatGrade[i] = $('#seatChoice_show_grade button').eq(i).text();	// '좌석등급'을 순서대로 담기
+		selectedSeatVal[i] = $('#seatChoice_show_grade button').eq(i).val();		// '좌석정보'를 순서대로 담기
+	}
+	
+	// 이거 근데 이렇게 넘기면, step5까지 계속 받고, 배열만들어 넘기고 과정 반복해야함.. 비효율적인듯. controller를 거치는게 나을려나.
+	location.href = "book_step3.jsp?selectedSeatGrade="+selectedSeatGrade+"&selectedSeatVal="+selectedSeatVal;
+	
+}
 
 </script>
 
@@ -83,11 +101,9 @@ $(document).ready(function(){
 			<td><div id="seatChoice_show_num"></div></td>		<!-- overflow 추가를 위해 div태그 추가 -->
 		</tr>
 	</table>
-	<a href="book_step3.jsp" id="section_right_confirm"><img src="images/ticketing/btn_seat_confirm_on.gif" onclick="goNext()"></a>	<!-- '좌석선택완료' 버튼 -->
+	<img src="images/ticketing/btn_seat_confirm_on.gif" id="section_right_confirm" onclick="goNext()">	<!-- '좌석선택완료' 버튼 -->
 	<img src="images/ticketing/btn_seat_prev.gif" id="section_right_prev" onclick="history.back()">			<!-- '이전 단계' 버튼 -->
 	<img src="images/ticketing/btn_seat_again.gif" id="section_right_again">		<!-- '좌석 다시 선택' 버튼 -->
-	<!-- 왜 여기 img들 cursor, script이벤트 다 안먹히냐... -->
-	<!-- => 원인 발견! section_main에 width, height 설정이 안되어있어 전체를 덮고 있었기 때문. 해결ok. -->
 </div>
 
 <div id="section_main">

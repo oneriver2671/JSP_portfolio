@@ -1,10 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import = "perform.PerformDTO" %>
-<%
-  request.setCharacterEncoding("utf-8");
-  String id = (String)session.getAttribute("id");			// 로그인 상태 회원 정보.		
-%>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<% request.setCharacterEncoding("utf-8"); %>  
+
+<!-- session에 담긴 공연정보 dto -->
+<c:set var="performTitle" value="${performDTO.perform_title }" />
+<c:set var="location" value="${performDTO.location }" />
+<c:set var="runningTime" value="${performDTO.running_time }" />
+<c:set var="intermission" value="${performDTO.intermission }" />
+<c:set var="performDate" value="${performDTO.perform_date }" />
+<c:set var="performDay" value="${performDTO.perform_day }" />
+<c:set var="limitAge" value="${performDTO.limit_age }" />
+<c:set var="mainImg" value="${performDTO.main_img }" />
 
 <!DOCTYPE html>
 <html>
@@ -155,19 +163,19 @@
 
 <!-- //공연정보, 예매정보 -->
 <div id="section_right">
-	<img src="images/main1_444x618.jpg" id="perform_mainImg">
-	<div id="perform_title">손정범 피아노 리사이틀</div>
+	<img src="performUpload/${mainImg }" id="perform_mainImg">
+	<div id="perform_title">${performTitle }</div>
 	<div id="perform_info">
-	2021.08.24 <br>
-	롯데콘서트홀 <br>
-	만 7세 이상 입장 <br>
-	관람시간: 130분 (인터미션 20분)
+	${performDate.substring(0, 10) }(${performDay }) <br>
+	${location } <br>
+	만 ${limitAge }세 이상 입장 <br>
+	관람시간: ${runningTime }분 (인터미션 ${intermission }분)
 	</div>
 	
 	<table id="reser_info">
 		<tr class="reser_info_row1" id="reser_info_firstTr">
 			<td>관람일시</td>
-			<td>2021.08.24 (화) 20:00</td>
+			<td>${performDate.substring(0, 10) }(${performDay }) ${performDate.substring(11, 16) } </td>
 		</tr>
 		<tr class="reser_info_rowMulti">
 			<td>선택좌석</td>

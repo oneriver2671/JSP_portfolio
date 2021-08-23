@@ -50,7 +50,7 @@ $(document).ready(function(){
   $('#navbar').mouseover(function(){
     $('.header_level2, #header_box').fadeIn(500);
   });
-  $('#navbar, #header_box').mouseleave(function(){
+  $('#navbar, #header_box').mouseleave(fu nction(){
     $('.header_level2, #header_box').fadeOut(500);
   });
 </script>

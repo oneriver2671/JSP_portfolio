@@ -48,6 +48,7 @@ public class PerformDetailAction implements PerformAction {
 		request.setAttribute("performDTO", performDTO);
 		request.setAttribute("isLike", isLike);   // 게시물 좋아요 정보 (boolean 반환)
 		
+		
 		ActionForward forward = new ActionForward();
 		forward.setPath("perform_detail.jsp");
    		return forward;
