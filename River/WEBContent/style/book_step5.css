@@ -243,7 +243,7 @@ nav{
 	font-size: 10pt;
 	font-weight: bold;
 }
-.total_amount{
+#total_amount{
 	position: absolute;
 	right: 35px;
 	bottom: 5px;
@@ -256,6 +256,14 @@ nav{
 	height: 80px;
 	overflow-y: scroll;
 }
+#selected_seatBox_grade{
+	float: left;
+	margin-right: 5px;
+}
+#selected_seatBox_val{
+	float: left;
+}
+
 
 #prev_btn{
 	position: absolute;

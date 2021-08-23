@@ -36,7 +36,7 @@
 <c:set var="mainImg" value="${performDTO.main_img }" />
 <c:set var="priceR" value="${performDTO.price_R }" />
 <c:set var="priceS" value="${performDTO.price_S }" />
-<c:set var="seatGradeArr" value="<%=seatGradeArr %>" />			<!-- 이렇게도 넣어줄 수 있음. -->
+<c:set var="seatGradeArr" value="<%=seatGradeArr %>" />	
 <c:set var="seatValArr" value="<%=seatValArr %>" />
 <c:set var="seatNum_R" value="<%=seatNumber_R %>" />
 <c:set var="seatNum_S" value="<%=seatNumber_S %>" />
@@ -83,7 +83,7 @@ $(document).ready(function(){
 		
 		// jstl의 값을 배열에 담아, 쿼리스트링으로 넘기기위한 작업.
 		<c:forEach var="item" items="${seatGradeArr }" >		
-			seatGradeArr.push('${item}');
+			seatGradeArr.push('${item}');			// push() 메소드 활용
 		</c:forEach>
 		<c:forEach var="item" items="${seatValArr }" >		
 			seatValArr.push('${item}');

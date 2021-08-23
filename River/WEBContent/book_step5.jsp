@@ -4,6 +4,28 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% request.setCharacterEncoding("utf-8"); %>  
 
+<% 
+	// 가격정보
+	String totalPrice = request.getParameter("totalPrice");
+
+	// step2 -> step3 -> step4 거쳐온 좌석정보
+	String selectedSeatGrade = request.getParameter("selectedSeatGrade");
+	String selectedSeatVal = request.getParameter("selectedSeatVal");
+	
+	String[] seatGradeArr = selectedSeatGrade.split(",");	
+	String[] seatValArr = selectedSeatVal.split(",");
+ 
+	int seatNumber_R = 0;
+	int seatNumber_S = 0;
+	for(int i=0; i<seatGradeArr.length; i++){
+	 if(seatGradeArr[i].equals("R석")){
+		 seatNumber_R++;
+	 } else if(seatGradeArr[i].equals("S석")){
+		 seatNumber_S++;
+	 }
+ }
+%>
+
 <!-- session에 담긴 공연정보 dto -->
 <c:set var="performTitle" value="${performDTO.perform_title }" />
 <c:set var="location" value="${performDTO.location }" />
@@ -13,6 +35,13 @@
 <c:set var="performDay" value="${performDTO.perform_day }" />
 <c:set var="limitAge" value="${performDTO.limit_age }" />
 <c:set var="mainImg" value="${performDTO.main_img }" />
+<!-- 예매자가 선택한 값들 -->
+<c:set var="seatGradeArr" value="<%=seatGradeArr %>" />	
+<c:set var="seatValArr" value="<%=seatValArr %>" />
+<c:set var="seatNum_R" value="<%=seatNumber_R %>" />
+<c:set var="seatNum_S" value="<%=seatNumber_S %>" />
+<c:set var="totalPrice" value="<%=totalPrice %>" />
+
 
 <!DOCTYPE html>
 <html>
@@ -20,7 +49,6 @@
 <meta charset="UTF-8">
 <title>공연예매 - 티켓예매</title>
 <link rel="stylesheet" type="text/css" href="style/book_step5.css">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 </head>
@@ -180,21 +208,29 @@
 		<tr class="reser_info_rowMulti">
 			<td>선택좌석</td>
 			<td><div id="selected_seatBox">
-				<div>R석 1층 C블록 9열 1</div>
-				<div>R석 1층 C블록 9열 2</div>
+					<div id="selected_seatBox_grade">
+					<c:forEach var="grade" items="${seatGradeArr }" >
+						<div>${grade }</div>
+					</c:forEach>
+				</div>
+				<div id="selected_seatBox_val">
+					<c:forEach var="val" items="${seatValArr }" >
+						<div>${val }</div>
+					</c:forEach>
+				</div>
 			</div></td>
 		</tr>
 		<tr class="reser_info_row1">
 			<td>티켓금액</td>
-			<td>70,000원</td>
+			<td>${totalPrice }원</td>
 		</tr>
 		<tr class="reser_info_row1">
 			<td>수수료</td>
-			<td>0원</td>
+			<td></td>
 		</tr>
 		<tr class="reser_info_row1">
 			<td>할인</td>
-			<td>0원</td>
+			<td></td>
 		</tr>
 		<tr class="reser_info_row1">
 			<td>취소기한</td>
@@ -206,11 +242,11 @@
 		</tr>
 		<tr class="reser_info_total">
 			<td>총 결제금액</td>
-			<td><span class="total_amount">70,000</span><span class="total_text">원</span></td>
+			<td><span id="total_amount">${totalPrice }</span><span class="total_text">원</span></td>
 		</tr>
 	</table>
 	<img src="images/ticketing/btn_pre.gif" id="prev_btn" onclick="history.back()">		<!-- 이전단계 버튼 -->
-	<img src="images/ticketing/btn_next_02.gif" id="next_btn" onclick="moveNext()">		<!-- 다음단계 버튼 -->
+	<img src="images/ticketing/btn_next_02.gif" id="next_btn">		<!-- 다음단계 버튼 -->
 </div> <!-- 공연정보, 예매정보 // -->
 
 </div>  <!-- wrap // -->
