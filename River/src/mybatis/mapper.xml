@@ -48,6 +48,12 @@
 	select * from perform_info where perform_num = #{perform_num}
 </select>
 
+<!-- (공연 상세페이지) '좌석정보' 출력 -->
+<select id="getPerformSeatInfo" resultType="perform.PerformSeatDTO" parameterType="int">
+	select * from perform_seat_info where perform_num = #{perform_num}
+</select>
+
+
 <!-- 공연정보 삭제 -->
 <delete id="performDelete" parameterType="int">
 	delete from perform_info where perform_num = #{perform_num}

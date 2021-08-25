@@ -109,6 +109,17 @@ public class PerformDataModel {
 		return performDTO;
 	}	
 	
+	/* 공연 상세페이지 - '좌석정보' 출력 */
+	public PerformSeatDTO getPerformSeatInfo(int perform_num){
+		PerformSeatDTO performSeatDTO = null;
+
+		SqlSession sqlSession = factory.openSession();
+		performSeatDTO = sqlSession.selectOne("getPerformSeatInfo", perform_num);
+		sqlSession.close();
+		
+		return performSeatDTO;
+	}	
+	
 	/* 공연정보 삭제 */
 	public int deletePerform(int perform_num){
 		int result = 0;

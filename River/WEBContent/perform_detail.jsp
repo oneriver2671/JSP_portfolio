@@ -3,6 +3,7 @@
 <%@ page import = "java.util.Date" %>
 <%@ page import = "java.text.SimpleDateFormat" %>
 <%@ page import = "perform.PerformDTO" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	request.setCharacterEncoding("utf-8");
 	String id = (String)session.getAttribute("id");			// 로그인 상태 회원 정보
@@ -259,13 +260,18 @@ location.href="logout.jsp";
 			</div>
 			<div class="reser_out3">예매가능 잔여좌석</div>
 			<div class="reser_out4">
-				<div><div>R석</div><div class="possible_seat">0석</div></div>
-				<div><div>S석</div><div class="possible_seat">11석</div></div>				
-				<div><div>A석</div><div class="possible_seat">0석</div></div>				
-				<div><div>B석</div><div class="possible_seat">8석</div></div>				
-				<div><div>시야방해R</div><div class="possible_seat">25석</div></div>				
-				<div><div>시야방해S</div><div class="possible_seat">15석</div></div>				
-				<div><div>시야방해A</div><div class="possible_seat">17석</div></div>				
+			<!-- jstl 문법 활용하여 처리할 것. -->
+				<div><div>전석</div><div class="possible_seat">${remain_all }석</div></div>
+				<div><div>R석</div><div class="possible_seat">${remain_R }석</div></div>
+				<div><div>S석</div><div class="possible_seat">${remain_S }석</div></div>				
+				<div><div>A석</div><div class="possible_seat">${remain_A }석</div></div>				
+				<div><div>B석</div><div class="possible_seat">${remain_B }석</div></div>			
+					
+				<!-- '롯데콘홀'용
+				<div><div>시야방해R</div><div class="possible_seat">0석</div></div>				
+				<div><div>시야방해S</div><div class="possible_seat">0석</div></div>				
+				<div><div>시야방해A</div><div class="possible_seat">0석</div></div>		
+				-->		
 			</div>
 			<%
 			Date open_date = dataFormat.parse(performDTO.getOpen_date());

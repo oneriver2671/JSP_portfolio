@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import board.svc.LikeNumService;
 import perform.PerformDTO;
+import perform.PerformSeatDTO;
 import perform.svc.PerformDetailService;
 import perform.svc.PerformLikeAddService;
 import vo.ActionForward;
@@ -26,10 +27,10 @@ public class PerformDetailAction implements PerformAction {
 		perform_num = Integer.parseInt(request.getParameter("perform_num"));
 	
 		
-		// 게시글 출력용 model 객체 생성
+		/*------ model단 작업 ------*/
 		PerformDetailService performDetailService = new PerformDetailService();
+		/* 공연 '상세정보' 가져오기 */
 		performDTO = performDetailService.getPerform(perform_num);
-		
 		
 		// 회원이 누른 좋아요 확인용 model 객체 생성
 		if(member_id != null) {		    // 로그인 안한 상태. (무조건 isLike == false)
@@ -43,10 +44,22 @@ public class PerformDetailAction implements PerformAction {
 		Date today_date = cal.getTime();
 		
 		
-		// view단으로 넘길 것들
+		/* 공연 '좌석정보' 가져오기 */
+		PerformSeatDTO performSeatDTO = performDetailService.getPerformSeatInfo(perform_num);
+		
+		
+		/* view단으로 넘길 것들 */
+		// 공연 '상세정보'
 		request.setAttribute("today_date", today_date);
 		request.setAttribute("performDTO", performDTO);
 		request.setAttribute("isLike", isLike);   // 게시물 좋아요 정보 (boolean 반환)
+		// 공연 '좌석정보'
+		request.setAttribute("booked_seat", performSeatDTO.getBooked_seat());
+		request.setAttribute("remain_R", performSeatDTO.getRemain_R());
+		request.setAttribute("remain_S", performSeatDTO.getRemain_S());
+		request.setAttribute("remain_A", performSeatDTO.getRemain_A());
+		request.setAttribute("remain_B", performSeatDTO.getRemain_B());
+		request.setAttribute("remain_all", performSeatDTO.getRemain_all());
 		
 		
 		ActionForward forward = new ActionForward();
