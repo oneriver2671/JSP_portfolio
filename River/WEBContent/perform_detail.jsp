@@ -3,22 +3,33 @@
 <%@ page import = "java.util.Date" %>
 <%@ page import = "java.text.SimpleDateFormat" %>
 <%@ page import = "perform.PerformDTO" %>
+<%@ page import = "perform.PerformSeatDTO" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	request.setCharacterEncoding("utf-8");
 	String id = (String)session.getAttribute("id");			// 로그인 상태 회원 정보
 %>
 <%
-  PerformDTO performDTO = (PerformDTO)request.getAttribute("performDTO");		// 공연정보 불러오기
+  PerformDTO performDTO = (PerformDTO)request.getAttribute("performDTO");		// 공연 '상세정보'
+  PerformSeatDTO performSeatDTO = (PerformSeatDTO)request.getAttribute("performSeatDTO");   // 공연 '좌석정보'
   
   // 티켓 예매 시 계속 필요해서, 일단 session에 넣어보기로.
   session.setAttribute("performDTO", performDTO);
+  session.setAttribute("performSeatDTO", performSeatDTO);
 
   /* 날짜 비교를 위한 Java코드 */
 	 SimpleDateFormat dataFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 	 Date today_date = (Date)request.getAttribute("today_date");		// Controller에서 넘어온 '오늘 날짜'
 	 boolean isLike = (Boolean)request.getAttribute("isLike");		// 게시글 좋아요 누른 회원인지 확인용
 %>
+
+<!-- 공연 '좌석정보' -->
+<c:set var="booked_seat" value="${performSeatDTO.booked_seat }" />
+<c:set var="remain_R" value="${performSeatDTO.remain_R }" />
+<c:set var="remain_S" value="${performSeatDTO.remain_S }" />
+<c:set var="remain_A" value="${performSeatDTO.remain_A }" />
+<c:set var="remain_B" value="${performSeatDTO.remain_B }" />
+<c:set var="remain_all" value="${performSeatDTO.remain_all }" />
 
 <!DOCTYPE html>
 <html>

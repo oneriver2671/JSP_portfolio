@@ -1,10 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-  request.setCharacterEncoding("utf-8");
-  String id = (String)session.getAttribute("id");			// 로그인 상태 회원 정보.		
-%>  
-<!-- 필요한 것: 공연별 좌석예약 현황 (DB에선 R석,S석 등도 구분되어야) -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<% request.setCharacterEncoding("utf-8"); %>  
+
+<!-- session에 담긴 공연 '좌석정보' dto -->
+<c:set var="booked_seat" value="${performSeatDTO.booked_seat }" />   <!-- 콤마로 연결된 문자열인 상태 -->
+<c:set var="bookedSeatArr" value="${fn:split(booked_seat, ',')}" />		<!-- 위의 function uri 불러와야 사용가능 -->
+<c:set var="remain_R" value="${performSeatDTO.remain_R }" />
+<c:set var="remain_S" value="${performSeatDTO.remain_S }" />
+<c:set var="remain_A" value="${performSeatDTO.remain_A }" />
+<c:set var="remain_B" value="${performSeatDTO.remain_B }" />
+<c:set var="remain_all" value="${performSeatDTO.remain_all }" />
 
 <!DOCTYPE html>
 <html>
@@ -18,6 +25,19 @@
 
 <script>
 $(document).ready(function(){
+	
+	/* 이미 예약된 좌석은 hide처리하기 위한 작업 */
+	var btnLength = $('#section_main button').length;
+	
+	for(var i=0; i<btnLength; i++){				// 이중 for문 사용
+		<c:forEach var="item" items="${bookedSeatArr}">
+			if($('#section_main button').eq(i).val() == '${item}'){
+				$('#section_main button').eq(i).hide();
+			}
+		</c:forEach>
+	}
+	
+
 	/*---- 좌석 클릭 이벤트 ----*/
 
 	// 좌석 클릭 시.
@@ -74,6 +94,7 @@ function goNext(){
 
 
 <body>
+${booked_seat}
 <div id="wrap">
 <header>
 	<img src="images/ticketing/step_02_on.gif" id="step02">	
@@ -87,8 +108,8 @@ function goNext(){
 	<div id="section_right_img1"><div><img src="images/ticketing/seat_noimg.gif"></div></div>
 	<img src="images/ticketing/stit_seat_01.gif" id="section_right_img2">
 	<div id="section_right_remainSeat">
-		<div><div><div id="seat_R_remain"></div>R석<span>149석</span></div><div class="seat_remain_price">60,000원</div></div>
-		<div><div><div id="seat_S_remain"></div>S석<span>117석</span></div><div class="seat_remain_price">40,000원</div></div>
+		<div><div><div id="seat_R_remain"></div>R석<span>${remain_R }석</span></div><div class="seat_remain_price">60,000원</div></div>
+		<div><div><div id="seat_S_remain"></div>S석<span>${remain_S }석</span></div><div class="seat_remain_price">40,000원</div></div>
 	</div>
 	<img src="images/ticketing/stit_seat_02.gif" id="section_right_img3">
 	<table id="section_right_choiceSeat">

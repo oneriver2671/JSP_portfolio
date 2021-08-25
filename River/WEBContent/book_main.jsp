@@ -5,14 +5,22 @@
 <% request.setCharacterEncoding("utf-8");	%>  
 
 <!-- session에 담긴 공연정보 dto -->
-<c:set var="performTitle" value="${performDTO.perform_title }"   />
+<c:set var="performTitle" value="${performDTO.perform_title }" />
 <c:set var="location" value="${performDTO.location }" />
 <c:set var="runningTime" value="${performDTO.running_time }" />
 <c:set var="intermission" value="${performDTO.intermission }" />
 <c:set var="performDate" value="${performDTO.perform_date }" />
 <c:set var="performDay" value="${performDTO.perform_day }" />
-<c:set var="limitAge" value="${performDTO.limit_age }" />
 <c:set var="mainImg" value="${performDTO.main_img }" />
+<c:set var="limitAge" value="${performDTO.limit_age }" />
+
+<!-- session에 담긴 공연 '좌석정보' dto -->
+<c:set var="booked_seat" value="${performSeatDTO.booked_seat }" />
+<c:set var="remain_R" value="${performSeatDTO.remain_R }" />
+<c:set var="remain_S" value="${performSeatDTO.remain_S }" />
+<c:set var="remain_A" value="${performSeatDTO.remain_A }" />
+<c:set var="remain_B" value="${performSeatDTO.remain_B }" />
+<c:set var="remain_all" value="${performSeatDTO.remain_all }" />
 
 <!DOCTYPE html>
 <html>
@@ -67,8 +75,8 @@
 <!-- 좌석등급 / 잔여석 -->
 <div id="section_seat">
 	<div><img src="images/ticketing/stit_seat.gif"></div>
-	<div>R석 | 19석</div>
-	<div>S석 | 47석</div>
+	<div>R석 | ${remain_R }석</div>
+	<div>S석 | ${remain_S }석</div>
 </div>
 
 <!-- 유의사항 -->
