@@ -11,22 +11,12 @@
 	// step2 -> step3 -> step4 거쳐온 좌석정보
 	String selectedSeatGrade = request.getParameter("selectedSeatGrade");
 	String selectedSeatVal = request.getParameter("selectedSeatVal");
-	
 	String[] seatGradeArr = selectedSeatGrade.split(",");	
 	String[] seatValArr = selectedSeatVal.split(",");
- 
-	int seatNumber_R = 0;
-	int seatNumber_S = 0;
-	for(int i=0; i<seatGradeArr.length; i++){
-	 if(seatGradeArr[i].equals("R석")){
-		 seatNumber_R++;
-	 } else if(seatGradeArr[i].equals("S석")){
-		 seatNumber_S++;
-	 }
- }
 %>
 
 <!-- session에 담긴 공연정보 dto -->
+<c:set var="performNum" value="${performDTO.perform_num }" />
 <c:set var="performTitle" value="${performDTO.perform_title }" />
 <c:set var="location" value="${performDTO.location }" />
 <c:set var="runningTime" value="${performDTO.running_time }" />
@@ -38,8 +28,6 @@
 <!-- 예매자가 선택한 값들 -->
 <c:set var="seatGradeArr" value="<%=seatGradeArr %>" />	
 <c:set var="seatValArr" value="<%=seatValArr %>" />
-<c:set var="seatNum_R" value="<%=seatNumber_R %>" />
-<c:set var="seatNum_S" value="<%=seatNumber_S %>" />
 <c:set var="totalPrice" value="<%=totalPrice %>" />
 
 
@@ -81,6 +69,66 @@
 		});
 		
 	});
+	
+	// '다음단계' 클릭 시.
+	function goNext(){
+		
+		var flag = 1;		// '0'이 될 시, 다음으로 넘어갈 수 없음.
+		var payTool = "";		// 결제방식.
+		
+		// 신용카드일 경우.
+		if($("input[name='payment']:checked").val() == '신용카드'){
+			payTool ="payTool_card";
+			if($('#selectPay_card_sort option:selected').text()=='카드 종류를 선택하세요.'){
+				flag = 0;
+				alert('카드 종류를 선택해주세요.');
+			}
+		}
+		// 무통장입금일 경우.
+		else if($("input[name='payment']:checked").val() == '무통장입금'){
+			payTool ="payTool_noBank";
+			if($('#selectPay_noBank_sort option:selected').text()=='입급하실 은행을 선택하세요.'){
+				flag = 0;
+				alert('입급하실 은행을 선택해주세요.');
+			}
+		}
+		// 휴대폰 결제일 경우.
+		else if($("input[name='payment']:checked").val() == '휴대폰결제'){
+			payTool ="payTool_phone";
+		}
+		
+		/* 넘어갈 정보들
+			*	공연 번호
+			*	선택한 좌석 정보, 좌석 등급 
+			*	총 결제가격
+			*	결제방식 (신용카드 / 무통장 / 폰결제 등) -> 이걸 쓸일이 있으려나?
+		*/
+		
+		if(flag == 1){
+			var performNum = '${performNum}';		// 공연 번호
+			var seatGradeArr = new Array();     // '좌석등급' 배열 
+			var seatValArr = new Array();       // '좌석정보' 배열 
+			var _totalPrice = '${totalPrice}';		// 총 결제금액
+			var memberId = '${id}';			        // 회원 ID (session에서 바로 불러옴)
+	
+			// '좌석등급, 좌석정보'를 배열에 담아 쿼리스트링으로 넘기기위한 작업.
+			<c:forEach var="item" items="${seatGradeArr }" >		
+				seatGradeArr.push('${item}');			// push() 메소드 활용
+			</c:forEach>
+			<c:forEach var="item" items="${seatValArr }" >		
+				seatValArr.push('${item}');
+			</c:forEach>
+			
+			// 정규식을 활용해 콤마 제거 (70,000 -> 70000)
+			var totalPrice = _totalPrice.replace(/,/g,"");
+
+			// Controller로 이동 (원래는 '결제창'으로 이동해야함.)
+			location.href = "performBook.pe?selectedSeatGrade="+seatGradeArr+"&selectedSeatVal="+seatValArr+"&totalPrice="+totalPrice+
+											"&performNum="+performNum+"&memberId="+memberId;
+		}
+			
+	}
+	
 </script>
 
 <body>
@@ -110,7 +158,7 @@
 			<div class="section_main_insertTop">신용카드정보</div>
 			<div>
 				<input type="radio" value="일반신용카드" name="cardSort" checked>일반신용카드
-				<select>
+				<select id="selectPay_card_sort">
 					<option>카드 종류를 선택하세요.</option>
 					<option>KB국민카드</option>
 					<option>BC카드</option>
@@ -121,9 +169,9 @@
 					<option>하나카드</option>
 				</select>
 			</div>
-			<div class="select_main_insert_card"><span>결제금액 : 70,000원</span></div>
+			<div class="select_main_insert_card"><span>결제금액 : ${totalPrice }원</span></div>
 			<div class="select_main_insert_card"><span>할부선택 : </span>
-				<select name="installment">
+				<select id="selectPay_card_installment">
 					<option>일시불</option>
 					<option>2개월</option>
 					<option>3개월</option>
@@ -151,7 +199,7 @@
 				<tr class="table_tr">
 					<td class="table_td1">입금하실은행</td>
 					<td>
-						<select>
+						<select id="selectPay_noBank_sort">
 							<option>입금하실 은행을 선택하세요.</option>
 							<option>농협(중앙)</option>
 							<option>국민은행</option>
@@ -189,7 +237,6 @@
 	</div>
 </div>
 
-<!-- //공연정보, 예매정보 -->
 <div id="section_right">
 	<img src="performUpload/${mainImg }" id="perform_mainImg">
 	<div id="perform_title">${performTitle }</div>
@@ -246,7 +293,7 @@
 		</tr>
 	</table>
 	<img src="images/ticketing/btn_pre.gif" id="prev_btn" onclick="history.back()">		<!-- 이전단계 버튼 -->
-	<img src="images/ticketing/btn_next_02.gif" id="next_btn">		<!-- 다음단계 버튼 -->
+	<img src="images/ticketing/btn_next_02.gif" id="next_btn" onclick="goNext()">		<!-- 다음단계 버튼 -->
 </div> <!-- 공연정보, 예매정보 // -->
 
 </div>  <!-- wrap // -->

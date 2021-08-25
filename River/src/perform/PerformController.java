@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import perform.action.PerformAction;
+import perform.action.PerformBookAction;
 import perform.action.PerformDeleteAction;
 import perform.action.PerformDetailAction;
 import perform.action.PerformDetailUpdateAction;
@@ -136,7 +137,7 @@ public class PerformController extends HttpServlet {
 			
 		}
 		
-		/* 공연정보 수정을 위한 정보출력 */
+		/* 공연정보 좋아요 증가 */
 		if(command.equals("/performLikeAdd.pe")) {
 			
 			action = new PerformLikeAddAction();
@@ -148,10 +149,22 @@ public class PerformController extends HttpServlet {
 			
 		}
 		
-		/* 공연정보 수정을 위한 정보출력 */
+		/* 공연정보 좋아요 감소 */
 		if(command.equals("/performLikeReduce.pe")) {
 			
 			action = new PerformLikeReduceAction();
+			try{
+				forward = action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
+		}
+		
+		/* 티켓예매 */
+		if(command.equals("/performBook.pe")) {
+			
+			action = new PerformBookAction();
 			try{
 				forward = action.execute(request, response);
 			}catch(Exception e){

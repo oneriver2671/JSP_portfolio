@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import mybatis.SqlMapConfig;
+import user.UserDTO;
 import vo.MemberLikeInfo;
 import vo.PerformSearchInfo;
 
@@ -243,6 +244,55 @@ public class PerformDataModel {
 		
 		return result;
 	}
+	
+	/* (티켓예매) 좌석정보 뽑아오기 */
+	public PerformSeatDTO selectPerformSeat(int perform_num){
+		PerformSeatDTO performSeatDTO = null;
+		
+		SqlSession sqlSession = factory.openSession();
+		performSeatDTO = sqlSession.selectOne("selectPerformSeat", perform_num);	
+		sqlSession.close();
+		
+		return performSeatDTO;
+	}
+	
+	/* (티켓예매) 좌석정보 수정 */
+	public int updatePerformSeat(PerformSeatDTO performSeatDTO){
+		int result = 0;
+		
+		SqlSession sqlSession = factory.openSession();
+		result = sqlSession.update("performBookUpdate", performSeatDTO);
+		sqlSession.commit();	
+		sqlSession.close();
+		
+		return result;
+	}
+	
+	/* (티켓예매) 예약정보 입력 */
+	public int insertPerformBook(PerformBookDTO performBookDTO){
+		int result = 0;
+		
+		
+		SqlSession sqlSession = factory.openSession();
+		result = sqlSession.insert("performBookInsert", performBookDTO);	
+		sqlSession.commit();
+		sqlSession.close();
+		
+		return result;
+	}
+	
+	/* (티켓예매) 회원정보 가져오기 */
+	public UserDTO selectBookMemberInfo(String memberId){
+		UserDTO userDTO = null;
+		
+		SqlSession sqlSession = factory.openSession();
+		userDTO = sqlSession.selectOne("selectBookMemberInfo", memberId);	
+		sqlSession.close();
+		
+		return userDTO;
+	}
+	
+	
 
 	
 }

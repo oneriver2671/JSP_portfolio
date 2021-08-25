@@ -3,7 +3,6 @@
 
 <mapper namespace="do">
 
-
 <!-- 공연정보 입력 -->
 <insert id="performInsert" parameterType="perform.PerformDTO">
 	insert into perform_info values(
@@ -12,6 +11,12 @@
   #{perform_host}, #{limit_age}, 0, default, #{open_date},
 	#{price_R}, #{price_S}, #{price_A}, #{price_B}, #{priceLow_R}, #{priceLow_S}, #{priceLow_A},
 	#{perform_day}, #{open_day}, #{price_All} )
+</insert>
+
+<!-- 공연 좌석정보 입력 -->
+<insert id="performSeatInsert" parameterType="perform.PerformSeatDTO">
+	insert into perform_seat_info values(#{perform_num}, #{perform_location}, #{booked_seat},
+	#{remain_R}, #{remain_S}, #{remain_A}, #{remain_B}, #{remain_all} )
 </insert>
 
 <!-- 공연 List 출력 -->
@@ -97,6 +102,29 @@
 <!-- (공연 Detail페이지) 회원이 누른 좋아요 정보 확인용 -->
 <select id="performLikeInfo" parameterType="vo.MemberLikeInfo" resultType="int">
 	select perform_num from member_perform_like where member_id = #{member_id} and perform_num = #{perform_num}
+</select>
+
+
+<!-- (티켓예매) 정보 수정 전, 좌석정보 뽑아오기  -->
+<select id="selectPerformSeat" parameterType="int" resultType="perform.PerformSeatDTO">
+	select * from perform_seat_info where perform_num = ${perform_num}
+</select>
+
+<!-- (티켓예매) 예약된 정보로 수정 -->
+<update id="performBookUpdate" parameterType="perform.PerformSeatDTO">
+	update perform_seat_info set booked_seat = concat(booked_seat, #{booked_seat}, ',') , remain_R = #{remain_R}, remain_S = #{remain_S},
+	remain_A = #{remain_A}, remain_B = #{remain_B}, remain_all = #{remain_all}
+	where perform_num = #{perform_num}
+</update>
+
+<!-- (티켓예매) 예약정보 입력 -->
+<insert id="performBookInsert" parameterType="perform.PerformBookDTO">
+	insert into reservation_info values(#{member_id}, #{member_tel}, #{member_email}, #{perform_num}, #{seat} )
+</insert>
+
+<!-- (for 티켓예매) 회원정보 꺼내오기 -->
+<select id="selectBookMemberInfo" parameterType="String" resultType="user.UserDTO">
+	select birth, tel, email from member_info where id = #{memberId}
 </select>
 
 

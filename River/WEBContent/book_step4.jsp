@@ -15,15 +15,6 @@
 	String[] seatGradeArr = selectedSeatGrade.split(",");	
 	String[] seatValArr = selectedSeatVal.split(",");
  
-	int seatNumber_R = 0;
-	int seatNumber_S = 0;
-	for(int i=0; i<seatGradeArr.length; i++){
-	 if(seatGradeArr[i].equals("R석")){
-		 seatNumber_R++;
-	 } else if(seatGradeArr[i].equals("S석")){
-		 seatNumber_S++;
-	 }
- }
 %>
 
 <!-- session에 담긴 공연정보 dto -->
@@ -38,8 +29,6 @@
 <!-- 예매자가 선택한 값들 -->
 <c:set var="seatGradeArr" value="<%=seatGradeArr %>" />	
 <c:set var="seatValArr" value="<%=seatValArr %>" />
-<c:set var="seatNum_R" value="<%=seatNumber_R %>" />
-<c:set var="seatNum_S" value="<%=seatNumber_S %>" />
 <c:set var="totalPrice" value="<%=totalPrice %>" />
 
 <!-- session에 담긴 회원 정보 -->
@@ -79,9 +68,8 @@ function goNext(){
 			seatValArr.push('${item}');
 		</c:forEach>
 		
-		// 이렇게 GET방식으로 넘기는게 최선인가..
-	  location.href = "book_step5.jsp?selectedSeatGrade="+seatGradeArr+"&selectedSeatVal="+seatValArr+"&totalPrice="+totalPrice+
-			  "&inputTel="+inputTel+"&inputEmail="+input_email+"&inputBirth="+input_birth;
+		// 회원정보는 보안문제가 있을 수 있으니 GET방식으로 넘기지 않겠음.
+	  location.href = "book_step5.jsp?selectedSeatGrade="+seatGradeArr+"&selectedSeatVal="+seatValArr+"&totalPrice="+totalPrice;
 	}
 }
 
