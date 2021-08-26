@@ -2,6 +2,7 @@ package perform.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import perform.PerformBookDTO;
 import perform.PerformSeatDTO;
@@ -104,6 +105,11 @@ public class PerformBookAction implements PerformAction {
 		
 		performBookService.setPerformBook(performBookDTO);	// '예약정보' 입력
 		
+		
+		// 예약 간 사용된 '공연정보' 관련 session 삭제.
+		HttpSession session = request.getSession();
+		session.removeAttribute("performDTO");
+		session.removeAttribute("performSeatDTO");
 		
 		ActionForward forward = new ActionForward();
 		forward.setPath("performDetail.pe?perform_num="+performNum+"&id="+memberId);	// 다시 '상세페이지'로.

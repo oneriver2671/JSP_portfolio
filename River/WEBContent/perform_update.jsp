@@ -21,6 +21,7 @@ section{
  width: 1200px;
  min-height: 900px;
  margin: 0 auto;
+ padding-bottom: 60px;
  background-color: whitesmoke;
 }
 #h2_list{

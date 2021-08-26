@@ -119,14 +119,12 @@
 				seatValArr.push('${item}');
 			</c:forEach>
 			
-			// 정규식을 활용해 콤마 제거 (70,000 -> 70000)
-			var totalPrice = _totalPrice.replace(/,/g,"");
+			var totalPrice = _totalPrice.replace(/,/g,"");   // 정규식을 활용해 콤마 제거 (70,000 -> 70000)
 
 			// Controller로 이동 (원래는 '결제창'으로 이동해야함.)
 			location.href = "performBook.pe?selectedSeatGrade="+seatGradeArr+"&selectedSeatVal="+seatValArr+"&totalPrice="+totalPrice+
 											"&performNum="+performNum+"&memberId="+memberId;
 		}
-			
 	}
 	
 </script>
