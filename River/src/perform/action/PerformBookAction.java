@@ -23,16 +23,7 @@ public class PerformBookAction implements PerformAction {
 		int performNum = Integer.parseInt(request.getParameter("performNum"));   // 공연 번호
 		
 		String[] seatGradeArr = _seatGradeArr.split(",");	// 콤마 제거 후 배열 형태로 변환.
-		
-		
-		/*---- 테스트용 출력 ----*/
-		System.out.println(seatGradeArr[0]);
-		System.out.println(seatGradeArr[1]);
-		System.out.println(seatValArr);
-		System.out.println(totalPrice);
-		System.out.println(performNum);
-		System.out.println(memberId);
-		
+
 		
 		/* model단 처리 */
 		PerformBookService performBookService = new PerformBookService();
