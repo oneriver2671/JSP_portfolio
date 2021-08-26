@@ -174,9 +174,12 @@ public class PerformController extends HttpServlet {
 		}
 
 		if(forward != null){	
+			// Redirect로 이동 (request, response가 초기화됨)
 			if(forward.isRedirect()){
 				response.sendRedirect(forward.getPath());
-			}else{
+			}
+			// Forward로 이동 (이전 페이지의 request를 쓸 수 있음)
+			else{
 				RequestDispatcher dispatcher  = request.getRequestDispatcher(forward.getPath());
 				dispatcher.forward(request, response);					
 			}

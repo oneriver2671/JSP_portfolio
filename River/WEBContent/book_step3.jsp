@@ -16,11 +16,16 @@
  
  int seatNumber_R = 0;
  int seatNumber_S = 0;
+ int seatNumber_all = 0;
  for(int i=0; i<seatGradeArr.length; i++){
 	 if(seatGradeArr[i].equals("R석")){
 		 seatNumber_R++;
-	 } else if(seatGradeArr[i].equals("S석")){
+	 } 
+	 else if(seatGradeArr[i].equals("S석")){
 		 seatNumber_S++;
+	 }
+	 else if(seatGradeArr[i].equals("전석")){
+		 seatNumber_all++;
 	 }
  }
 %>
@@ -34,13 +39,14 @@
 <c:set var="performDay" value="${performDTO.perform_day }" />
 <c:set var="limitAge" value="${performDTO.limit_age }" />
 <c:set var="mainImg" value="${performDTO.main_img }" />
+<c:set var="priceAll" value="${performDTO.price_All }" />
 <c:set var="priceR" value="${performDTO.price_R }" />
 <c:set var="priceS" value="${performDTO.price_S }" />
 <c:set var="seatGradeArr" value="<%=seatGradeArr %>" />	
 <c:set var="seatValArr" value="<%=seatValArr %>" />
+<c:set var="seatNum_all" value="<%=seatNumber_all %>" />
 <c:set var="seatNum_R" value="<%=seatNumber_R %>" />
 <c:set var="seatNum_S" value="<%=seatNumber_S %>" />
-
 
 <!DOCTYPE html>
 <html>
@@ -172,6 +178,42 @@ $(document).ready(function(){
 					<td class="table_td4">
 						<select>
 							<c:forEach var="i" begin="0" end="${seatNum_S }" step="1" > 
+								<option value=${i }>${i }매</option>
+							</c:forEach>
+						</select>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</c:if>
+	
+	<!-- 전석 선택 시 -->
+	<c:if test="${seatNum_all != 0 }">
+		<div id="section_main_all">
+			<div class="section_main_seatInfo"><span>전석</span> | <span>좌석 ${seatNum_all }매</span>를 선택하셨습니다.</div>
+			<table>
+				<tr>
+					<td class="table_td1">기본가</td>
+					<td class="table_td2">일반</td>
+					<td class="table_td3">${priceAll }원</td>
+					<td class="table_td4">
+						<select>
+							<c:forEach var="i" begin="0" end="${seatNum_all }" step="1" > 
+								<option value=${i }>${i }매</option>
+							</c:forEach>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td class="table_td1">기본할인</td>
+					<td class="table_td2">장애인/국가유공자 할인 50%</td>
+					<td class="table_td3">
+						<fmt:parseNumber var="priceAll_half" value="${priceAll/2 }" integerOnly="true" />  <!-- jstl 소숫점 없애기 -->
+						${priceAll_half}원  
+					</td>
+					<td class="table_td4">
+						<select>
+							<c:forEach var="i" begin="0" end="${seatNum_all }" step="1" > 
 								<option value=${i }>${i }매</option>
 							</c:forEach>
 						</select>

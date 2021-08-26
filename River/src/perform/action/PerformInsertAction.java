@@ -15,6 +15,8 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import perform.PerformDTO;
+import perform.PerformSeatDTO;
+import perform.svc.PerformDetailService;
 import perform.svc.PerformInsertService;
 import vo.ActionForward;
 
@@ -194,7 +196,7 @@ public class PerformInsertAction implements PerformAction {
 		}
 	
 		
-		/* 공연정보 dto에 담기 */
+		// 공연정보 dto에 담기
 		performDTO = new PerformDTO();
 		performDTO.setPerform_title(multi.getParameter("title"));
 		performDTO.setPerform_date(perform_date);
@@ -219,20 +221,62 @@ public class PerformInsertAction implements PerformAction {
 		performDTO.setPerform_day(perform_dayOfWeek);
 		performDTO.setOpen_day(open_dayOfWeek);
 		performDTO.setPrice_All(price_All);
+		
+		
+		// 공연 '좌석정보' 설정하기
+		int remain_R = 0;		// R석 초기값
+		int remain_S = 0;		// S석 초기값
+		int remain_A = 0;		// A석 초기값
+		int remain_B = 0;		// B석 초기값
+		int remain_all = 0;		// 전석 초기값 (들어오는 좌석정보가 '전석'일 시에만, 값 설정됨)
+		
+		// 공연장별 '좌석 수' 초기값 다르게 설정
+		if(multi.getParameter("location").equals("예술의전당 - IBK챔버홀")) {
+			// 전석이 아닌 경우
+			if(multi.getParameter("seat_price_All").equals("")) {
+				remain_R = 392;
+				remain_S = 208;
+			} 
+			// 전석인 경우
+			else {
+				remain_all = 600;
+			}
+		}
+		
 
 		
-		// model 객체 호출
+		
+		/*----- model 객체 호출 -----*/
 		PerformInsertService performInsertService = new PerformInsertService();
+		/* 공연 '상세정보' 입력 */
 		boolean isInsertSuccess = performInsertService.registArticle(performDTO);
 		if(!isInsertSuccess) {
 			System.out.println("입력 실패!");
 		} else {
 			System.out.println("입력 성공");
-			forward = new ActionForward();
-			forward.setRedirect(true);
-			forward.setPath("performList.pe");	
 		}
 		
+		/* 공연 상세정보에 입력된 '공연번호' 불러오기 (바로 위 코드에서 추가된) */
+		int perform_num = performInsertService.getPerformNumFinal();
+		
+		/* 공연 '좌석정보' 입력 */
+		PerformSeatDTO performSeatDTO = new PerformSeatDTO();
+		performSeatDTO.setPerform_num(perform_num);		
+		performSeatDTO.setPerform_location(multi.getParameter("location"));
+		performSeatDTO.setBooked_seat("");		// 초기값은 공백
+		performSeatDTO.setRemain_R(remain_R);
+		performSeatDTO.setRemain_S(remain_S);
+		performSeatDTO.setRemain_A(remain_A);
+		performSeatDTO.setRemain_B(remain_B);
+		performSeatDTO.setRemain_all(remain_all);
+		
+		
+		performInsertService.setPerformSeatInfo(performSeatDTO);
+		
+		
+		forward = new ActionForward();
+		forward.setRedirect(true);
+		forward.setPath("performList.pe");	
 		return forward;
 	}
 

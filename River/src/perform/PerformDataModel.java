@@ -25,14 +25,39 @@ public class PerformDataModel {
 	/* 공연정보 입력 */
 	public int insertPerform(PerformDTO performDTO){
 		int result = 0;
+		
 		SqlSession sqlSession = factory.openSession();
 		result = sqlSession.insert("performInsert", performDTO);
-		
 		sqlSession.commit();	// select와 다르게 꼭 필요한 ★★★
 		sqlSession.close();
 		
 		return result;
 	}
+	
+	/* 공연번호(ID) 불러오기 (for 공연 좌석정보) */
+	public int selectFianlPerformNum(){
+		int perform_num = 0;
+		
+		SqlSession sqlSession = factory.openSession();
+		perform_num = sqlSession.selectOne("getFinalPerformNum");
+		sqlSession.close();
+		
+		return perform_num;
+	}
+	
+
+	/* 공연 '좌석정보' 입력 */
+	public int insertPerformSeatInfo(PerformSeatDTO performSeatDTO){
+		int result = 0;
+		
+		SqlSession sqlSession = factory.openSession();
+		result = sqlSession.insert("performSeatInsert", performSeatDTO);
+		sqlSession.commit();	
+		sqlSession.close();
+		
+		return result;
+	}
+	
 	
 	/* 공연 List 출력 */
 	public List<PerformDTO> getPerformList(int page){

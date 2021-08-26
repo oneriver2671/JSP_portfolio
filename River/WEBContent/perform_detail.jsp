@@ -23,6 +23,13 @@
 	 boolean isLike = (Boolean)request.getAttribute("isLike");		// 게시글 좋아요 누른 회원인지 확인용
 %>
 
+<!-- 공연 '상세정보' -->
+<c:set var="price_all" value="${performDTO.price_All }" />
+<c:set var="price_R" value="${performDTO.price_R }" />
+<c:set var="price_S" value="${performDTO.price_S }" />
+<c:set var="price_A" value="${performDTO.price_A }" />
+<c:set var="price_B" value="${performDTO.price_B }" />
+
 <!-- 공연 '좌석정보' -->
 <c:set var="booked_seat" value="${performSeatDTO.booked_seat }" />
 <c:set var="remain_R" value="${performSeatDTO.remain_R }" />
@@ -271,13 +278,23 @@ location.href="logout.jsp";
 			</div>
 			<div class="reser_out3">예매가능 잔여좌석</div>
 			<div class="reser_out4">
-			<!-- jstl 문법 활용하여 처리할 것. -->
-				<div><div>전석</div><div class="possible_seat">${remain_all }석</div></div>
-				<div><div>R석</div><div class="possible_seat">${remain_R }석</div></div>
-				<div><div>S석</div><div class="possible_seat">${remain_S }석</div></div>				
-				<div><div>A석</div><div class="possible_seat">${remain_A }석</div></div>				
+			<!-- 가격 유무에 따라 좌석정보 표시 -->
+			<c:if test="${price_all != 0}">
+				<div><div>전석</div><div class="possible_seat">${remain_all }석</div></div>			
+			</c:if>
+			<c:if test="${price_R != 0}">
+				<div><div>R석</div><div class="possible_seat">${remain_R }석</div></div>					
+			</c:if>
+			<c:if test="${price_S != 0}">
+				<div><div>S석</div><div class="possible_seat">${remain_S }석</div></div>			
+			</c:if>
+			<c:if test="${price_A != 0}">
+				<div><div>A석</div><div class="possible_seat">${remain_A }석</div></div>		
+			</c:if>
+			<c:if test="${price_B != 0}">
 				<div><div>B석</div><div class="possible_seat">${remain_B }석</div></div>			
-					
+			</c:if>
+	
 				<!-- '롯데콘홀'용
 				<div><div>시야방해R</div><div class="possible_seat">0석</div></div>				
 				<div><div>시야방해S</div><div class="possible_seat">0석</div></div>				

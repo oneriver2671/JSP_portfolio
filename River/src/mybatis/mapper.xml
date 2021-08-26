@@ -13,11 +13,18 @@
 	#{perform_day}, #{open_day}, #{price_All} )
 </insert>
 
+<!-- 공연번호(ID) 불러오기 (for 공연 좌석정보) -->
+<select id="getFinalPerformNum" resultType="int">
+	select max(perform_num) from perform_info
+</select>
+
 <!-- 공연 좌석정보 입력 -->
 <insert id="performSeatInsert" parameterType="perform.PerformSeatDTO">
 	insert into perform_seat_info values(#{perform_num}, #{perform_location}, #{booked_seat},
 	#{remain_R}, #{remain_S}, #{remain_A}, #{remain_B}, #{remain_all} )
 </insert>
+
+
 
 <!-- 공연 List 출력 -->
 <select id="getPerformList" resultType="perform.PerformDTO" parameterType="int">

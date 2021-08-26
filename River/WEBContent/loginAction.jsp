@@ -32,6 +32,8 @@
 			pwd = rs.getString("pwd");
 			name = rs.getString("name");
 			birth = rs.getString("birth");
+			tel = rs.getString("tel");
+			email = rs.getString("email");
 			
 			if(!pwd_input.equals(pwd)){		
 				out.println("<script>alert('비밀번호가 일치하지 않습니다.');");

@@ -13,6 +13,11 @@
 <c:set var="performDay" value="${performDTO.perform_day }" />
 <c:set var="mainImg" value="${performDTO.main_img }" />
 <c:set var="limitAge" value="${performDTO.limit_age }" />
+<c:set var="price_all" value="${performDTO.price_All }" />
+<c:set var="price_R" value="${performDTO.price_R }" />
+<c:set var="price_S" value="${performDTO.price_S }" />
+<c:set var="price_A" value="${performDTO.price_A }" />
+<c:set var="price_B" value="${performDTO.price_B }" />
 
 <!-- session에 담긴 공연 '좌석정보' dto -->
 <c:set var="booked_seat" value="${performSeatDTO.booked_seat }" />
@@ -75,8 +80,22 @@
 <!-- 좌석등급 / 잔여석 -->
 <div id="section_seat">
 	<div><img src="images/ticketing/stit_seat.gif"></div>
-	<div>R석 | ${remain_R }석</div>
-	<div>S석 | ${remain_S }석</div>
+	<!-- 가격 유무에 따라 좌석정보 표시 -->
+			<c:if test="${price_all != 0}">
+				<div>전석 | ${remain_all }석</div>	
+			</c:if>
+			<c:if test="${price_R != 0}">
+				<div>R석 | ${remain_R }석</div>				
+			</c:if>
+			<c:if test="${price_S != 0}">
+				<div>S석 | ${remain_S }석</div>		
+			</c:if>
+			<c:if test="${price_A != 0}">
+				<div>A석 | ${remain_A }석</div>		
+			</c:if>
+			<c:if test="${price_B != 0}">
+				<div>B석 | ${remain_B }석</div>		
+			</c:if>
 </div>
 
 <!-- 유의사항 -->

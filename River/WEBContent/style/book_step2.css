@@ -133,6 +133,14 @@ header img{
 	justify-content: space-between;
 	align-items: center;
 }
+#seat_all_remain{
+	width: 10px;
+	height: 10px;
+	background-color: #0080ff;
+	padding: 0;
+	border: none;
+	margin-right: 5px;
+}
 #seat_R_remain{
 	width: 10px;
 	height: 10px;
@@ -205,7 +213,14 @@ header img{
 	overflow-y: auto;
 }
 
-
+.seat_all{
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	background-color: #0080ff;
+	padding: 0;
+	border: none;
+}
 .seat_R{
 	position: absolute;
 	width: 10px;

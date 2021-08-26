@@ -33,6 +33,10 @@
 
 <!-- session에 담긴 회원 정보 -->
 <c:set var="memberName" value="${memberName }" />
+<c:set var="memberBirth" value="${memberBirth }" />
+<c:set var="memberTel" value="${memberTel }" />
+<c:set var="memberEmail" value="${memberEmail }" />
+
 
 <!DOCTYPE html>
 <html>
@@ -50,26 +54,31 @@ function goNext(){
 	var input_tel_middle = $('input[name=input_tel_middle]').val();
 	var input_tel_back = $('input[name=input_tel_back]').val();
 	var input_email = $('input[name=input_email]').val();
-	
+	var input_tel = input_tel_front + input_tel_middle + input_tel_back;		// 전화번호
 
 	if(input_birth=="" || input_tel_front=="" || input_tel_middle=="" || input_tel_back=="" || input_email==""){
 		alert('정보를 빠짐없이 입력해주세요.');
-	} else{
-		var inputTel = input_tel_front + input_tel_middle + input_tel_back;		// 전화번호
-		var totalPrice = $('#total_amount').text();		// 총 결제금액
-		var seatGradeArr = new Array();   // '좌석등급' 배열 (from step2.jsp)
-		var seatValArr = new Array();     // '좌석정보' 배열 (from step2.jsp)
-		
-		// jstl의 값을 배열에 담아, 쿼리스트링으로 넘기기위한 작업.
-		<c:forEach var="item" items="${seatGradeArr }" >		
-			seatGradeArr.push('${item}');			// push() 메소드 활용
-		</c:forEach>
-		<c:forEach var="item" items="${seatValArr }" >		
-			seatValArr.push('${item}');
-		</c:forEach>
-		
-		// 회원정보는 보안문제가 있을 수 있으니 GET방식으로 넘기지 않겠음.
-	  location.href = "book_step5.jsp?selectedSeatGrade="+seatGradeArr+"&selectedSeatVal="+seatValArr+"&totalPrice="+totalPrice;
+	} 
+	else{
+		if(input_birth != '${memberBirth}' || input_tel != '${memberTel}' || input_email != '${memberEmail}'){
+			alert('입력하신 회원정보가 일치하지 않습니다.');
+		} else{
+			alert('확인되었습니다.');
+				var totalPrice = $('#total_amount').text();		// 총 결제금액
+				var seatGradeArr = new Array();   // '좌석등급' 배열 (from step2.jsp)
+				var seatValArr = new Array();     // '좌석정보' 배열 (from step2.jsp)
+				
+				// jstl의 값을 배열에 담아, 쿼리스트링으로 넘기기위한 작업.
+				<c:forEach var="item" items="${seatGradeArr }" >		
+					seatGradeArr.push('${item}');			// push() 메소드 활용
+				</c:forEach>
+				<c:forEach var="item" items="${seatValArr }" >		
+					seatValArr.push('${item}');
+				</c:forEach>
+				
+				// 회원정보는 보안문제가 있을 수 있으니 GET방식으로 넘기지 않겠음.
+			  location.href = "book_step5.jsp?selectedSeatGrade="+seatGradeArr+"&selectedSeatVal="+seatValArr+"&totalPrice="+totalPrice;
+		}
 	}
 }
 
@@ -104,7 +113,7 @@ function goNext(){
 			</tr>
 			<tr>
 				<td class="table_td1">생년월일</td>
-				<td class="table_td2"><input type="text" name="input_birth" placeholder="YYMMDD" id="input_birth"> 예) 850101</td>
+				<td class="table_td2"><input type="text" name="input_birth" placeholder="8자리 입력" id="input_birth"> 예) 19850101</td>
 			</tr>
 			<tr>
 				<td class="table_td1">휴대폰</td>

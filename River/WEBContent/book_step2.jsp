@@ -4,6 +4,14 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <% request.setCharacterEncoding("utf-8"); %>  
 
+
+<!-- 공연정보 dto -->
+<c:set var="price_all" value="${performDTO.price_All }" />
+<c:set var="price_R" value="${performDTO.price_R }" />
+<c:set var="price_S" value="${performDTO.price_S }" />
+<c:set var="price_A" value="${performDTO.price_A }" />
+<c:set var="price_B" value="${performDTO.price_B }" />
+
 <!-- session에 담긴 공연 '좌석정보' dto -->
 <c:set var="booked_seat" value="${performSeatDTO.booked_seat }" />   <!-- 콤마로 연결된 문자열인 상태 -->
 <c:set var="bookedSeatArr" value="${fn:split(booked_seat, ',')}" />		<!-- 위의 function uri 불러와야 사용가능 -->
@@ -12,6 +20,7 @@
 <c:set var="remain_A" value="${performSeatDTO.remain_A }" />
 <c:set var="remain_B" value="${performSeatDTO.remain_B }" />
 <c:set var="remain_all" value="${performSeatDTO.remain_all }" />
+
 
 <!DOCTYPE html>
 <html>
@@ -37,6 +46,10 @@ $(document).ready(function(){
 		</c:forEach>
 	}
 	
+	/* '전석'일 시, button 색을 바꿔주기 위함 */
+	<c:if test="${price_all != 0}">
+		$('#section_main button').attr('class', 'seat_all');
+	</c:if>
 
 	/*---- 좌석 클릭 이벤트 ----*/
 
@@ -48,8 +61,12 @@ $(document).ready(function(){
 		
 		if(seatGrade == "seat_R"){
 			$('#seatChoice_show_grade').append('<button value="'+seatVal+'">R석</button>');
-		} else if(seatGrade == "seat_S"){
+		} 
+		else if(seatGrade == "seat_S"){
 			$('#seatChoice_show_grade').append('<button value="'+seatVal+'">S석</button>');	
+		}
+		else if(seatGrade =="seat_all"){
+			$('#seatChoice_show_grade').append('<button value="'+seatVal+'">전석</button>');	
 		}
 		$('#seatChoice_show_num').append('<input type="text" value="'+seatVal+'">');
 		$('#section_main').append('<button class="seat_choice_imgBtn" value="'+seatVal+'" style="'+position+'"><img src="images/ticketing/seat_choice.gif"style="width: 10px; height:10px;"></button>');	
@@ -94,7 +111,6 @@ function goNext(){
 
 
 <body>
-${booked_seat}
 <div id="wrap">
 <header>
 	<img src="images/ticketing/step_02_on.gif" id="step02">	
@@ -108,8 +124,24 @@ ${booked_seat}
 	<div id="section_right_img1"><div><img src="images/ticketing/seat_noimg.gif"></div></div>
 	<img src="images/ticketing/stit_seat_01.gif" id="section_right_img2">
 	<div id="section_right_remainSeat">
-		<div><div><div id="seat_R_remain"></div>R석<span>${remain_R }석</span></div><div class="seat_remain_price">60,000원</div></div>
-		<div><div><div id="seat_S_remain"></div>S석<span>${remain_S }석</span></div><div class="seat_remain_price">40,000원</div></div>
+	<!-- 가격 유무에 따라 좌석정보 표시 -->
+			<c:if test="${price_all != 0}">
+				<div><div><div id="seat_all_remain"></div>전석<span>${remain_all }석</span></div><div class="seat_remain_price">${price_all }원</div></div>	
+			</c:if>
+			<c:if test="${price_R != 0}">
+				<div><div><div id="seat_R_remain"></div>R석<span>${remain_R }석</span></div><div class="seat_remain_price">${price_R }원</div></div>			
+			</c:if>
+			<c:if test="${price_S != 0}">
+				<div><div><div id="seat_S_remain"></div>S석<span>${remain_S }석</span></div><div class="seat_remain_price">${price_S }원</div></div>	
+			</c:if>
+			<c:if test="${price_A != 0}">
+					<div><div><div id="seat_A_remain"></div>A석<span>${remain_A }석</span></div><div class="seat_remain_price">${price_A }원</div></div>
+			</c:if>
+			<c:if test="${price_B != 0}">
+					<div><div><div id="seat_S_remain"></div>B석<span>${remain_B }석</span></div><div class="seat_remain_price">${price_B }원</div></div>
+			</c:if>
+
+		
 	</div>
 	<img src="images/ticketing/stit_seat_02.gif" id="section_right_img3">
 	<table id="section_right_choiceSeat">
