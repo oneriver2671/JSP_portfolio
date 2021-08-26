@@ -332,14 +332,6 @@ function back(){
 					전석: <input type="text" name="seat_price_All" class="priceInput" placeholder="전석 동일 시" >
 				</td>
 			</tr>
-			<tr>
-				<td>시야방해석 가격</td>
-				<td>
-					시야방해 R석: <input type="text" name="seat_priceLow_R" class="priceInput" placeholder="숫자만"> 
-					시야방해 S석: <input type="text" name="seat_priceLow_S" class="priceInput" placeholder="숫자만"> 
-					시야방해 A석: <input type="text" name="seat_priceLow_A" class="priceInput" placeholder="숫자만"> 
-				</td>
-			</tr>
 		</table>
 			<input type="button" value="돌아가기" onclick="back()">
 			<input type="submit" id="addBtn" value="작성 완료">

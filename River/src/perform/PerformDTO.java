@@ -12,18 +12,14 @@ public class PerformDTO {
 	private String main_img;		// 포스터 사진
 	private String sub_img;		    // 기타 이미지
 	private String intro_text;		// 간략한 소개글
-	private String perform_host;		// 주최
+	private String perform_host;	// 주최
 	private int limit_age;			// 관람연령제한
 	private int like_num;		    // 좋아요 수
-	private int possible_seat;		// 남은 자리수
 	private String open_date;		// 티켓예매 날짜
 	private int price_R;			// R석 가격
 	private int price_S;			// S석 가격
 	private int price_A;			// A석 가격
 	private int price_B;			// B석 가격
-	private int priceLow_R;			// 시야방해 R석 가격
-	private int priceLow_S;			// 시야방해 S석 가격
-	private int priceLow_A;			// 시야방해 A석 가격
 	private String perform_day;		// 공연 요일
 	private String open_day;		// 티켓오픈 요일
 	private int price_All;			// 전석 동일가격
@@ -108,12 +104,6 @@ public class PerformDTO {
 	public void setLike_num(int like_num) {
 		this.like_num = like_num;
 	}
-	public int getPossible_seat() {
-		return possible_seat;
-	}
-	public void setPossible_seat(int possible_seat) {
-		this.possible_seat = possible_seat;
-	}
 	public String getOpen_date() {
 		return open_date;
 	}
@@ -144,24 +134,6 @@ public class PerformDTO {
 	public void setPrice_B(int price_B) {
 		this.price_B = price_B;
 	}
-	public int getPriceLow_R() {
-		return priceLow_R;
-	}
-	public void setPriceLow_R(int priceLow_R) {
-		this.priceLow_R = priceLow_R;
-	}
-	public int getPriceLow_S() {
-		return priceLow_S;
-	}
-	public void setPriceLow_S(int priceLow_S) {
-		this.priceLow_S = priceLow_S;
-	}
-	public int getPriceLow_A() {
-		return priceLow_A;
-	}
-	public void setPriceLow_A(int priceLow_A) {
-		this.priceLow_A = priceLow_A;
-	}
 	public String getPerform_day() {
 		return perform_day;
 	}
@@ -180,8 +152,6 @@ public class PerformDTO {
 	public void setPrice_All(int price_All) {
 		this.price_All = price_All;
 	}
-	
-	
-	
+
 	
 }

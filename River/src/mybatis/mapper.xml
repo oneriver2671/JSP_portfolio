@@ -8,9 +8,8 @@
 	insert into perform_info values(
 	default, #{perform_title}, #{perform_date}, #{location}, #{artist_main},
 	#{running_time}, #{intermission}, #{main_img}, #{sub_img}, #{intro_text},
-  #{perform_host}, #{limit_age}, 0, default, #{open_date},
-	#{price_R}, #{price_S}, #{price_A}, #{price_B}, #{priceLow_R}, #{priceLow_S}, #{priceLow_A},
-	#{perform_day}, #{open_day}, #{price_All} )
+  #{perform_host}, #{limit_age}, 0, #{open_date},
+	#{price_R}, #{price_S}, #{price_A}, #{price_B}, #{perform_day}, #{open_day}, #{price_All} )
 </insert>
 
 <!-- 공연번호(ID) 불러오기 (for 공연 좌석정보) -->
@@ -28,19 +27,19 @@
 
 <!-- 공연 List 출력 -->
 <select id="getPerformList" resultType="perform.PerformDTO" parameterType="int">
-	select perform_num, perform_title, perform_date, perform_day, location, artist_main, main_img, possible_seat, open_date,
+	select perform_num, perform_title, perform_date, perform_day, location, artist_main, main_img, open_date,
 	price_R, price_S, price_A, price_B, price_All from perform_info order by perform_date asc limit #{startrow}, 15
 </select>
 
 <!-- 공연 List 출력 (날짜 선택 시) -->
 <select id="getPerformListByDate" resultType="perform.PerformDTO" parameterType="vo.PerformSearchInfo">
-	select perform_num, perform_title, perform_date, perform_day, location, artist_main, main_img, possible_seat, open_date,
+	select perform_num, perform_title, perform_date, perform_day, location, artist_main, main_img, open_date,
 	price_R, price_S, price_A, price_B, price_All from perform_info where date(perform_date) between #{startDate} and #{endDate} order by perform_date asc limit #{startrow}, 15
 </select>
 
 <!-- 공연 List 출력 (날짜 + 장소 선택 시) -->
 <select id="getPerformListByLocation" resultType="perform.PerformDTO" parameterType="vo.PerformSearchInfo">
-	select perform_num, perform_title, perform_date, perform_day, location, artist_main, main_img, possible_seat, open_date,
+	select perform_num, perform_title, perform_date, perform_day, location, artist_main, main_img, open_date,
 	price_R, price_S, price_A, price_B, price_All from perform_info where location like '%${location}%' and date(perform_date) between #{startDate} and #{endDate} order by perform_date asc limit #{startrow}, 15
 </select>
 
@@ -72,8 +71,7 @@
 	artist_main=#{artist_main}, running_time=#{running_time}, intermission=#{intermission}, main_img=#{main_img},
 	sub_img=#{sub_img}, intro_text=#{intro_text}, perform_host=#{perform_host},
 	limit_age=#{limit_age}, open_date=#{open_date}, price_R=#{price_R}, price_S=#{price_S}, price_A=#{price_A},
-	price_B=#{price_B}, priceLow_R=#{priceLow_R}, priceLow_S=#{priceLow_S}, priceLow_A=#{priceLow_A},
-	perform_day=#{perform_day}, open_day=#{open_day}, price_All=#{price_All}
+	price_B=#{price_B}, perform_day=#{perform_day}, open_day=#{open_day}, price_All=#{price_All}
 	where perform_num = #{perform_num}
 </update>
 

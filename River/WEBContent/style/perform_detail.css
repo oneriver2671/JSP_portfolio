@@ -497,6 +497,9 @@ section{
 	text-align: center;
 	margin: 0 auto;
 }
+#section_middle_introImg img{
+	width: 1080px;
+}
 #section_middle_introText{
 	width: 1080px;
 	font-size: 10pt;

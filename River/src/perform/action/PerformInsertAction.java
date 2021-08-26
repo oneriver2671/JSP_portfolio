@@ -140,19 +140,11 @@ public class PerformInsertAction implements PerformAction {
 			limit_age = Integer.parseInt(multi.getParameter("limit_age"));
 		}
 		
-		int possible_seat = 0;
-		if(multi.getParameter("location").equals("롯데 콘서트홀")) {
-			possible_seat = 2036;
-		}
-		
 		// 가격 null값 처리
 		int price_R;
 		int price_S;
 		int price_A;
 		int price_B;
-		int priceLow_R;
-		int priceLow_S;
-		int priceLow_A;
 		int price_All;
 		if(multi.getParameter("seat_price_R").equals("")) {
 			price_R = 0;
@@ -174,21 +166,6 @@ public class PerformInsertAction implements PerformAction {
 		} else {
 			price_B = Integer.parseInt(multi.getParameter("seat_price_B"));
 		}
-		if(multi.getParameter("seat_priceLow_R").equals("")) {
-			priceLow_R = 0;
-		} else {
-			priceLow_R = Integer.parseInt(multi.getParameter("seat_priceLow_R"));
-		}
-		if(multi.getParameter("seat_priceLow_S").equals("")) {
-			priceLow_S = 0;
-		} else {
-			priceLow_S = Integer.parseInt(multi.getParameter("seat_priceLow_S"));
-		}
-		if(multi.getParameter("seat_priceLow_A").equals("")) {
-			priceLow_A = 0;
-		} else {
-			priceLow_A = Integer.parseInt(multi.getParameter("seat_priceLow_A"));
-		}
 		if(multi.getParameter("seat_price_All").equals("")) {
 			price_All = 0;
 		} else {
@@ -209,15 +186,11 @@ public class PerformInsertAction implements PerformAction {
 		performDTO.setIntro_text(multi.getParameter("intro_perform"));
 		performDTO.setPerform_host(multi.getParameter("perform_host"));
 		performDTO.setLimit_age(limit_age);
-		performDTO.setPossible_seat(possible_seat);
 		performDTO.setOpen_date(open_date);
 		performDTO.setPrice_R(price_R);
 		performDTO.setPrice_S(price_S);
 		performDTO.setPrice_A(price_A);
 		performDTO.setPrice_B(price_B);
-		performDTO.setPriceLow_R(priceLow_R);
-		performDTO.setPriceLow_S(priceLow_S);
-		performDTO.setPriceLow_A(priceLow_A);
 		performDTO.setPerform_day(perform_dayOfWeek);
 		performDTO.setOpen_day(open_dayOfWeek);
 		performDTO.setPrice_All(price_All);
