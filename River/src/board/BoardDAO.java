@@ -751,7 +751,7 @@ public class BoardDAO {
 		int result = 0;
 		
 		try {
-			pstmt = con.prepareStatement("insert into member_like_info values(?, ?)");
+			pstmt = con.prepareStatement("insert into member_board_like values(?, ?)");
 			pstmt.setString(1, member_id);		// 회원 id
 			pstmt.setInt(2, board_num);			// 게시물 번호
 			result = pstmt.executeUpdate();
@@ -770,7 +770,7 @@ public class BoardDAO {
 		int result = 0;
 		
 		try {
-			pstmt = con.prepareStatement("delete from member_like_info where member_id=? and board_num=?");
+			pstmt = con.prepareStatement("delete from member_board_like where member_id=? and board_num=?");
 			pstmt.setString(1, member_id);		// 회원 id
 			pstmt.setInt(2, board_num);			// 게시물 번호
 			result = pstmt.executeUpdate();
@@ -790,7 +790,7 @@ public class BoardDAO {
 		ResultSet rs = null;
 		
 		try {
-			pstmt = con.prepareStatement("select board_num from member_like_info where member_id=? and board_num=?");
+			pstmt = con.prepareStatement("select board_num from member_board_like where member_id=? and board_num=?");
 			pstmt.setString(1, member_id);		// 회원 id
 			pstmt.setInt(2, board_num);
 			rs = pstmt.executeQuery();
