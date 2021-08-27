@@ -24,19 +24,12 @@
 
   <!-- 이미지 슬라이더 1 -->
       <!-- Demo CSS -->
-<link rel="stylesheet" href="FlexSlider_01/flexslider.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="style/flexslider.css" type="text/css" media="screen" />
       <!-- Modernizr -->
-  <script src="FlexSlider_01/demo/js/modernizr.js"></script>
+  <script src="js/modernizr.js"></script>
   <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.min.js">\x3C/script>')</script>
       <!-- FlexSlider -->
-  <script defer src="FlexSlider_01/jquery.flexslider.js"></script>
-
-  <!-- 슬라이더(레슨 찾기) -->
-  <script src="jquery-1.2.6.js" type="text/javascript"></script>
-  <script src="coda-slider/jquery.scrollTo-1.3.3.js" type="text/javascript"></script>
-  <script src="coda-slider/jquery.localscroll-1.2.5.js" type="text/javascript" charset="utf-8"></script>
-  <script src="coda-slider/jquery.serialScroll-1.2.1.js" type="text/javascript" charset="utf-8"></script>
-  <script src="coda-slider/coda-slider.js" type="text/javascript" charset="utf-8"></script>
+  <script defer src="js/jquery.flexslider.js"></script>
 
 </head>
 
@@ -105,143 +98,7 @@ $(document).ready(function(){
     </div>
   </section>      <!-- main section 종료 -->
     
-  <section id="mid_section">
-    <div class="lessonInfo">
-      <div class="lessonInfo_top">
-        <div class="lesson_search"><h2>레슨 찾기</h2></div>
-        <div class="room_search"><h2>연습실 찾기</h2></div>
-      </div>
-    
-      <div id="slider" class="slider">    
-        <ul class="navigation">
-          <li><a href="#piano">피아노</a></li>
-          <li><a href="#sing_man">성악(남)</a></li>
-          <li><a href="#sing_woman">성악(여)</a></li>
-          <li><a href="#violin">바이올린</a></li>
-          <li><a href="#viola">비올라</a></li>
-          <li><a href="#cello">첼로</a></li>
-          <li><a href="#oboe">오보에&클라리넷</a></li>
-          <li><a href="#flute">플룻</a></li>
-          <li><a href="#bassoon">바순&호른</a></li>
-          <li><a href="#percussion">타악기</a></li>
-        </ul>
-        <span class="searchBox">
-          <input type="text" name="lessonSearch" placeholder="빠른 찾기" size="26"/>
-          <div><i class="fas fa-search"></i></div>
-        </span>
-    
-        <div class="scroll">
-          <div class="scrollContainer">
-            <div class="panel" id="piano">
-              <img src="images/brunch1.png">
-              <img src="images/brunch2.png">
-              <img src="images/brunch3.png">
-              <img src="images/brunch4.png">
-            </div>
-            <div class="panel" id="sing_man">
-              <img src="images/brunch5.png">
-              <img src="images/brunch6.png">
-              <img src="images/brunch7.png">
-            </div>
-            <div class="panel" id="sing_woman">
-              <img src="images/brunch6.png">
-            </div>
-            <div class="panel" id="violin">
-              <img src="images/brunch8.png">
-              <img src="images/brunch9.png">
-            </div>
-            <div class="panel" id="viola"></div>
-            <div class="panel" id="cello"></div>
-            <div class="panel" id="oboe"></div>
-            <div class="panel" id="flute"></div>
-            <div class="panel" id="bassoon"></div>
-            <div class="panel" id="percussion"></div>
-          </div>
-        </div>
-      </div>
-
-      <div id="content_room_search" class="slider">    
-        <ul class="navigation">
-          <li><a href="#sinchon">신촌</a></li>
-          <li><a href="#hongdae">홍대</a></li>
-          <li><a href="#hapjeong">합정</a></li>
-          <li><a href="#mapo">공덕/마포</a></li>
-          <li><a href="#jongno">광화문/종로</a></li>
-          <li><a href="#gangnam">강남</a></li>
-          <li><a href="#sadang">사당</a></li>
-          <li><a href="#seocho">교대/서초</a></li>
-          <li><a href="#ilsan">일산</a></li>
-        </ul>
-        <span class="searchBox">
-          <input type="text" name="lessonSearch" placeholder="빠른 찾기" size="26"/>
-          <div><i class="fas fa-search"></i></div>
-        </span>
-    
-        <div class="scroll">
-          <div class="scrollContainer">
-            <div class="panel2" id="sinchon">
-              <img src="images/room1.png">
-              <img src="images/room2.png">
-              <img src="images/room1.png">
-              <img src="images/room2.png">
-            </div>
-            <div class="panel2" id="hongdae">
-              <img src="images/room2.png">
-              <img src="images/room2.png">
-              <img src="images/room2.png">         
-            </div>
-            <div class="panel2" id="hapjeong">
-              <img src="images/room1.png">
-              <img src="images/room1.png">
-              <img src="images/room1.png">         
-            </div>
-            <div class="panel2" id="mapo">
-              <img src="images/room1.png">          
-            </div>
-            <div class="panel2" id="jongno">
-              <img src="images/room1.png">          
-            </div>
-            <div class="panel2" id="gangnam">
-              <img src="images/room2.png">          
-            </div>
-            <div class="panel2" id="sadang">
-              <img src="images/room1.png">          
-            </div>
-            <div class="panel2" id="seocho">
-              <img src="images/room1.png">          
-            </div>
-            <div class="panel2" id="ilsan">
-              <img src="images/room1.png">          
-            </div>
-          </div>
-        </div>
-      </div>
-  
-    </div>
-  
-    
-  <!-- <div class="practiceInfo">
-    <div class="lessonInfo_top">
-      <h2>악보 찾기 & 연습곡 추천</h2>
-    </div>
-    
-    <div class="practiceInfo_select">
-      <img src="images/singing_white.png" width="40" height="40">
-      <img src="images/violin.png" width="40" height="40">
-      <img src="images/basoon_white.png" width="40" height="40">
-      <img src="images/piano_white.png" width="40" height="40">
-      <img src="images/snaredrum_white.png" width="40" height="40">
-    </div> -->
-      <!-- Place somewhere in the <body> of your page -->
-    <!-- <div class="flexslider_2">
-      <img src="images/scores/Elise.png">
-      <img src="images/scores/prelude23_5_1.png">
-      <img src="images/scores/Elise.png">
-    </div>
-  </div> -->
-
-  </section>    <!-- mid_section 종료 -->
-
+ 
   <div id="bottom_wrap">
     <section id="bottom_section">
       <div class="notice">
@@ -263,10 +120,10 @@ $(document).ready(function(){
         <div class="board_top">
           <h2>커뮤니티</h2>
           <ul>
-            <li>자유게시판</li>
-            <li>음악이야기</li>
-            <li>악기정보</li>
-            <li>공연정보</li>
+            <li><a href="board_free_m1.jsp">자유게시판</a></li>
+            <li><a href="boardList.bo?sort=음악이야기">음악이야기</a></li>
+            <li><a href="boardList.bo?sort=악기정보">악기정보</a></li>
+            <li><a href="boardList.bo?sort=공연정보">공연정보</a></li>
           </ul>
           <img src="images/btn_more.png">
         </div>

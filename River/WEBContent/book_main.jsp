@@ -41,7 +41,36 @@
 
 <script>
 	$(function() {
-	  $( "#datepicker" ).datepicker();
+		var performDate = '${performDate.substring(0,10)}';		// jstl에 담긴 날짜정보.
+		
+		//선택가능 날짜 
+		var availableDates = [performDate];		// 여러 날짜가 들어갈 수 있으니, 배열의 형태. (일단 날짜 1개로 고정)
+		function available(date) {
+			var thismonth = date.getMonth()+1;
+			var thisday = date.getDate();
+
+			if(thismonth<10){
+				thismonth = "0"+thismonth;
+			}
+
+			if(thisday<10){
+				thisday = "0"+thisday;
+			}
+		    ymd = date.getFullYear() + "-" + thismonth + "-" + thisday;
+
+		    if ($.inArray(ymd, availableDates) >= 0) {
+		        return [true,"",""];
+		    } else {
+		        return [false,"",""];
+		    }
+		}
+
+		$('#datepicker').datepicker({ 
+			dateFormat: "yy-mm-dd",
+			regional: "ko",
+			beforeShowDay: available 
+		});
+
 	});
 	
 	function moveNext(){
@@ -68,7 +97,7 @@
 <!-- 관람일 선택 -->
 <div id="section_calendar">
 	<img src="images/ticketing/stit_date.gif">
-	<div id="datepicker"></div>			<!-- jQuery 오픈소스 사용. 다른 오픈소스 찾아보기 -->
+	<div id="datepicker"></div>			<!-- jQuery 오픈소스 사용. -->
 </div>
 
 <!-- 회차(관람시간) -->
