@@ -26,7 +26,7 @@ function loginCheck(id){
 	if(id == ""){		
 		alert('로그인 후 작성할 수 있습니다.');
 	} else{
-		location.href='write.jsp';
+		location.href='board_m1_write.jsp';
 	}
 	
 }

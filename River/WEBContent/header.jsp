@@ -107,7 +107,7 @@ function logout(){
             <li class="header_level1">커뮤니티
               <ul class="header_level2">
                 <li>공지사항</li>
-                <li><a href="board_free_m1.jsp">자유게시판</a></li>
+                <li><a href="board_m1_list.jsp">자유게시판</a></li>
                 <li><a href="boardList.bo?sort=음악이야기">음악이야기</a></li>
                 <li><a href="boardList.bo?sort=악기정보">악기정보</a></li>
                 <li><a href="boardList.bo?sort=공연정보">공연정보</a></li>

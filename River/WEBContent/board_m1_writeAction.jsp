@@ -21,6 +21,6 @@
 		out.println("<script>history.back();</script>");
 	} else{		
 		out.println("<script>alert('게시글 작성이 완료되었습니다.');</script>");
-		out.println("<script>location.href='freeBoard.jsp';</script>");
+		out.println("<script>location.href='board_m1_list.jsp';</script>");
 	}
 %>

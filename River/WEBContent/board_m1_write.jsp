@@ -19,7 +19,7 @@
 
   <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="js/board_free_m1.js"></script>		<!-- script는 파일 하나로 써도 무방할 듯. -->
+  <script src="js/board_m1_list.js"></script>	
 </head>
 <script>
 function nullCheck(){
@@ -46,7 +46,7 @@ function nullCheck(){
   <section>
   	<div id="main_section">
   		<div class="post">
-  			<form action="board_writeAction.jsp" name="updateAction" id="writeAction" method="post" >
+  			<form action="board_m1_writeAction.jsp" name="updateAction" id="writeAction" method="post" >
 	  			<div class="post_categori"> 
   					<!-- 카테고리 선택값을 어떻게 넘겨줄 수 있을까. click되면 name을 부여하는건 어때? -->
   					<!-- 버튼으로 바꾸고 싶음. --> <!-- hidden은 회색으로 표시하고 싶음. -->
@@ -62,7 +62,7 @@ function nullCheck(){
 	  			<input type="text" class="post_title" name="title" placeholder="제목을 입력하세요." autocomplete='off'>
   				<textarea class="post_content" name="content" placeholder="내용을 입력하세요." maxlength="2048"></textarea>
   				<div class="post_btn">
-  				  <input type="button" value="취소" onClick="location.href='freeBoard.jsp'">
+  				  <input type="button" value="취소" onClick="location.href='board_m1_list.jsp'">
   					<input type="button" name="writeBtn" value="작성" onclick="nullCheck()">
   							<!-- 위에 submit 아닌 것에 name="submit"하면 에러남. 참고!! -->
   				</div>

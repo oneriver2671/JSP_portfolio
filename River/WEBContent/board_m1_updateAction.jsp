@@ -20,7 +20,7 @@
 		out.println("<script>history.back();</script>");
 	} else{		
 		out.println("<script>alert('수정이 완료되었습니다.');</script>");
-		out.println("<script>location.href='freeBoard.jsp';</script>");  	// 이 위치는 수정이 좀 필요.
+		out.println("<script>location.href='board_m1_list.jsp';</script>");  	// 이 위치는 수정이 좀 필요.
 	}
   
 

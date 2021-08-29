@@ -15,7 +15,7 @@
   } else{
 	  out.println("<script>");
 	  out.println("alert('삭제되었습니다.');");
-	  out.println("location.href='freeBoard.jsp';");
+	  out.println("location.href='board_m1_list.jsp';");
 	  out.println("</script>");
   }
 

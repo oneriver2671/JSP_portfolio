@@ -5,10 +5,17 @@
   // 로그인 성공 후, 정보 가져오기
   request.setCharacterEncoding("utf-8");
   String id = (String)session.getAttribute("id");
-  ArrayList<BoardDTO> board_list = (ArrayList)request.getAttribute("arrayList");
-  BoardDTO dto = null;
+  if(id == null){
+	  id = "";		// 로그인 안했을 시, id값을 null 대신 공백으로 처리.
+  }
+  
+  // paging 작업.
+  int pageNum = 1;		// 기본 pageNum 세팅.
+  if(request.getParameter("pageNum")!=null){			// 이건 어디에서 넘어옴? -> 밑에 이전페이지, 다음페이지에 있는 a태그로부터.
+	  pageNum = Integer.parseInt(request.getParameter("pageNum"));	
+  }
+  
 %>
-
 
 <!DOCTYPE html>
 <html>
@@ -25,17 +32,21 @@
 
   <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="freeBoard.js"></script>
+  <script src="js/board_m1_list.js"></script>
 </head>
 
 
 <body>
 <jsp:include page="searchBar.jsp"></jsp:include>		<!-- 검색창 담겨있음 -->
 <jsp:include page="header.jsp"></jsp:include>		<!-- header 담겨있음 -->
-
 <div id="wrap">
   <section>
   	<div id="main_section">	  	
+	  	<jsp:useBean id="dao" class="board.BoardDAO" scope="page" />	
+				<%
+					ArrayList<BoardDTO> board_list2 = dao.getList(pageNum);    		// 게시판 내용 모두 가져온 값.
+					BoardDTO dto = null;		// dto 객체 초기화.
+				%>
 				<h2>자유게시판</h2> 
 	  		<table class="main_table">
 	  			<thead>
@@ -50,12 +61,14 @@
 	  			</thead>
 	  			<tbody>
 	  				<% 
-							for(int i=0; i<board_list.size(); i++){
-								dto = board_list.get(i);
+							for(int i=0; i<board_list2.size(); i++){
+								dto = board_list2.get(i);
 						%>
 						<tr>
+						<!-- 여기 a태그 ?문법 정리 -->
 							<td><%= dto.getOrders() %></td>
-							<td><a href="board_content.jsp?orders=<%= dto.getOrders() %>"><%= dto.getTitle()%></a></td>
+							<!-- 제목 클릭 시, 조회수 증가. dao에서 hits()메소드 호출. -->
+							<td><a href="board_m1_content.jsp?orders=<%= dto.getOrders() %>"><%= dto.getTitle()%></a></td>
 							<td><%= dto.getWriter_id() %></td>
 							<td><%= dto.getWrited_date().substring(0, 4)%>.<%=dto.getWrited_date().substring(5, 7)%>.<%=dto.getWrited_date().substring(8, 10)%></td>
 							<td><%= dto.getCheck_num() %></td>
@@ -66,28 +79,33 @@
 	  		</table>
 		
   		<div class="write_blank">
-  			<div id="write_btn" onclick="loginCheck('<%= id %>')">글쓰기</div>
+  			<div id="write_btn" onclick="loginCheck('<%= id %>')"  >글쓰기</div>
+
   		</div>
   		<div id="bot_section">
-  
-  			<div>(페이지 순서 들어갈 예정)</div>
   			<div>
-  				<form name="board_search" class="board_search" action="searchAction.jsp">
+		  		<% if(pageNum != 1){ %>
+		  			<a href="board_m1_list.jsp?pageNum=<%= pageNum - 1 %>">◁ 이전</a>
+		  		
+		  		<% } %>
+		  		<div class="page_num"><%= pageNum %></div>
+		  		<% if(dao.nextPage(pageNum)){ %>
+						<a href="board_m1_list.jsp?pageNum=<%= pageNum + 1 %>">다음 ▷</a>  			 
+		  		 <% } %>
+  			</div>
+  			<div>
+  				<form name="board_search" class="board_search" action="board_m1_searchAction.jsp">
   					<select name="search_by_day">
   						<option>전체기간</option>
   						<option>1일</option>
   						<option>1주</option>
   						<option>1개월</option>
-  						<option>6개월</option>
-  						<option>1년</option>
   						<!-- 밑에 기간 입력 칸도 만들고 싶음. -->
   					</select>
   					<select name="search_by_content">
   						<option>제목+내용</option>
   						<option>제목만</option>
   						<option>글 작성자</option>
-  						<option>댓글 내용</option>
-  						<option>댓글 작성자</option>
   					</select>
   					<!-- 2글자 이상부터 검색되게 제한하기. -->
   					<input type="text" name="search_value" placeholder="검색어를 입력해주세요" class="searchBar">
@@ -97,7 +115,7 @@
   		</div>
   	</div>
   </section>
-
+  
 <!-- footer 담겨있음 -->
 <jsp:include page="footer.jsp"></jsp:include>	
 

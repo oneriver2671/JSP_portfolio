@@ -42,7 +42,7 @@
 
   <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="js/board_free_m1.js"></script>		<!-- script는 파일 하나로 써도 무방할 듯. 다른 것만 몇개 이 파일에 추가. -->
+  <script src="js/board_m1_list.js"></script>		<!-- script는 파일 하나로 써도 무방할 듯. 다른 것만 몇개 이 파일에 추가. -->
 </head>
 <script>
 /*----  ajax 사용해야할 듯. ----*/
@@ -85,17 +85,12 @@ $(document).ready(function(){
   			<%
 					if(id!=null && id.equals(dto.getWriter_id())){
 			   %>
-			   		<a href="update.jsp?orders=<%= dto.getOrders() %>">수정</a>
-  				  <a href="deleteAction.jsp?orders=<%= dto.getOrders() %>">삭제</a>
+			   		<a href="board_m1_update.jsp?orders=<%= dto.getOrders() %>">수정</a>
+  				  <a href="board_m1_deleteAction.jsp?orders=<%= dto.getOrders() %>">삭제</a>
 			  <% } %>
   			</div>
   			<div class="top_btns_right">
-  				<!-- 이전글, 다음글도 onclick시 이동되어야 함. -->
-  				<% int temp=0; %>
-  				<button><a href="contentAction.jsp?orders=<%= dto.getOrders() %>&temp=0" >이전글</a></button>
-  				<button><a href="contentAction.jsp?orders=<%= dto.getOrders() %>&temp=1" >다음글</a></button>
-  				<button onclick="location.href='freeBoard.jsp'">목록</button>
-  			</div>
+    			</div>
   		</div>
   		<div class="post">
   			<div class="post_categori"><%= dto.getSort() %></div>

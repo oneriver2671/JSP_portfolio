@@ -23,7 +23,7 @@
 
   <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="js/board_free_m1.js"></script>		<!-- script는 파일 하나로 써도 무방할 듯. -->
+  <script src="js/board_m1_list.js"></script>		<!-- script는 파일 하나로 써도 무방할 듯. -->
 </head>
 <script>
 function nullCheck(){
@@ -52,7 +52,7 @@ function nullCheck(){
   <section>
   	<div id="main_section">
   		<div class="post">
-  			<form action="board_updateAction.jsp" name="writeAction" id="writeAction" method="post" >
+  			<form action="board_m1_updateAction.jsp" name="writeAction" id="writeAction" method="post" >
   				<input type="hidden" name="orders" value=<%= orders %>>
 	  			<div class="post_categori"> 
   					<!-- 카테고리 선택값을 어떻게 넘겨줄 수 있을까. click되면 name을 부여하는건 어때? -->
@@ -69,7 +69,7 @@ function nullCheck(){
 	  			<input type="text" class="post_title" name="title" value="<%= dto.getTitle() %>" autocomplete='off'>
   				<textarea class="post_content" name="content" maxlength="2048"><%= dto.getContent() %></textarea>
   				<div class="post_btn">
-  				  <input type="button" value="취소" onClick="location.href='board_free_m1.jsp'">
+  				  <input type="button" value="취소" onClick="location.href='board_m1_list.jsp'">
   					<input type="button" name="writeBtn" value="수정" onclick="nullCheck()">
   							<!-- 위에 submit 아닌 것에 name="submit"하면 에러남. 참고!! -->
   				</div>

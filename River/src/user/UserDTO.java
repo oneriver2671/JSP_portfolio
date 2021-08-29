@@ -13,8 +13,6 @@ public class UserDTO {
 	String addr;		// 주소
 	String eamil_ok;	// 이메일 수신여부
 	String sms_ok;		// sms 수신여부
-	String like_perform;	// 좋아요 클릭한 작품들
-	String like_teacher;	// 좋아요 클릭한 레슨 선생님들
 	
 	public String getName() {
 		return name;
@@ -82,19 +80,6 @@ public class UserDTO {
 	public void setSms_ok(String sms_ok) {
 		this.sms_ok = sms_ok;
 	}
-	public String getLike_perform() {
-		return like_perform;
-	}
-	public void setLike_perform(String like_perform) {
-		this.like_perform = like_perform;
-	}
-	public String getLike_teacher() {
-		return like_teacher;
-	}
-	public void setLike_teacher(String like_teacher) {
-		this.like_teacher = like_teacher;
-	}
-
 	
 	
 }
