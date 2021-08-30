@@ -294,10 +294,25 @@ select {
 	font-weight: bold;
 	font-size: 10pt;
 }
+#tel_ok{
+	color: red;
+	font-weight: bold;
+	font-size: 10pt;
+}
+#email_ok{
+	color: red;
+	font-weight: bold;
+	font-size: 10pt;
+}
 #checkId_btn:disabled{
 	background-color: rgba(203, 206, 209, 0.781);
 }
-
+#checkTel_btn:disabled{
+	background-color: rgba(203, 206, 209, 0.781);
+}
+#checkEmail_btn:disabled{
+	background-color: rgba(203, 206, 209, 0.781);
+}
 .tel_sort {
   width: 90px;
 }

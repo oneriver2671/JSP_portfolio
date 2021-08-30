@@ -18,7 +18,7 @@
 	// db와 연결 시작.
 	try{
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/river?useSSL=false&characterEncoding=UTF-8", "root", "adsl48596!");
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/river?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8", "root", "adsl48596!");
 		if(conn == null){
 			throw new Exception("데이터베이스 연결 실패.<br>");
 		}

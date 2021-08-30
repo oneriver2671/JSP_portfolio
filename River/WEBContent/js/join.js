@@ -141,11 +141,12 @@ function join(){
 	   }
 	  
 	  
-	  // 만약 btn이 없이 중복확인 체크한 경우에는, 어떻게 조건을 써줘야할까?? 
-	   if(document.getElementById("checkId_btn").disabled == true){
+	  // ID, 전화번호, 이메일 모두 '중복확인'이 완료되어야 temp 증가.
+	   if(document.getElementById("checkId_btn").disabled == true && document.getElementById("checkTel_btn").disabled == true &&
+			 document.getElementById("checkEmail_btn").disabled){
 		  temp++;
 	  } else{
-		  alert("중복확인을 진행해주세요.");
+		  alert("모든 중복확인을 진행해주세요.");
 	  } 
 	  
 	 
@@ -231,8 +232,6 @@ function sample6_execDaumPostcode() {
   }).open();
 }
 
-
-
 /*----- 아이디 중복확인 ajax -----*/
 	function checkId_ajax(){
 		var _id = $('#id_input').val();				// id input의 value 가져오기
@@ -241,25 +240,104 @@ function sample6_execDaumPostcode() {
 			return;			    // 아예 function을 끝내버림.
 		}
 		
+	  if(_id.length < 6 || _id.length > 15){
+		 alert('id를 6자 이상, 15자 이하로 입력해주세요.');
+		 return;
+	  }
+		
 		$.ajax({
 			type: "post",
 			async: true,        
-			url : "http://localhost:8080/River/UserServlet",				// 아마 Servlet에서 mapping해줘서 이렇게 될걸?
+			url : "idCheck.join",				// 아마 Servlet에서 mapping해줘서 이렇게 될걸?
 			dataType : "text",        // html대신 text 써줌. (별로 차이 없을듯??)
 			data: {id: _id},           // ID를 서블릿으로 전송. (이렇게 보내면 받을 때 'id'로 받으면 되나?)
 			error : function(request, error){
 				alert("ajax 연결 실패"); 
 				alert("code:"+ request.status + "\n" + "message:"+request.responseText+"\n"+"error:"+error);
 			},
-			success : function(data, textStatus){				// 서블릿에서 보내는 데이터를 data로 받기.
-				if(data == 'usable'){
+			success : function(data){				// 서블릿에서 보내는 데이터를 data로 받기.
+				if(data == 'usable'){			
 					$('#id_ok').text("사용할 수 있는 아이디입니다.");
 					$('#id_ok').css("color", "blue");
 					$('#checkId_btn').prop("disabled", true);			// 중복확인 버튼 비활성화. (비활성화 시, css로 변화주기.)
-					$('#checkId_btn').css("backgrond-color", "whitesmoke");
 				} else{
 					$('#id_ok').text("이미 존재하는 아이디입니다.");
+					$('#tel_ok').css("color", "red");
 				}
 			}
 		})
 	}
+	
+	
+/*----- 전화번호 중복확인 ajax -----*/
+	function checkTel_ajax(){
+		var tel_first = $('.tel_first option:selected').val();			// 010 ~ 019 중 선택
+		var tel_second = $('input[name=tel_02]').val();		// 중간 자리
+		var tel_third = $('input[name=tel_03]').val();			// 뒷 자리
+		var _tel_input = tel_first + tel_second + tel_third;	
+		
+		
+		if(tel_first=='' || tel_second=='' ||tel_third==''){
+			alert("전화번호를 모두 입력하세요.");
+			return;			    // 아예 function을 끝내버림.
+		}
+		
+		$.ajax({
+			type: "post",
+			async: true,        
+			url : "telCheck.join",		// UserTelCheckAction.java 로 이동.	
+			dataType : "text",       
+			data: {tel_input: _tel_input},         
+			error : function(request, error){
+				alert("ajax 연결 실패"); 
+				alert("code:"+ request.status + "\n" + "message:"+request.responseText+"\n"+"error:"+error);
+			},
+			success : function(data){				// 서블릿에서 보내는 데이터를 data로 받기.
+				if(data == 'usable'){			
+					$('#tel_ok').text("사용할 수 있는 전화번호입니다.");
+					$('#tel_ok').css("color", "blue");
+					$('#checkTel_btn').prop("disabled", true);			// 중복확인 버튼 비활성화. (비활성화 시, css로 변화주기.)
+				} else{
+					$('#tel_ok').text("이미 존재하는 전화번호입니다.");
+					$('#tel_ok').css("color", "red");
+				}
+			}
+		})
+	}
+	
+	
+	/*----- 이메일 중복확인 ajax -----*/
+	function checkEmail_ajax(){
+		var mail_front = $('#mail_front').val();
+		var mail_back = $('#mail_back').val();
+		var _mail_input = mail_front + "@" + mail_back;
+	
+		if(mail_front=='' || mail_back==''){
+			alert("이메일을 모두 입력하세요.");
+			return;			    // 아예 function을 끝내버림.
+		}
+		
+		$.ajax({
+			type: "post",
+			async: true,        
+			url : "emailCheck.join",		// UserTelCheckAction.java 로 이동.	
+			dataType : "text",       
+			data: {mail_input: _mail_input},         
+			error : function(request, error){
+				alert("ajax 연결 실패"); 
+				alert("code:"+ request.status + "\n" + "message:"+request.responseText+"\n"+"error:"+error);
+			},
+			success : function(data){				// 서블릿에서 보내는 데이터를 data로 받기.
+				if(data == 'usable'){			
+					$('#email_ok').text("사용할 수 있는 이메일입니다.");
+					$('#email_ok').css("color", "blue");
+					$('#checkEmail_btn').prop("disabled", true);			// 중복확인 버튼 비활성화.
+				} else{
+					$('#email_ok').text("이미 존재하는 이메일입니다.");
+					$('#email_ok').css("color", "red");
+				}
+			}
+		})
+		
+	}
+	

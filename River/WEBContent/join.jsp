@@ -48,20 +48,6 @@
               <li>공연관람 예절</li>
             </ul>
           </li>
-            <li class="header_level1_2">연습실/악보
-              <ul class="header_level2">
-                <li>연습실 추천</li>
-                <li>연습곡 추천</li>
-                <li>악보 찾기</li>
-              </ul>
-            </li>
-          <li class="header_level1">레슨 모집
-            <ul class="header_level2">
-              <li>강사 찾기</li>
-              <li>수강생 찾기</li>
-              <li>강사 신청</li>
-            </ul>
-          </li>
           <li class="header_level1">이용 안내
             <ul class="header_level2">
               <li>이용안내</li>
@@ -71,7 +57,6 @@
           </li>
           <li class="header_level1">커뮤니티
             <ul class="header_level2">
-              <li>공지사항</li>
                <li><a href="board_free_m1.jsp">자유게시판</a></li>
                <li><a href="boardList.bo?sort=음악이야기">음악이야기</a></li>
                <li><a href="boardList.bo?sort=악기정보">악기정보</a></li>
@@ -117,7 +102,7 @@
     <tr>
       <td>아이디 *</td>
       <td class='same_check'>
-        <input type="text" name="idInput" id="id_input" size="40" maxlength="20" placeholder="영문자 숫자 조합 6자 이상">
+        <input type="text" name="idInput" id="id_input" size="40" maxlength="20" placeholder="6자 이상, 15자 이하 입력">
         <input type="button" name="mail_check" id="checkId_btn" class="submit_class" value="중복확인" onclick="checkId_ajax()">
        	<div id="id_ok"></div>
       </td>
@@ -308,15 +293,16 @@
         <input type="text" name="tel_02" size="8" maxlength="4">
         -
         <input type="text" name="tel_03" size="8" maxlength="4">
+         <input type="button" name="tel_check" id="checkTel_btn" class="submit_class" value="중복확인" onclick="checkTel_ajax()">
         <div id="tel_ok"></div>
       </td>
     </tr>
     <tr>
       <td>이메일 주소 *</td>
       <td>  
-        <input type="text" name="mail_front" size="18">
+        <input type="text" name="mail_front" id="mail_front" size="18">
         @
-        <input type="text" name="mail_back" size="18">
+        <input type="text" name="mail_back" id="mail_back" size="18">
         <select name="mail_choice" onchange="mailSelect_02()">
           <option value="직접 입력">직접 입력</option>
           <option value="naver.com">naver.com</option>
@@ -324,7 +310,8 @@
           <option value="google.com">google.com</option>
           <option value="nate.com">nate.com</option>
         </select>
-        <input type="button" name="mail_check" class="submit_class" value="중복확인">
+        <input type="button" name="mail_check" class="submit_class"  id="checkEmail_btn" value="중복확인" onclick="checkEmail_ajax()">
+        <div id="email_ok"></div>
       </td>
     </tr>
   

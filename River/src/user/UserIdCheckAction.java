@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/UserServlet")
-public class UserServlet extends HttpServlet {
+@WebServlet("/idCheck.join")
+public class UserIdCheckAction extends HttpServlet {
 	// 이 doGet 추가 안해주면 405 오류나왔다. 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
@@ -24,17 +24,16 @@ public class UserServlet extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer = response.getWriter();				// java.io에 있음. 이거 쓰임 확인.
 		String id = (String)request.getParameter("id");
-		System.out.println("id =" + id);     // 확인용.
 		UserDAO userDAO = new UserDAO();
-		boolean overlappedID = userDAO.overlappedID(id);		// ID 중복 여부 체크.
+		boolean isIdExist = userDAO.isIdExist(id);		// ID 중복 여부 체크.
 		
-		if(overlappedID == true) {
+		// ajax에서 'data'로 들어가는 값들
+		if(isIdExist == true) {
 			writer.print("not_usable");		// 중복 존재 시.
 		} else {
 			writer.print("usable");			// 중복 미존재 시.
 		}
 		
 		
-	
 	}
 }
