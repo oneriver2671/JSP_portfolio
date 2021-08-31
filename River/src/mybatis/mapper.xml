@@ -19,7 +19,7 @@
 
 <!-- 공연 좌석정보 입력 -->
 <insert id="performSeatInsert" parameterType="perform.PerformSeatDTO">
-	insert into perform_seat_info values(#{perform_num}, #{perform_location}, #{booked_seat},
+	insert into perform_seat_info values(#{perform_num}, #{booked_seat},
 	#{remain_R}, #{remain_S}, #{remain_A}, #{remain_B}, #{remain_all} )
 </insert>
 
@@ -135,7 +135,7 @@
 
 <!-- (티켓예매) 예약정보 입력 -->
 <insert id="performBookInsert" parameterType="perform.PerformBookDTO">
-	insert into reservation_info values(#{member_id}, #{member_tel}, #{member_email}, #{perform_num}, #{seat} )
+	insert into reservation_info values(#{member_id}, #{perform_num}, #{seat})
 </insert>
 
 <!-- (for 티켓예매) 회원정보 꺼내오기 -->

@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 import perform.PerformBookDTO;
 import perform.PerformSeatDTO;
 import perform.svc.PerformBookService;
-import user.UserDTO;
 import vo.ActionForward;
 
 public class PerformBookAction implements PerformAction {
@@ -27,12 +26,6 @@ public class PerformBookAction implements PerformAction {
 		
 		/* model단 처리 */
 		PerformBookService performBookService = new PerformBookService();
-		
-		// 회원정보 뽑아오기(이메일, 생년월일, 연락처) -> '예약정보' 테이블에 추가될 것들
-		UserDTO userDTO = performBookService.getBookMemberInfo(memberId);
-		String memberEmail = userDTO.getEmail();	
-		String memberTel = userDTO.getTel();
-		int memberBirth = userDTO.getBirth();
 		
 		
 		/*----- '좌석정보' 테이블 수정 -----*/
@@ -86,11 +79,8 @@ public class PerformBookAction implements PerformAction {
 		
 		
 		/*----- '예약정보' 테이블에 입력 -----*/
-		// 전화번호, 이메일 필요함!! (여기서 뽑아쓸지, 아니면 View에서 넘어오게 할 지.)
 		PerformBookDTO performBookDTO = new PerformBookDTO();
 		performBookDTO.setMember_id(memberId);
-		performBookDTO.setMember_tel(memberTel);
-		performBookDTO.setMember_email(memberEmail);
 		performBookDTO.setPerform_num(performNum);
 		performBookDTO.setSeat(seatValArr);
 		

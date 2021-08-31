@@ -56,14 +56,6 @@ public class PerformDetailAction implements PerformAction {
 		// 공연 '좌석정보' 
 		request.setAttribute("performSeatDTO", performSeatDTO);
 		
-		/*
-			request.setAttribute("booked_seat", performSeatDTO.getBooked_seat());
-			request.setAttribute("remain_R", performSeatDTO.getRemain_R());
-			request.setAttribute("remain_S", performSeatDTO.getRemain_S());
-			request.setAttribute("remain_A", performSeatDTO.getRemain_A());
-			request.setAttribute("remain_B", performSeatDTO.getRemain_B());
-			request.setAttribute("remain_all", performSeatDTO.getRemain_all());
-		*/
 		
 		ActionForward forward = new ActionForward();
 		forward.setPath("perform_detail.jsp");
