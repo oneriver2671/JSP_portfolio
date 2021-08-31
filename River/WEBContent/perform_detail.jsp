@@ -218,20 +218,19 @@
 			<c:if test="${price_B != 0}">
 				<div><div>B석</div><div class="possible_seat">${remain_B }석</div></div>			
 			</c:if>
-	
-				<!-- '롯데콘홀'용
-				<div><div>시야방해R</div><div class="possible_seat">0석</div></div>				
-				<div><div>시야방해S</div><div class="possible_seat">0석</div></div>				
-				<div><div>시야방해A</div><div class="possible_seat">0석</div></div>		
-				-->		
 			</div>
 			<%
 			Date open_date = dataFormat.parse(performDTO.getOpen_date());
 			Date perform_date = dataFormat.parse(performDTO.getPerform_date());
 			if(open_date.after(today_date)){ %>
 				<div class="reser_btn_prepare">티켓 오픈 준비중</div>	
-			<%} else if(perform_date.after(today_date)) { %>	
-				<a href="book_main.jsp" class="reser_btn" target="_blank">예매하기</a>	
+			<%} else if(perform_date.after(today_date)) { %>
+				<c:if test="${id==null }">
+					<div class="reser_btn" onclick="idNull()">예매하기</div>	
+				</c:if>	
+				<c:if test="${id!=null }">
+					<a href="book_main.jsp" class="reser_btn" target="_blank">예매하기</a>	
+				</c:if>	
 			<%} else{ %>
 	   	 <div class="reser_btn_end">공연 종료</div>
 			<%} %>
@@ -242,8 +241,12 @@
 			<%} else{ %>
 					<i class="fas fa-thumbs-up"></i>		<!-- 색깔 있는 좋아요 -->
 			<%} %> 관심공연</div>
-				<a href="performLikeList.pe?member_id=${id }" class="like_list"><i class="fas fa-list"></i></a>
-			
+				<c:if test="${id==null }">
+					<div class="like_list" onclick="idNull()"><i class="fas fa-list"></i></div>	
+				</c:if>	
+				<c:if test="${id!=null }">
+					<a href="performLikeList.pe?member_id=${id }" class="like_list"><i class="fas fa-list"></i></a>
+				</c:if>	
 		</div>
 	</div>
 	

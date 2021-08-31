@@ -380,6 +380,7 @@ section{
 	font-weight: bold;
 	color: whitesmoke;
 	padding: 12px 80px;
+	cursor: pointer;
 }
 .reser_btn_end{
 	bottom: 70px;
@@ -419,6 +420,7 @@ section{
 	border: solid 1px gray;
 	padding: 9px 17px;
 	background-color: #FAF9F5;
+	cursor: pointer;
 }
 .like_list:visited{
 	color: black;
