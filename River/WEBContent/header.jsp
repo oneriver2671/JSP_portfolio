@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
   // 로그인 성공 후, 정보 가져오기
   request.setCharacterEncoding("utf-8");
@@ -42,6 +43,11 @@ function logout(){
   // session.invalidate();				// session 삭제가 되질 않는다... 무엇이 문제인가.. -> 해결 : jsp문법인데 script안에 썼기 때문. 아래와 같이 써야함.
   <% // session.removeAttribute("id"); %>   // but, 자동 새로고침이 필요하니 다른 페이지로 이동 후 다시 돌아오는 방법을 사용.
 }
+
+function idNull(){
+	alert('로그인 후 이용하실 수 있습니다.');
+}
+
 </script>
 <body>
  
@@ -102,7 +108,14 @@ function logout(){
             <li class="header_level1_3">마이페이지
               <ul class="header_level2">
                 <li>예매확인/취소</li>
-                <li>나의 관심공연</li>
+                <li>
+                	<c:if test='${id==null }'>
+                		<div onclick="idNull()">나의 관심공연</div>
+                	</c:if>
+                	<c:if test='${id!=null }'>
+                		<a href="performLikeList.pe?member_id=${id }">나의 관심공연</a>
+                	</c:if>
+                </li>
                 <li>회원정보 변경</li>
                 <li>아이디 찾기</li>
                 <li>비밀번호 찾기</li> 

@@ -31,7 +31,7 @@ $(document).ready(function(){
     $('.imgCover_6').css({'z-index':'1'});
   });
 
-  $('.imgCover div').mouseout(function(){
+  $('.imgCover a').mouseout(function(){
     $(this).css({'z-index':'-1'});
   });
 
@@ -42,53 +42,8 @@ $(document).ready(function(){
   });
 
 
-  /* ---- 레슨 찾기, 연습실 찾기 ----  */
-
-  $('#content_room_search').hide();
-  $('.room_search').click(function(){
-    $(this).css({'color':'whitesmoke', 'background-color':'#2a2a31'});
-    $('.lesson_search').css({'color':'gray', 'background-color':'#41414c'});
-    $('#slider').fadeOut(500);
-    $('#content_room_search').fadeIn(500);
-    $('.scrollButtons').css({'top':'170px'});
-    $('.scrollButtons').hide();
-    $('.scrollButtons').fadeIn(500);
-
-  });
-  $('.lesson_search').click(function(){
-    $(this).css({'color':'whitesmoke', 'background-color':'#2a2a31'});
-    $('.room_search').css({'color':'gray', 'background-color':'#41414c'});
-    $('#slider').fadeIn(500);
-    $('#content_room_search').fadeOut(500);
-    $('.scrollButtons').css({'top':'230px'});
-    $('.scrollButtons').hide();
-    $('.scrollButtons').fadeIn(500);
-  });
-
-  /* '연습실 찾기' 클릭 시, 맨처음 '신촌'에 background 되어있게. */
-  // $('ul.navigation li:first-child a').css({
-  //   'background-color':'#2a2a31'
-  // });
-  // $('ul.navigation li:not(:first-child)').click(function(){
-  //   $('ul.navigation li:first-child a').css({'background-color':'#41414c'});
-  // });
-  // $('ul.navigation li:first-child a').hover(function(){
-  //   $(this).css({'background-color':'#373741'});
-  // });
-  // $('ul.navigation li:first-child a').click(function(){
-  //   $(this).css({'background-color':'#2a2a31'});
-  // });
-
 });
 
-
-/* 이미지 슬라이더1 */
-// Can also be used with $(document).ready()
-// $(window).load(function() {
-//   $('.flexslider').flexslider({
-//     animation: "slide"
-//   });
-// });
 
 
 // 이걸 그냥 jsp 페이지에 옮기니까 그때야 되네?? why???

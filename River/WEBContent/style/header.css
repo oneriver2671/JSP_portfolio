@@ -185,6 +185,9 @@ body {
 .header_level2 a{
 	color: rgba(245, 245, 245, 0.726);
 }
+.header_level2 div{
+	cursor: pointer;
+}
 .header_level1_3 {
   list-style: none;
   width: 150px;

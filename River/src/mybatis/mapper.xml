@@ -115,6 +115,11 @@
 	select perform_num from member_perform_like where member_id = #{member_id} and perform_num = #{perform_num}
 </select>
 
+<!-- 공연 좋아요 목록 출력 -->
+<select id="performLikeList" parameterType="String" resultType="perform.PerformDTO">
+	 select a.perform_num, a.perform_title, a.perform_date, a.location from perform_info a inner join member_perform_like b on
+   a.perform_num = b.perform_num where b.member_id = #{member_id}
+</select>
 
 <!-- (티켓예매) 정보 수정 전, 좌석정보 뽑아오기  -->
 <select id="selectPerformSeat" parameterType="int" resultType="perform.PerformSeatDTO">

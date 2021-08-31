@@ -46,10 +46,6 @@ body {
   top: 20px;
   left: 0;
 }
-.flexslider img {
-  width: 444px;
-  height: 618px;
-}
 .flexslider img:hover {
   cursor: pointer;
 }
@@ -106,7 +102,7 @@ body {
   top: 20px;
   /* border: solid 2px green; */
 }
-.imgCover div {
+.imgCover a {
   width: 210px;
   height: 280px;
   background-color: #373741ce;
@@ -120,7 +116,7 @@ body {
 .imgCover i {
   font-size: 18pt;
 }
-.imgCover div:hover {
+.imgCover a:hover {
   cursor: pointer;
 }
 .imgCover_1 {

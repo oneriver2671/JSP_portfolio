@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
   // 로그인 성공 후, 정보 가져오기
   request.setCharacterEncoding("utf-8");
@@ -59,41 +60,41 @@ $(document).ready(function(){
       <div class="flexslider">
         <ul class="slides">
           <li>
-            <img src="images/main1_444x618.jpg" />
+             <a href="performDetail.pe?perform_num=24&id=${id }"><img src="images/index_main/손정범_main_20210829.gif" style="width: 444px; height: 618px;"/></a>
           </li>
           <li>
-            <img src="images/main2_(444x618).jpg" />
+            <a href="performDetail.pe?perform_num=30&id=${id }"><img src="images/index_main/원재연_main_20210902.gif" style="width: 444px; height: 618px;"/></a>
           </li>
           <li>
-            <img src="images/main3_444x618px.jpg" />
+             <a href="performDetail.pe?perform_num=22&id=${id }"><img src="images/index_main/토요신진_210904_이윤경_오보에_스몰배너_228x304px.jpg" style="width: 444px; height: 618px;"/></a>
           </li>
           <li>
-            <img src="images/main4(444x618).jpg"/>
+             <a href="performDetail.pe?perform_num=24&id=${id }"><img src="images/index_main/포비올라_main_20210918.gif" style="width: 444px; height: 618px;"/></a>
           </li>
           <li>
-            <img src="images/main5(444x618).jpg" />
+           <a href="performDetail.pe?perform_num=6&id=${id }"><img src="images/index_main/KHP_amabile_20210811.jpg" style="width: 444px; height: 618px;"/></a>
           </li>
           <li>
-            <img src="images/main6(444x618).jpg" />
+            <a href="performDetail.pe?perform_num=29&id=${id }"><img src="images/index_main/20210911_brahms_small.gif" style="width: 444px; height: 618px;"/></a>
           </li>
         </ul>
       </div>
 
       <div class="imgCover">
-        <div class="imgCover_1"><i class="fas fa-search"></i></div>
-        <div class="imgCover_2"><i class="fas fa-search"></i></div>
-        <div class="imgCover_3"><i class="fas fa-search"></i></div>
-        <div class="imgCover_4"><i class="fas fa-search"></i></div>
-        <div class="imgCover_5"><i class="fas fa-search"></i></div>
-        <div class="imgCover_6"><i class="fas fa-search"></i></div>
+        <a href="performDetail.pe?perform_num=24&id=${id }" class="imgCover_1"><i class="fas fa-search"></i></a>
+        <a href="performDetail.pe?perform_num=30&id=${id }" class="imgCover_2"><i class="fas fa-search"></i></a>
+        <a href="performDetail.pe?perform_num=22&id=${id }" class="imgCover_3"><i class="fas fa-search"></i></a>
+        <a href="performDetail.pe?perform_num=24&id=${id }" class="imgCover_4"><i class="fas fa-search"></i></a>
+        <a href="performDetail.pe?perform_num=6&id=${id }" class="imgCover_5"><i class="fas fa-search"></i></a>
+        <a href="performDetail.pe?perform_num=29&id=${id }" class="imgCover_6"><i class="fas fa-search"></i></a>
       </div>
       <div class="small_images">
-        <img src="images/small1_228x304px.jpg" class="small_1">
-        <img src="images/small2.jpg" class="small_2">
-        <img src="images/small3.jpg" class="small_3">
-        <img src="images/small4.gif" class="small_4">
-        <img src="images/small5.gif" class="small_5">
-        <img src="images/small6.gif" class="small_6">
+      <img src="images/index_main/손정범_main_20210829.gif" class="small_1">
+        <img src="images/index_main/원재연_main_20210902.gif" class="small_2">
+        <img src="images/index_main/토요신진_210904_이윤경_오보에_스몰배너_228x304px.jpg" class="small_3">
+        <img src="images/index_main/포비올라_main_20210918.gif" class="small_4">
+        <img src="images/index_main/KHP_amabile_20210811.jpg" class="small_5">
+        <img src="images/index_main/20210911_brahms_small.gif" class="small_6">
       </div>
     </div>
   </section>      <!-- main section 종료 -->

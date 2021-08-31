@@ -16,6 +16,7 @@ import perform.action.PerformDetailAction;
 import perform.action.PerformDetailUpdateAction;
 import perform.action.PerformInsertAction;
 import perform.action.PerformLikeAddAction;
+import perform.action.PerformLikeListAction;
 import perform.action.PerformLikeReduceAction;
 import perform.action.PerformListAction;
 import perform.action.PerformListByDateAction;
@@ -165,6 +166,18 @@ public class PerformController extends HttpServlet {
 		if(command.equals("/performBook.pe")) {
 			
 			action = new PerformBookAction();
+			try{
+				forward = action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
+		}
+		
+		/* 공연 관심정보 List */
+		if(command.equals("/performLikeList.pe")) {
+			
+			action = new PerformLikeListAction();
 			try{
 				forward = action.execute(request, response);
 			}catch(Exception e){

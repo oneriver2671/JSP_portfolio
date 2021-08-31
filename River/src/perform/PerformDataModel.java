@@ -281,6 +281,15 @@ public class PerformDataModel {
 		return result;
 	}
 	
+	/* 회원이 누른 좋아요 공연정보 목록 출력 */
+	public List<PerformDTO> getPerformLikeList(String member_id){
+		SqlSession sqlSession = factory.openSession();
+		List<PerformDTO> performList = sqlSession.selectList("performLikeList", member_id);
+		sqlSession.close();
+		
+		return performList;
+	}
+	
 	/* (티켓예매) 좌석정보 뽑아오기 */
 	public PerformSeatDTO selectPerformSeat(int perform_num){
 		PerformSeatDTO performSeatDTO = null;
