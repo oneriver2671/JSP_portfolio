@@ -5,6 +5,7 @@
 <%@ page import = "java.text.SimpleDateFormat" %>
 <%@ page import = "perform.PerformDTO" %>
 <%@ page import = "vo.PageInfo" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%
 	request.setCharacterEncoding("utf-8");
@@ -99,20 +100,6 @@
               <li>공연관람 예절</li>
             </ul>
           </li>
-            <li class="header_level1_2">연습실/악보
-              <ul class="header_level2">
-                <li>연습실 추천</li>
-                <li>연습곡 추천</li>
-                <li>악보 찾기</li>
-              </ul>
-            </li>
-          <li class="header_level1">레슨 모집
-            <ul class="header_level2">
-              <li>강사 찾기</li>
-              <li>수강생 찾기</li>
-              <li>강사 신청</li>
-            </ul>
-          </li>
           <li class="header_level1">이용 안내
             <ul class="header_level2">
               <li>이용안내</li>
@@ -122,7 +109,6 @@
           </li>
           <li class="header_level1">커뮤니티
             <ul class="header_level2">
-              <li>공지사항</li>
                <li><a href="board_free_m1.jsp">자유게시판</a></li>
                <li><a href="boardList.bo?sort=음악이야기">음악이야기</a></li>
                <li><a href="boardList.bo?sort=악기정보">악기정보</a></li>
@@ -132,7 +118,14 @@
           <li class="header_level1_1">마이페이지
             <ul class="header_level2">
               <li>예매확인/취소</li>
-              <li>나의 관심공연</li>
+              <li>
+	              <c:if test='${id==null }'>
+               		<div onclick="idNull()">나의 관심공연</div>
+              	</c:if>
+               	<c:if test='${id!=null }'>
+               		<a href="performLikeList.pe?member_id=${id }">나의 관심공연</a>
+               	</c:if>
+              </li>
               <li>회원정보 변경</li>
               <li>아이디 찾기</li>
               <li>비밀번호 찾기</li> 

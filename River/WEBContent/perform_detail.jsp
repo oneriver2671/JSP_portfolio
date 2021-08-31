@@ -51,77 +51,9 @@
  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
  <!-- jQuery -->
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+ <script src="js/perform_detail.js"></script>
 </head>
-<script>
-/* header 부분 */
-$(document).ready(function(){
-  $('.header_level2, #header_box').hide();
 
-  $('#navbar').mouseover(function(){
-    $('.header_level2, #header_box').fadeIn(500);
-  });
-  $('#navbar, #header_box').mouseleave(function(){
-    $('.header_level2, #header_box').fadeOut(500);
-  });
-  
-  
-
-	/*---- 좋아요 기능 (비동기식 구현) ----*/
-	// 좋아요 클릭 시, 좋아요버튼 색깔 바뀜
-	$('.like_btn').click(function(){		  
-		var _perform_num = $('#perform_num').val();			// hidden으로 가져옴.
-		var _member_id = $('#member_id').val();		// hidden으로 가져옴.
-		
-		// 로그인한 회원만 누를 수 있게.	
-		if(_member_id == 'null'){
-			alert('로그인 후 누르실 수 있습니다.');
-		} 
-		else{
-			// 안눌린 상태 -> 눌린 상태
-			if($('.like_btn i').attr('class')=='far fa-thumbs-up'){		
-					$('.like_btn i').attr('class', 'fas fa-thumbs-up');
-					
-					$.ajax({
-						type: "post",
-						async: true,
-						url: "performLikeAdd.pe",				// 좋아요 증가 기능
-						data: {perform_num: _perform_num, member_id: _member_id},
-						dataType: "text",
-						error : function(request, error){
-							alert("ajax 연결 실패"); 
-							alert("code:"+ request.status + "\n" + "message:"+request.responseText+"\n"+"error:"+error);
-						}
-					})
-					
-			} 
-			// 눌린 상태 -> 좋아요 해제
-			else{		
-				$('.like_btn i').attr('class', 'far fa-thumbs-up');
-				
-				$.ajax({
-					type: "post",
-					async: true,
-					url: "performLikeReduce.pe",			// 좋아요 감소 기능
-					data: {perform_num: _perform_num, member_id: _member_id},
-					dataType: "text",
-					error : function(request, error){
-						alert("ajax 연결 실패"); 
-						alert("code:"+ request.status + "\n" + "message:"+request.responseText+"\n"+"error:"+error);
-					}
-				})
-			}
-		}
-	});
-  
-
-});
-
-function logout(){
-	  alert('로그아웃 되었습니다.');
-location.href="logout.jsp";
-}
-
-</script>
 <body>
 <jsp:include page="searchBar.jsp"></jsp:include>		<!-- 검색창 담겨있음 -->
 
@@ -163,20 +95,6 @@ location.href="logout.jsp";
               <li>공연관람 예절</li>
             </ul>
           </li>
-            <li class="header_level1_2">연습실/악보
-              <ul class="header_level2">
-                <li>연습실 추천</li>
-                <li>연습곡 추천</li>
-                <li>악보 찾기</li>
-              </ul>
-            </li>
-          <li class="header_level1">레슨 모집
-            <ul class="header_level2">
-              <li>강사 찾기</li>
-              <li>수강생 찾기</li>
-              <li>강사 신청</li>
-            </ul>
-          </li>
           <li class="header_level1">이용 안내
             <ul class="header_level2">
               <li>이용안내</li>
@@ -186,7 +104,6 @@ location.href="logout.jsp";
           </li>
           <li class="header_level1">커뮤니티
             <ul class="header_level2">
-              <li>공지사항</li>
                <li><a href="board_free_m1.jsp">자유게시판</a></li>
                <li><a href="boardList.bo?sort=음악이야기">음악이야기</a></li>
                <li><a href="boardList.bo?sort=악기정보">악기정보</a></li>
@@ -196,7 +113,14 @@ location.href="logout.jsp";
           <li class="header_level1_1">마이페이지
             <ul class="header_level2">
               <li>예매확인/취소</li>
-              <li>나의 관심공연</li>
+              <li>
+	           	 	<c:if test='${id==null }'>
+	             		<div onclick="idNull()">나의 관심공연</div>
+	             	</c:if>
+	             	<c:if test='${id!=null }'>
+	             		<a href="performLikeList.pe?member_id=${id }">나의 관심공연</a>
+	             	</c:if>
+              </li>
               <li>회원정보 변경</li>
               <li>아이디 찾기</li>
               <li>비밀번호 찾기</li> 
@@ -318,7 +242,8 @@ location.href="logout.jsp";
 			<%} else{ %>
 					<i class="fas fa-thumbs-up"></i>		<!-- 색깔 있는 좋아요 -->
 			<%} %> 관심공연</div>
-			<div class="like_list"><i class="fas fa-list"></i></div>
+				<a href="performLikeList.pe?member_id=${id }" class="like_list"><i class="fas fa-list"></i></a>
+			
 		</div>
 	</div>
 	

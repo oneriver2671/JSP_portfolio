@@ -186,6 +186,9 @@ body {
 .header_level2 a{
 	color: rgba(245, 245, 245, 0.726);
 }
+.header_level2 div{
+	cursor: pointer;
+}
 .header_level1_3 {
   list-style: none;
   width: 150px;
@@ -409,12 +412,16 @@ section{
 	cursor: pointer;
 }
 .like_list{
+	position: absolute;
 	bottom: 22px;
 	right: 17px;
 	font-size: 14pt;
 	border: solid 1px gray;
 	padding: 9px 17px;
 	background-color: #FAF9F5;
+}
+.like_list:visited{
+	color: black;
 }
 
 #section_middle{
