@@ -166,7 +166,7 @@
 		 					<div><b><%= id %></b></div>
 		 					<input type="text" name="content" placeholder="댓글을 남겨보세요" autocomplete='off'>
 		 					<div class="comment_write_bot">
-		 						<div class="comment_write_attach">(여기가 허전해)</div>
+		 						<div class="comment_write_attach"></div>
 		 						<input type="submit" name="comment_write" value="등록">
 		 						<!-- <button>등록</button>  -->   <!-- 근데 이거 submit 아니어도 action으로 넘어가네? 참고로, input type='button'하면 안넘어감 -->
 		 						<!-- 대댓글에 button이 추가되니, 이거 값 안넘어가네?? -->
